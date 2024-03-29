@@ -24,7 +24,7 @@ const Navbar = () => {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                        Find Your Space
+                        Find your space
                     </Typography>
                     <div>
                         <Button component={Link} to="/offices" color="inherit">

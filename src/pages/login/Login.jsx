@@ -1,5 +1,7 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginStore from '../../api/LoginStore';
+import Navbar from '../../components/navbar/Navbar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -18,7 +20,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        findaspace.com
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,7 +30,18 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+
+const defaultTheme = createTheme({
+  palette: {
+      primary: {
+          main: '#000000', // Set primary color to black
+      },
+  },
+  typography: {
+      fontFamily: 'Dubai Medium',
+       // Replace with your desired font
+  },
+});
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -105,7 +118,9 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Navbar />
       <Grid container component="main" sx={{ height: '100vh' }}>
+        
         <CssBaseline />
         <Grid
           item
@@ -113,7 +128,7 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: 'url(https://images-ext-1.discordapp.net/external/DyfCRS33c5c_Iae-COieGxymj0mI2gibgYVFfukYv-Y/https/theadfocus.com/wp-content/uploads/2022/03/Times-Square-andreas-m-unsplash-scaled.jpg?format=webp&width=1266&height=904)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -121,21 +136,32 @@ const Login = () => {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center', // Center vertically
+           
+          }}
+        >
+        
+
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                fontSize: '30px'
+              }}
+            >
+              Welcome to Find a Space!
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -145,6 +171,7 @@ const Login = () => {
                 id="email"
                 label="Email Address"
                 name="email"
+                onChange={handleEmailChange}
                 autoComplete="email"
                 autoFocus
               />
@@ -156,8 +183,12 @@ const Login = () => {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={handlePasswordChange}
                 autoComplete="current-password"
               />
+              {loginError && (
+                  <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
+                )}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -168,7 +199,7 @@ const Login = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Log In
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -178,13 +209,12 @@ const Login = () => {
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Create a new account"}
                   </Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
-          </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
