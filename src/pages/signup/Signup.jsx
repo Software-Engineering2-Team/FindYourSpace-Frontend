@@ -11,7 +11,6 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -43,7 +42,7 @@ const defaultTheme = createTheme({
   },
 });
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -128,7 +127,7 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://images-ext-1.discordapp.net/external/DyfCRS33c5c_Iae-COieGxymj0mI2gibgYVFfukYv-Y/https/theadfocus.com/wp-content/uploads/2022/03/Times-Square-andreas-m-unsplash-scaled.jpg?format=webp&width=1266&height=904)',
+            backgroundImage: 'url(https://sharpguyswebdesign.com/wp-content/uploads/2023/08/cody3490_billboard_on_the_internet_highway_fe937dd9-7dda-4afd-9129-f1d8c53a3352.png)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -152,7 +151,7 @@ const Login = () => {
            
           }}
         >
-          <Box
+            <Box
               sx={{
                 padding: {xs: "24px", md: "32px"},
                 margin: {xs: "16px", md: "32px"},
@@ -168,7 +167,7 @@ const Login = () => {
                 fontSize: '30px'
               }}
             >
-              Welcome to Find a Space!
+              Lets Create an Account at Find your space!
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -193,34 +192,39 @@ const Login = () => {
                 onChange={handlePasswordChange}
                 autoComplete="current-password"
               />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
+                type="password"
+                id="password"
+                onChange={handlePasswordChange}
+                autoComplete="current-password"
+              />
               {loginError && (
                   <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
                 )}
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Log In
+                Create Account
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
                 </Grid>
                 <Grid item>
                 <Link
-                  to="/signup"
-                  variant="body2"
-                  onClick={() => navigate('/signup')}
-                >
-                  {"Create a new account"}
+                    to="/"
+                    variant="body2"
+                    onClick={() => navigate('/')}
+                    >
+                    {"Already have an account?"}
                 </Link>
                 </Grid>
               </Grid>
@@ -237,4 +241,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default Signup;
