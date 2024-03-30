@@ -5,7 +5,7 @@ function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const searchContainerStyle = {
-        width: '50%',
+        width: '100%',
         margin: 'auto',
         marginTop: '30px',
     };

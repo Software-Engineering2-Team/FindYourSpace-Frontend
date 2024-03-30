@@ -31,7 +31,7 @@ const Navbar = () => {
                             Find spaces
                         </Button>
                         {/* <Button component={Link} to="/add" color="inherit">Add</Button> */}
-                        <Button component={Link} to="/spaces" color="inherit">
+                        <Button component={Link} to="/profile" color="inherit">
                             Profile
                         </Button>
                         <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>

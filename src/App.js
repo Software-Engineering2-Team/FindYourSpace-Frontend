@@ -9,6 +9,7 @@ import AddOfficeSpaceForm from "./pages/add/add";
 import EditOfficeSpaceForm from "./pages/edit/edit";
 import ReservationsTable from "./pages/reservations/reservations"
 import Signup from "./pages/signup/Signup";
+import Profile from "./pages/profile/Profile";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         {/* <Route path="/add" element={<AddOfficeSpaceForm/>}/> */}
         {/* <Route path="/reservations/:id" element={<ReservationsTable/>}/> */}
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   );
