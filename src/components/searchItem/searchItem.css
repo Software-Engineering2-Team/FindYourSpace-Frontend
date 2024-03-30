@@ -1,7 +1,5 @@
 .searchItem {
-  border: 1px solid lightgray;
-  padding: 10px;
-  border-radius: 5px;
+  border: none;
   display: flex;
   justify-content: space-between; /* Add this line */
   gap: 20px; /* Add this line */
@@ -9,7 +7,7 @@
 }
 
 .siImg {
-  width: 140px;
+  width: 70%;
   height: 160px;
   object-fit: cover;
 }
@@ -61,7 +59,7 @@
 
 .siDetails {
   margin-top: 10px;
-  width: 150px; 
+  width: 50px; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;

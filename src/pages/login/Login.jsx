@@ -34,12 +34,11 @@ function Copyright(props) {
 const defaultTheme = createTheme({
   palette: {
       primary: {
-          main: '#000000', // Set primary color to black
+          main: '#000000', 
       },
   },
   typography: {
-      fontFamily: 'Dubai Medium',
-       // Replace with your desired font
+      fontFamily: 'Dubai Medium'
   },
 });
 
@@ -149,7 +148,7 @@ const Login = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center', // Center vertically
-           
+            
           }}
         >
           <Box
@@ -165,7 +164,8 @@ const Login = () => {
               component="h1"
               variant="h5"
               sx={{
-                fontSize: '30px'
+                fontSize: '30px',
+                textAlign: 'center'
               }}
             >
               Welcome to Find a Space!

@@ -117,126 +117,122 @@ const Signup = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Navbar />
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
+    <Navbar />
+    <Grid
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop:'250px'
+       
+      }}
+    >
+        <Box
           sx={{
-            backgroundImage: 'url(https://sharpguyswebdesign.com/wp-content/uploads/2023/08/cody3490_billboard_on_the_internet_highway_fe937dd9-7dda-4afd-9129-f1d8c53a3352.png)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            padding: {xs: "24px", md: "32px"},
+            margin: {xs: "16px", md: "32px"},
+            boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
+            borderRadius: "8px",
+            backgroundColor: "#fff",
+
           }}
-        />
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
+      >
+         <Typography
+          component="h1"
+          variant="h5"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center', // Center vertically
-           
+            fontSize: '30px',
+            textAlign:"center"
           }}
         >
-            <Box
-              sx={{
-                padding: {xs: "24px", md: "32px"},
-                margin: {xs: "16px", md: "32px"},
-                boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-                borderRadius: "8px",
-                backgroundColor: "#fff",
-              }}
-          >
-             <Typography
-              component="h1"
-              variant="h5"
-              sx={{
-                fontSize: '30px'
-              }}
-            >
-              Lets Create an Account at Find your space!
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={handleEmailChange}
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={handlePasswordChange}
-                autoComplete="current-password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Confirm Password"
-                type="password"
-                id="password"
-                onChange={handlePasswordChange}
-                autoComplete="current-password"
-              />
-              {loginError && (
-                  <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
-                )}
-
+          Let's Create an account at Find your space!
+        </Typography>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="firstname"
+            label="First Name"
+            name="firstname"
+            autoComplete="First Name"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="lastname"
+            label="Last Name"
+            name="lastname"
+            autoComplete="Last Name"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            onChange={handleEmailChange}
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            onChange={handlePasswordChange}
+            autoComplete="current-password"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Confirm Password"
+            type="password"
+            id="password"
+            onChange={handlePasswordChange}
+            autoComplete="current-password"
+          />
+          {loginError && (
+              <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
+            )}
               <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Create Account
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                </Grid>
-                <Grid item>
-                <Link
-                    to="/"
-                    variant="body2"
-                    onClick={() => navigate('/')}
-                    >
-                    {"Already have an account?"}
-                </Link>
-                </Grid>
-              </Grid>
-              <Copyright sx={{ mt: 5 }} />
-            </Box>
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Create Account
+          </Button>
+          <Grid container>
+            <Grid item xs>
+            </Grid>
+            <Grid item>
+            <Link
+                to="/"
+                variant="body2"
+                onClick={() => navigate('/')}
+                >
+                {"Already have an account?"}
+            </Link>
+            </Grid>
+          </Grid>
+          <Copyright sx={{ mt: 5 }} />
+        </Box>
+      </Box>
+    
 
-          </Box>
-        
-
-           
-        </Grid>
-      </Grid>
+       
+    </Grid>
     </ThemeProvider>
   );
 }

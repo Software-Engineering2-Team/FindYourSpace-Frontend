@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import LoginStore from './LoginStore';
-
+import { officeSpaces } from './data.js';
 const url = 'https://officely.azurewebsites.net';
 //const url = 'http://localhost:8080';
 
@@ -8,26 +8,26 @@ const OfficeStore = create((set) => ({
     offices: [],
     setOffices:
         (offices) => set({ offices }),
-    fetchOffices:
-        async (pageSize, pageNum) => fetch(`${url}/offices?pageSize=${pageSize}&pageNum=${pageNum}`, {
-            method: 'GET',
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json',
-            }}),
-    // fetchOffices: async (pageSize, pageNum) => {
-    //     try {
-    //         const officeData = await import('../data.js');
-    //         const startIdx = pageNum * pageSize;
-    //         const endIdx = startIdx + pageSize;
-    //         const offices = officeData.slice(startIdx, endIdx);
-    //         return Promise.resolve({
-    //             json: () => Promise.resolve(offices)
-    //         });
-    //     } catch (error) {
-    //         return Promise.reject(error);
-    //     }
-    // },
+    // fetchOffices:
+    //     async (pageSize, pageNum) => fetch(`${url}/offices?pageSize=${pageSize}&pageNum=${pageNum}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Accept': '*/*',
+    //             'Content-Type': 'application/json',
+    //         }}),
+    fetchOffices: async (pageSize, pageNum) => {
+        try {
+            const officeData = await officeSpaces;
+            const startIdx = pageNum * pageSize;
+            const endIdx = startIdx + pageSize;
+            const offices = officeData.slice(startIdx, endIdx);
+            return Promise.resolve({
+                json: () => Promise.resolve(offices)
+            });
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
     fetchOffice:
         async (officeId) => fetch(`${url}/offices/${officeId}`, {
             method: 'GET',

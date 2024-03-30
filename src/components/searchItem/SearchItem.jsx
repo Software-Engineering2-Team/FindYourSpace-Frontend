@@ -50,38 +50,10 @@ const SearchItem = ({ space, onUpdate }) => {
             />
         )}
         <div className="siDesc">
-          <h1 className="siTitle">{space.name}</h1>
           <span className="siSubtitle">{space.address}</span>
-          <span className="siFeatures">{formatOfficeType(space.officeType)}</span>
           <span className="siPrice">{`$${space.pricePerDay}`}</span>
         </div>
-        <div className="siDetails">
-          <div className="tooltip">
-            <DeleteIcon
-                onClick={handleDeleteConfirmation}
-                className="deleteIcon"
-            />
-            {showDeleteConfirmation && (
-                <div className="tooltipText">
-                  <p>Are you sure you want to delete this office?</p>
-                  <button onClick={handleDeleteConfirmed}>Yes</button>
-                  <button onClick={handleDeleteCancel}>No</button>
-                </div>
-            )}
-          </div>
-          <button
-              className="siCheckButton"
-              onClick={() => navigate(`/offices/${space.id}`)}
-          >
-            Edit
-          </button>
-          <button
-              className="siCheckButton"
-              onClick={() => navigate(`/reservations/${space.id}`)}
-          >
-            Reservations
-          </button>
-        </div>
+        
       </div>
   );
 };
