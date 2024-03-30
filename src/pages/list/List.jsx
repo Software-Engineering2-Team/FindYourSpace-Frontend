@@ -113,8 +113,12 @@ const List = () => {
           <div className="listContainer">
               <div className="listWrapper">
                 <div className="listResult">
-                  {filteredOfficeSpaces.map(space => (
-                      <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
+                  {Array.from({ length: Math.ceil(filteredOfficeSpaces.length / 3) }).map((_, rowIndex) => (
+                    <div className="searchItemRow" key={rowIndex}>
+                      {filteredOfficeSpaces.slice(rowIndex * 3, rowIndex * 3 + 3).map(space => (
+                        <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
+                      ))}
+                    </div>
                   ))}
                 </div>
                 <div

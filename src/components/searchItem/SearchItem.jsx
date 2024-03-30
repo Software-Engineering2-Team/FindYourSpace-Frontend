@@ -41,20 +41,21 @@ const SearchItem = ({ space, onUpdate }) => {
   };
 
   return (
-      <div className="searchItem">
-        {space.mainPhoto.length > 0 && (
-            <img
-                src={space.mainPhoto}
-                alt={space.name}
-                className="siImg"
-            />
-        )}
-        <div className="siDesc">
-          <span className="siSubtitle">{space.address}</span>
-          <span className="siPrice">{`$${space.pricePerDay}`}</span>
+    <div className="searchItem">
+      {space.mainPhoto.length > 0 && (
+        <div className="imageContainer">
+          <img
+            src={space.mainPhoto}
+            alt={space.name}
+            className="siImg"
+          />
         </div>
-        
+      )}
+      <div className="detailsContainer">
+        <div className="address">{space.address}</div>
+        <div className="price">{`$${space.pricePerDay}`}</div>
       </div>
+    </div>
   );
 };
 
