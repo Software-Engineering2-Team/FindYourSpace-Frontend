@@ -6,6 +6,10 @@ import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 import LoginStore from '../../api/LoginStore';
 import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
+
+
+
+
 const List = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,6 +18,7 @@ const List = () => {
   const [filteredOfficeSpaces, setFilteredOfficeSpaces] = useState(OfficeStore.getState().offices);
   const [sortOption, setSortOption] = useState('default');
   const listRef = React.createRef();
+
 
   useEffect(() => {
     OfficeStore.getState()
@@ -99,7 +104,7 @@ const List = () => {
   return (
     <div>
       <Navbar />
-      <div className="navbar-divider"></div> 
+      <div style={{ height: '1px', backgroundColor: 'white' }} />
       <MarketingComponent/>
       <Container ref={listRef} style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ width: '80%' }}>

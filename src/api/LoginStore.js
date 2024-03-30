@@ -9,7 +9,7 @@ const LoginStore = create((set) => ({
   userData: null,
 
   setToken: (jwttoken) => {
-    Cookies.set('jwttoken', jwttoken, { expires: 1 });
+    Cookies.set('jwttoken', jwttoken, { expires: 1});
     set({ jwttoken });
   },
 

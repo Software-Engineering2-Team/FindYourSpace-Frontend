@@ -127,7 +127,7 @@ const Login = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://as1.ftcdn.net/v2/jpg/06/12/20/06/1000_F_612200673_BEd6gjY00ETFpSxrlESvdh8T6qstp4xO.jpg)',
+            backgroundImage: 'url(https://theadfocus.com/wp-content/uploads/2021/12/Times-Square-anthony-rosset-scaled.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
