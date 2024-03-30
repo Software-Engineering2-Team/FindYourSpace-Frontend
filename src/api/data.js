@@ -72,7 +72,7 @@ export const officeSpaces = [
     "description": "An innovative office space equipped with cutting-edge technology and open workspace for collaborative projects.",
     "pricePerDay": 250.0,
     "isActive": true,
-    "address": "Krakowskie Przedmieście 1, Warsaw",
+    "address": "Downtown Dubai",
     "availableFrom": "2024-02-03T19:14:03.+0000",
     "availableTo": "2024-02-03T19:14:03.+0000",
     "amenities": [
@@ -94,7 +94,7 @@ export const officeSpaces = [
     "description": "A dynamic coworking space with private offices and collaborative areas, fostering innovation and creativity.",
     "pricePerDay": 400.0,
     "isActive": true,
-    "address": "Krakowskie Przedmieście 5, Warsaw",
+    "address": "Bangalore Main Town",
     "availableFrom": "2024-02-03T19:14:03.+0000",
     "availableTo": "2024-02-03T19:14:03.+0000",
     "amenities": [
@@ -184,7 +184,7 @@ export const officeSpaces = [
     "description": "A peaceful office space with modern amenities and wellness programs, promoting work-life balance and employee well-being.",
     "pricePerDay": 380.0,
     "isActive": true,
-    "address": "Aleje Jerozolimskie 50, Warsaw",
+    "address": "Warsaw Old Town",
     "availableFrom": "2024-02-03T19:14:03.+0000",
     "availableTo": "2024-02-03T19:14:03.+0000",
     "amenities": [
@@ -206,7 +206,7 @@ export const officeSpaces = [
     "description": "A modern workspace with 24/7 access and versatile amenities, providing a conducive environment for productivity and growth.",
     "pricePerDay": 300.0,
     "isActive": true,
-    "address": "Marszałkowska 10, Warsaw",
+    "address": "Cracow Old Town",
     "availableFrom": "2024-02-03T19:14:03.+0000",
     "availableTo": "2024-02-03T19:14:03.+0000",
     "amenities": [

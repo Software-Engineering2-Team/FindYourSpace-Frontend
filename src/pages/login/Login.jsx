@@ -94,7 +94,7 @@ const Login = () => {
       .login(email, password)
       .then(() =>
         {
-          navigate('/offices');
+          navigate('/spaces');
         }
       )
       .catch((error) => 

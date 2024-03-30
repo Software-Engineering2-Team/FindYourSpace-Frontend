@@ -1,7 +1,6 @@
 .searchItem {
   display: flex;
   flex-direction: column; /* Change to column layout */
-  align-items: center;
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
@@ -12,16 +11,7 @@
 }
 
 .siImg {
-  width: 100%;
-  height: auto;
-  max-height: 160px;
+  width: 250px;
+  height: 200px;
   object-fit: cover;
-}
-
-.detailsContainer {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
- /* Center details horizontally */
-
 }

@@ -27,10 +27,13 @@ const Navbar = () => {
                         Find your space
                     </Typography>
                     <div>
-                        <Button component={Link} to="/offices" color="inherit">
-                            Home
+                        <Button component={Link} to="/spaces" color="inherit">
+                            Find spaces
                         </Button>
-                        <Button component={Link} to="/add" color="inherit">Add</Button>
+                        {/* <Button component={Link} to="/add" color="inherit">Add</Button> */}
+                        <Button component={Link} to="/spaces" color="inherit">
+                            Profile
+                        </Button>
                         <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
                             Log Out
                         </Button>

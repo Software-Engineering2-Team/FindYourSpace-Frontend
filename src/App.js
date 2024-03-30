@@ -14,10 +14,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login/>}/>
-        <Route path="/offices" element={<List/>}/>
-        <Route path="/offices/:id" element={<EditOfficeSpaceForm/>}/>
-        <Route path="/add" element={<AddOfficeSpaceForm/>}/>
-        <Route path="/reservations/:id" element={<ReservationsTable/>}/>
+        <Route path="/spaces" element={<List/>}/>
+        {/* <Route path="/spaces/:id" element={<EditOfficeSpaceForm/>}/> */}
+        {/* <Route path="/add" element={<AddOfficeSpaceForm/>}/> */}
+        {/* <Route path="/reservations/:id" element={<ReservationsTable/>}/> */}
         <Route path="/signup" element={<Signup/>}/>
       </Routes>
     </BrowserRouter>

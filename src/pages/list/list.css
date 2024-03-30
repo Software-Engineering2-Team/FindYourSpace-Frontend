@@ -1,29 +1,4 @@
-.listContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
 
-.listWrapper {
-  width: 100%;
-  max-width: 1024px;
-}
-
-.listResult {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.searchItemRow {
-  width: calc(33.33% - 10px); /* Adjust as needed */
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media screen and (max-width: 768px) {
-  .searchItemRow {
-    width: 100%;
-  }
+.navbar-divider {
+  border-bottom: 1px solid #ffffff; /* Adjust the thickness and color as needed */
 }

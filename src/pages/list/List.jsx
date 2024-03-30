@@ -5,7 +5,7 @@ import SearchItem from '../../components/searchItem/SearchItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 import LoginStore from '../../api/LoginStore';
-
+import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
 const List = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -97,9 +97,12 @@ const List = () => {
   };
 
   return (
-      <div>
-        <Navbar />
-        <Container ref={listRef}>
+    <div>
+      <Navbar />
+      <div className="navbar-divider"></div> 
+      <MarketingComponent/>
+      <Container ref={listRef} style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '80%' }}>
           <SearchBar onSearch={handleSearch} />
           <FormControl style={{ margin: '20px 0' }}>
             <InputLabel htmlFor="sort">Sort by:</InputLabel>
@@ -110,40 +113,35 @@ const List = () => {
               <MenuItem value="features">Office Types</MenuItem>
             </Select>
           </FormControl>
-          <div className="listContainer">
-              <div className="listWrapper">
-                <div className="listResult">
-                  {Array.from({ length: Math.ceil(filteredOfficeSpaces.length / 3) }).map((_, rowIndex) => (
-                    <div className="searchItemRow" key={rowIndex}>
-                      {filteredOfficeSpaces.slice(rowIndex * 3, rowIndex * 3 + 3).map(space => (
-                        <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-                <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      alignItems: 'center',
-                      paddingTop: '20px', // Adjust as needed
-                      marginBottom: '30px'
-                    }}
-                >
-                  <Pagination
-                      count={totalPages}
-                      page={currentPage}
-                      onChange={handlePageChange}
-                      color="primary"
-                      size="large"
-                  />
-                  <div style={{marginLeft: '20px'}}>Page {currentPage} of {totalPages}</div>
-                </div>
+          <div className="listResult" style={{ display: 'flex', flexWrap: 'wrap'}}>
+            {filteredOfficeSpaces.map(space => (
+              <div key={space.id} style={{ width: 'calc(100% / 3)' }}>
+                <SearchItem space={space} onUpdate={handleOfficeUpdate} />
               </div>
+            ))}
           </div>
-        </Container>
-      </div>
-);
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              paddingTop: '20px',
+              marginBottom: '30px'
+            }}
+          >
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              size="large"
+            />
+            <div style={{ marginLeft: '20px' }}>Page {currentPage} of {totalPages}</div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
 };
 
 export default List;
