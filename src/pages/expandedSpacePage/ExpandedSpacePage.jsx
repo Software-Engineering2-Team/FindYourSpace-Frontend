@@ -34,7 +34,6 @@ const ExpandedSpacePage = () => {
     }
   };
 
-  // Call fetchData directly when the component mounts
   useEffect(() => {
     console.log('Fetching office space with id:', id);
     fetchData();
