@@ -133,17 +133,18 @@ const Profile = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop:'100px'
+            marginTop:'40px'
         }}
       >
         <Box
           sx={{
             padding: { xs: "24px", md: "32px" },
-            margin: { xs: "16px", md: "32px" },
+            margin: { xs: "10px", md: "10px" }, 
             boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
             borderRadius: "8px",
             backgroundColor: "#fff",
-            width: "40%"
+            width: "40%",
+            textAlign: "center" 
           }}
         >
           <Typography
@@ -192,22 +193,25 @@ const Profile = () => {
             {loginError && (
               <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
             )}
+            
            
           </Box>
-          <Button align ="center" type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000" }}>
+          <Button type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}> {/* Added marginY to create vertical space */}
                 Save Changes
-          </Button>
+            </Button> 
         </Box>
 
         {/* Reset or Change Password Section */}
         <Box
           sx={{
             padding: { xs: "24px", md: "32px" },
-            margin: { xs: "16px", md: "32px" },
+            margin: { xs: "10px", md: "10px" },
             boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
             borderRadius: "8px",
             backgroundColor: "#fff",
-            width: "40%"
+            width: "40%",
+            textAlign:'center'
+            
           }}
         >
           <Typography
@@ -248,12 +252,12 @@ const Profile = () => {
            
           
             
-            <Button type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000",align:"center" }}>
-              Reset Password
-            </Button>
+            
            
           </Box>
-          
+          <Button type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}> {/* Added marginY to create vertical space */}
+                Reset Password
+            </Button> 
         </Box>
         <Button variant="outlined" color="error">
                 Delete Account

@@ -124,7 +124,7 @@ const Signup = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop:'250px'
+        marginTop:'40px'
        
       }}
     >
@@ -135,6 +135,7 @@ const Signup = () => {
             boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
             borderRadius: "8px",
             backgroundColor: "#fff",
+            width:"50%"
 
           }}
       >
