@@ -1,5 +1,4 @@
     import { create } from 'zustand'
-    import LoginStore from './LoginStore';
     import { officeSpaces } from './data.js';
     const url = 'https://officely.azurewebsites.net';
     //const url = 'http://localhost:8080';
@@ -24,12 +23,15 @@
         fetchOffice: async (id) => {
             try {
                 console.log('Fetching office with id:', id);
-                const officeData = await officeSpaces;
-                const office = officeData.find((office) => office.id === id);
+                const office = officeSpaces.find((office) => office.id === parseInt(id));
                 console.log('Fetched office:', office);
-                return Promise.resolve({
-                    json: () => Promise.resolve(office),
-                });
+                if (office) {
+                    return Promise.resolve({
+                        json: () => Promise.resolve(office),
+                    });
+                } else {
+                    return Promise.reject(new Error(`Office with id ${id} not found`));
+                }
             } catch (error) {
                 console.error('Error fetching office:', error);
                 return Promise.reject(error);
