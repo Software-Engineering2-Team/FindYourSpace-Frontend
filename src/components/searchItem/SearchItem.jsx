@@ -55,44 +55,32 @@ const SearchItem = ({ space, onUpdate }) => {
   return (
     <div className="searchItem">
       <ThemeProvider theme={defaultTheme}/>
-      <Link to={`/space/${space.id}`}>
-        {space.mainPhoto.length > 0 && (
-          
-          <div className="imageContainer">
+      {space.mainPhoto.length > 0 && (
+        <div className="imageContainer">
+          <Link to={`/space/${space.id}`}>
             <img
               src={space.mainPhoto}
               alt={space.name}
               className="siImg"
             />
-          </div>
-        )}
-      </Link>
-      
-      
-        <div>
-          <Typography
-                component="h2"
-                variant="h5"
-                fontWeight="bold"
-                sx={{
-                  fontSize: '17px',
-                
-                }}
-              >
-                {space.address}
-          </Typography>
+          </Link>
+        </div>
+      )}
+      <div>
         <Typography
-              component="h2"
-              variant="h5"
-              sx={{
-                fontSize: '15px',
-              
-              }}
-            >
-              {`$${space.pricePerDay}`}
+          component="h2"
+          variant="h5"
+          fontWeight="bold"
+          sx={{fontSize: '17px'}}>
+          {space.address}
+        </Typography>
+        <Typography
+          component="h2"
+          variant="h5"
+          sx={{fontSize: '15px'}}>
+          {`$${space.pricePerDay}`}
         </Typography>
       </div>
-      
     </div>
   );
 };
