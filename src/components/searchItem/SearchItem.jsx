@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./searchItem.css";
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 export const formatOfficeType = (officeType) => {
@@ -56,18 +55,21 @@ const SearchItem = ({ space, onUpdate }) => {
   return (
     <div className="searchItem">
       <ThemeProvider theme={defaultTheme}/>
-      {space.mainPhoto.length > 0 && (
-        <div className="imageContainer">
-          <img
-            src={space.mainPhoto}
-            alt={space.name}
-            className="siImg"
-          />
-        </div>
-      )}
       <Link to={`/space/${space.id}`}>
-        <div>
+        {space.mainPhoto.length > 0 && (
           
+          <div className="imageContainer">
+            <img
+              src={space.mainPhoto}
+              alt={space.name}
+              className="siImg"
+            />
+          </div>
+        )}
+      </Link>
+      
+      
+        <div>
           <Typography
                 component="h2"
                 variant="h5"
@@ -90,8 +92,6 @@ const SearchItem = ({ space, onUpdate }) => {
               {`$${space.pricePerDay}`}
         </Typography>
       </div>
-
-    </Link>
       
     </div>
   );
