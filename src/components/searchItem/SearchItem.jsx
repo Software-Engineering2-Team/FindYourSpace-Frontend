@@ -58,41 +58,30 @@ const SearchItem = ({ space, onUpdate }) => {
       <ThemeProvider theme={defaultTheme}/>
       {space.mainPhoto.length > 0 && (
         <div className="imageContainer">
-          <img
-            src={space.mainPhoto}
-            alt={space.name}
-            className="siImg"
-          />
+          <Link to={`/space/${space.id}`}>
+            <img
+              src={space.mainPhoto}
+              alt={space.name}
+              className="siImg"
+            />
+          </Link>
         </div>
       )}
-      <Link to={`/space/${space.id}`}>
-        <div>
-          
-          <Typography
-                component="h2"
-                variant="h5"
-                fontWeight="bold"
-                sx={{
-                  fontSize: '17px',
-                
-                }}
-              >
-                {space.address}
-          </Typography>
+      <div>
         <Typography
-              component="h2"
-              variant="h5"
-              sx={{
-                fontSize: '15px',
-              
-              }}
-            >
-              {`$${space.pricePerDay}`}
+          component="h2"
+          variant="h5"
+          fontWeight="bold"
+          sx={{fontSize: '17px'}}>
+          {space.address}
+        </Typography>
+        <Typography
+          component="h2"
+          variant="h5"
+          sx={{fontSize: '15px'}}>
+          {`$${space.pricePerDay}`}
         </Typography>
       </div>
-
-    </Link>
-      
     </div>
   );
 };
