@@ -76,12 +76,14 @@ const Login = () => {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
+    console.log(email)
     validateEmail(value);
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
+    console.log(password)
     validatePassword(value);
   };
 

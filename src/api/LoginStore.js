@@ -1,17 +1,9 @@
-import { create } from 'zustand'
-import Cookies from 'js-cookie';
+import { create } from 'zustand';
 
-const url = 'https://officely.azurewebsites.net';
-//const url = 'http://localhost:8080';
+const url = 'http://127.0.0.1:8000';
 
 const LoginStore = create((set) => ({
-  jwttoken: Cookies.get('jwttoken'),
   userData: null,
-
-  setToken: (jwttoken) => {
-    Cookies.set('jwttoken', jwttoken, { expires: 1});
-    set({ jwttoken });
-  },
 
   setUserData: (userData) => {
     set({ userData });
@@ -19,10 +11,9 @@ const LoginStore = create((set) => ({
 
   login: async (username, password) => {
     try {
-      const response = await fetch(`${url}/auth/login`, {
+      const response = await fetch(`${url}/api/login/`, {
         method: 'POST',
         headers: {
-          'Accept': '*/*',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password }),
@@ -33,8 +24,7 @@ const LoginStore = create((set) => ({
       }
 
       const data = await response.json();
-      LoginStore.getState().setToken(data.jwttoken);
-      LoginStore.getState().setUserData(data.userData);
+      LoginStore.getState().setUserData(data);
 
       console.log(data);
     } catch (error) {
@@ -45,45 +35,30 @@ const LoginStore = create((set) => ({
 
   logout: async () => {
     try {
-      const jwttoken = LoginStore.getState().jwttoken;
-
-      if (!jwttoken) {
-        // If there's no token, just clear local storage and return
-        localStorage.clear();
-        Cookies.remove('jwttoken');
-        set({ jwttoken: '', userData: null });
-        return;
-      }
-
-      const response = await fetch(`${url}/auth/logout`, {
+      const response = await fetch(`${url}/api/logout/`, {
         method: 'POST',
         headers: {
-          'Accept': '*/*',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwttoken}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Request failed: ${response.statusText}`);
+        throw new Error('Logout failed');
       }
 
-      // Clear local storage
-      localStorage.clear();
-
-      LoginStore.getState().setToken('');
+      // Clear user data
       LoginStore.getState().setUserData(null);
-      Cookies.remove('jwttoken');
 
-      return response;
+      console.log('Logout successful');
     } catch (error) {
-      console.error('Authenticated request failed:', error.message);
+      console.error('Logout failed:', error.message);
       throw error;
     }
   },
 }));
 
 export default LoginStore;
+
 
 // TODD: check if user is admin, probably it will be done server side 
 // const LoginStore = create((set) => ({
