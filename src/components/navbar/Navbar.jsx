@@ -20,27 +20,29 @@ const theme = createTheme({
 
 const Navbar = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                        Find your space
-                    </Typography>
-                    <div>
-                        <Button component={Link} to="/spaces" color="inherit">
-                            Find spaces
-                        </Button>
-                        {/* <Button component={Link} to="/add" color="inherit">Add</Button> */}
-                        <Button component={Link} to="/profile" color="inherit">
-                            Profile
-                        </Button>
-                        <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
-                            Log Out
-                        </Button>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </ThemeProvider>
+        <div data-testid="navbar-1">
+            <ThemeProvider theme={theme}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                            Find your space
+                        </Typography>
+                        <div>
+                            <Button component={Link} to="/spaces" color="inherit">
+                                Find spaces
+                            </Button>
+                            {/* <Button component={Link} to="/add" color="inherit">Add</Button> */}
+                            <Button component={Link} to="/profile" color="inherit">
+                                Profile
+                            </Button>
+                            <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
+                                Log Out
+                            </Button>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </ThemeProvider>
+        </div>
     );
 };
 

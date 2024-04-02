@@ -118,11 +118,11 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div data-testid="login-1">
+      <ThemeProvider theme={defaultTheme}>
       <Navbar />
       {/* <div style={{ height: '5px', backgroundColor: 'white' }} />  */}
       <Grid container component="main" sx={{ height: '100vh' }}>
-        
         <CssBaseline />
         <Grid
           item
@@ -229,14 +229,11 @@ const Login = () => {
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
-
           </Box>
-        
-
-           
         </Grid>
       </Grid>
     </ThemeProvider>
+    </div>    
   );
 }
 

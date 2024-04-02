@@ -116,125 +116,124 @@ const Signup = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-    <Navbar />
-    <Grid
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop:'40px'
-       
-      }}
-    >
-        <Box
-          sx={{
-            padding: {xs: "24px", md: "32px"},
-            margin: {xs: "16px", md: "32px"},
-            boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-            borderRadius: "8px",
-            backgroundColor: "#fff",
-            width:"50%"
-
-          }}
+    <div data-testid="signupPage-1">
+      <ThemeProvider theme={defaultTheme}>
+      <Navbar />
+      <Grid
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop:'40px'
+        
+        }}
       >
-         <Typography
-          component="h1"
-          variant="h5"
-          sx={{
-            fontSize: '30px',
-            textAlign:"center"
-          }}
-        >
-          Let's Create an account at Find your space!
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-        <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="firstname"
-            label="First Name"
-            name="firstname"
-            autoComplete="First Name"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="lastname"
-            label="Last Name"
-            name="lastname"
-            autoComplete="Last Name"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            onChange={handleEmailChange}
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handlePasswordChange}
-            autoComplete="current-password"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Confirm Password"
-            type="password"
-            id="password"
-            onChange={handlePasswordChange}
-            autoComplete="current-password"
-          />
-          {loginError && (
-              <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
-            )}
-              <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Create Account
-          </Button>
-          <Grid container>
-            <Grid item xs>
-            </Grid>
-            <Grid item>
-            <Link
-                to="/"
-                variant="body2"
-                onClick={() => navigate('/')}
-                >
-                {"Already have an account?"}
-            </Link>
-            </Grid>
-          </Grid>
-          <Copyright sx={{ mt: 5 }} />
-        </Box>
-      </Box>
-    
+          <Box
+            sx={{
+              padding: {xs: "24px", md: "32px"},
+              margin: {xs: "16px", md: "32px"},
+              boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
+              borderRadius: "8px",
+              backgroundColor: "#fff",
+              width:"50%"
 
-       
-    </Grid>
-    </ThemeProvider>
+            }}
+        >
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{
+              fontSize: '30px',
+              textAlign:"center"
+            }}
+          >
+            Let's Create an account at Find your space!
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="firstname"
+              label="First Name"
+              name="firstname"
+              autoComplete="First Name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="lastname"
+              label="Last Name"
+              name="lastname"
+              autoComplete="Last Name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              onChange={handleEmailChange}
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              onChange={handlePasswordChange}
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Confirm Password"
+              type="password"
+              id="password"
+              onChange={handlePasswordChange}
+              autoComplete="current-password"
+            />
+            {loginError && (
+                <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
+              )}
+                <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Create Account
+            </Button>
+            <Grid container>
+              <Grid item xs>
+              </Grid>
+              <Grid item>
+              <Link
+                  to="/"
+                  variant="body2"
+                  onClick={() => navigate('/')}
+                  >
+                  {"Already have an account?"}
+              </Link>
+              </Grid>
+            </Grid>
+            <Copyright sx={{ mt: 5 }} />
+          </Box>
+        </Box>  
+      </Grid>
+      </ThemeProvider>
+    </div>
   );
 }
 

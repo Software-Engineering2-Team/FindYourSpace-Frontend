@@ -53,7 +53,7 @@ const SearchItem = ({ space, onUpdate }) => {
   
 
   return (
-    <div className="searchItem">
+    <div className="searchItem" data-testid="searchItem-1">
       <ThemeProvider theme={defaultTheme}/>
       {space.mainPhoto.length > 0 && (
         <div className="imageContainer">
