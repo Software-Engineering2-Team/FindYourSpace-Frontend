@@ -124,6 +124,7 @@ const Profile = () => {
   };
 
   return (
+    <div data-testid="profilePage-1">
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Navbar />
@@ -248,12 +249,7 @@ const Profile = () => {
               id="password"
               onChange={handlePasswordChange}
               autoComplete="current-password"
-            />
-           
-          
-            
-            
-           
+            />  
           </Box>
           <Button type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}> {/* Added marginY to create vertical space */}
                 Reset Password
@@ -264,6 +260,7 @@ const Profile = () => {
         </Button>
       </Grid>
     </ThemeProvider>
+    </div>
   );
 }
 

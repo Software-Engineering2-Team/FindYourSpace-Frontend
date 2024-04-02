@@ -148,7 +148,7 @@ const List = () => {
   };
 
   return (
-    <div>
+    <div data-testid="list-1">
       <Navbar />
       <div style={{ height: '1px', backgroundColor: 'white' }} />
       <MarketingComponent/>

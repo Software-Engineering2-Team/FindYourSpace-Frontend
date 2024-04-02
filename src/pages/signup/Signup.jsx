@@ -116,6 +116,7 @@ const Signup = () => {
   };
 
   return (
+    <div data-testid="signupPage-1">
     <ThemeProvider theme={defaultTheme}>
     <Navbar />
     <Grid
@@ -230,11 +231,9 @@ const Signup = () => {
           <Copyright sx={{ mt: 5 }} />
         </Box>
       </Box>
-    
-
-       
     </Grid>
     </ThemeProvider>
+    </div>
   );
 }
 
