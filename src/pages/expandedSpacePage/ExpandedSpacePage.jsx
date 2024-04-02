@@ -63,12 +63,12 @@ const ExpandedSpacePage = () => {
       <CssBaseline />
       <Grid container component="main" sx={{ height: '100vh' }}>
 
-        <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-300px',marginLeft:'50px' }}>
+        <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-20px',marginLeft:'75px' }}>
           <img src={space?.mainPhoto} alt="Space" style={{ width: '500px', height: '500px' }} />
         </Grid>
    
-        <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-400px',flexDirection: 'column'  }}>
-        <Box sx={{ maxWidth: '80%', marginTop: '40px',marginRight:'175px' }}>
+        <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-30',flexDirection: 'column'  }}>
+        <Box sx={{ maxWidth: '80%', marginLeft:'1px',marginBottom:'75px' }}>
             <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
                 {space?.address}
             </Typography>

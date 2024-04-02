@@ -190,6 +190,16 @@ const Profile = () => {
                 autoComplete="email"
                 autoFocus
               />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="contactinfo"
+                label="Contact Info"
+                name="contactinfo"
+                autoComplete="Contact Info"
+                autoFocus
+              />
             
               {loginError && (
                 <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>
