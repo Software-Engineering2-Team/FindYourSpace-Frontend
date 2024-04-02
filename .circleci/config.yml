@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@5
-  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -28,6 +27,3 @@ jobs:
 
       # Run tests
       - run: npm run test
-
-      - codecov/upload:
-          file: "./coverage/clover.xml"
