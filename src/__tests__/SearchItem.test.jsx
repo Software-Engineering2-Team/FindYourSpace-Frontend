@@ -7,6 +7,7 @@ const mockSpace = {
   mainPhoto: 'https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg',
   address: 'Warsaw',
   pricePerDay: 100,
+  name: 'AdSpace1'
 };
 
 describe('SearchItem component', () => {
@@ -26,7 +27,7 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const imageElement = screen.getByAltText(mockSpace.address);
+    const imageElement = screen.getByAltText(mockSpace.name);
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.src).toBe(mockSpace.mainPhoto);
   });
@@ -57,7 +58,7 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const imageElement = screen.getByAltText(mockSpace.address);
+    const imageElement = screen.getByAltText(mockSpace.name);
     expect(imageElement.parentElement).toHaveAttribute('href', `/space/${mockSpace.id}`);
   });
 });
