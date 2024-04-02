@@ -127,6 +127,7 @@ const ExpandedSpacePage = () => {
         </Grid>
       </Grid>
     </ThemeProvider>
+    </div>
   );
 };
 
