@@ -179,7 +179,7 @@ const Login = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Username"
                 name="email"
                 onChange={handleEmailChange}
                 autoComplete="email"

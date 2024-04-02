@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const url = 'http://127.0.0.1:8000';
+const url = 'http://localhost:8000';
 
 const LoginStore = create((set) => ({
   userData: null,
@@ -32,6 +32,30 @@ const LoginStore = create((set) => ({
       throw error;
     }
   },
+  // login: async (username, password) => {
+  //   try {
+  //     const response = await fetch(`${url}/api/login/`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ username, password }),
+  //     });
+  
+  //     if (!response.ok) {
+  //       const errorMessage = await response.text();
+  //       throw new Error(errorMessage || 'Invalid credentials');
+  //     }
+  
+  //     const data = await response.json();
+  //     set({ userData: data }); // Use the set function to update state
+  
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error('Login failed:', error.message);
+  //     throw error;
+  //   }
+  // },
 
   logout: async () => {
     try {
