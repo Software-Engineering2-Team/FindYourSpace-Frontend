@@ -64,70 +64,69 @@ const ExpandedSpacePage = () => {
         <CssBaseline />
         <Grid container component="main" sx={{ height: '100vh' }}>
 
-          <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-300px',marginLeft:'50px' }}>
-            <img src={space?.mainPhoto} alt="Space" style={{ width: '500px', height: '500px' }} />
-          </Grid>
-    
-          <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-400px',flexDirection: 'column'  }}>
-          <Box sx={{ maxWidth: '80%', marginTop: '40px',marginRight:'175px' }}>
-              <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
-                  {space?.address}
-              </Typography>
-              <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '25px' }}>
-                  {`$${space?.pricePerDay}/day`}
-              </Typography>
-              <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
-                  {space?.description}
-              </Typography>
-              {/* Add additional details like number of days counter and starting date selector */}
-              <LocalizationProvider marginTop="10px" dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="Starting Date" onClick={()=>handleStartDateChange()} />
-                  </DemoContainer>
-              </LocalizationProvider>
-
-              <Grid container alignItems="center" spacing={2} marginTop="10px">
-                  <Grid item>
-                  <Button
-                      variant="contained"
-                      startIcon={<RemoveIcon />}
-                      onClick={() => handleNumberOfDaysChange(numberOfDays - 1)}
-                      disabled={numberOfDays === 1}
-                  >
-                  </Button>
-                  </Grid>
-                  <Grid item>
-                  <Typography>{numberOfDays}</Typography>
-                  </Grid>
-                  <Grid item>
-                  <Button
-                      variant="contained"
-                      endIcon={<AddIcon/>}
-                      onClick={() => handleNumberOfDaysChange(numberOfDays + 1)}
-                  >
-                  </Button>
-                  </Grid>
-              </Grid>
-
-              <Grid container spacing={2} justifyContent="left" marginTop="10px">
-                  <Grid item>
-                  <Button variant="contained">Reviews</Button>
-                  </Grid>
-                  <Grid item>
-                  <Button
-                      variant="contained"
-                      color="primary"
-                  >
-                      Rent Now
-                  </Button>
-                  </Grid>
-              </Grid>
-          </Box>
-            
-          </Grid>
+        <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-20px',marginLeft:'75px' }}>
+          <img src={space?.mainPhoto} alt="Space" style={{ width: '500px', height: '500px' }} />
         </Grid>
-      </ThemeProvider>
-    </div>
+   
+        <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-30',flexDirection: 'column'  }}>
+        <Box sx={{ maxWidth: '80%', marginLeft:'1px',marginBottom:'75px' }}>
+            <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
+                {space?.address}
+            </Typography>
+            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '25px' }}>
+                {`$${space?.pricePerDay}/day`}
+            </Typography>
+            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
+                {space?.description}
+            </Typography>
+            {/* Add additional details like number of days counter and starting date selector */}
+            <LocalizationProvider marginTop="10px" dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DatePicker']}>
+                <DatePicker label="Starting Date" onClick={()=>handleStartDateChange()} />
+                </DemoContainer>
+            </LocalizationProvider>
+
+            <Grid container alignItems="center" spacing={2} marginTop="10px">
+                <Grid item>
+                <Button
+                    variant="contained"
+                    startIcon={<RemoveIcon />}
+                    onClick={() => handleNumberOfDaysChange(numberOfDays - 1)}
+                    disabled={numberOfDays === 1}
+                >
+                </Button>
+                </Grid>
+                <Grid item>
+                <Typography>{numberOfDays}</Typography>
+                </Grid>
+                <Grid item>
+                <Button
+                    variant="contained"
+                    endIcon={<AddIcon/>}
+                    onClick={() => handleNumberOfDaysChange(numberOfDays + 1)}
+                >
+                </Button>
+                </Grid>
+            </Grid>
+
+            <Grid container spacing={2} justifyContent="left" marginTop="10px">
+                <Grid item>
+                <Button variant="contained">Reviews</Button>
+                </Grid>
+                <Grid item>
+                <Button
+                    variant="contained"
+                    color="primary"
+                >
+                    Rent Now
+                </Button>
+                </Grid>
+            </Grid>
+        </Box>
+          
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 };
 
