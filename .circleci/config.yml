@@ -1,29 +1,36 @@
 version: 2.1
-orbs:
-  node: circleci/node@5
 jobs:
   build:
-    docker:
-      - image: node:21.0.0
-
     working_directory: ~/repo
-
+    docker:
+      - image: cimg/node:21.0.0
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # Fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: npm install
-
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
       - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # Run tests
-      - run: npm run test
+            - ./node_modules
+      - run:
+          name: Build React App
+          command: npm run build
+      - save_cache:
+          key: app-build-cache-{{ .Branch }}
+          paths:
+            - ./build
+      - run:
+          name: Deploy to Netlify
+          command: ./node_modules/.bin/netlify deploy --site 67c0c118-c57d-42fa-a052-b7c756f16321 --auth nfp_rzorWHP8G9VUN3HhZCMPPnEkDsNhSSUv087c --prod --dir=build
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
