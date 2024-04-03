@@ -24,12 +24,11 @@ const MarketingComponent = () => {
                         Top advertisement spaces to rent
                     </Typography>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 ,fontSize:20}} marginLeft={10}>
-                        {/* From high trafic urban hubs to exclusive venues. */}
-                        NETLIFY IS HEREEEEEE!!!!!!!!!!
+                        From high trafic urban hubs to exclusive venues.
                     
                     </Typography>  
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1,fontSize:20,marginBottom:6}} marginLeft={10}>
-                        find the perfect spot to amplify your message!
+                        Find the perfect spot to amplify your message!
                     
                     </Typography>  
                     
