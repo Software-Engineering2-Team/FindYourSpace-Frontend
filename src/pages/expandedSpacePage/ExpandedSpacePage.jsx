@@ -33,18 +33,18 @@ const ExpandedSpacePage = () => {
   const { id } = useParams();
   console.log("The id is ", id);
 
-const fetchData = async () => {
-  try {
-    const response = await OfficeStore.getState().fetchOffice(id);
-    const data = await response.json();
-    console.log('Fetched office space:', data);
-    setSpace(data);
-  } catch (error) {
-    console.error('Error fetching office space:', error);
-  }
-};
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await OfficeStore.getState().fetchOffice(id);
+        const data = await response.json();
+        console.log('Fetched office space:', data);
+        setSpace(data);
+      } catch (error) {
+        console.error('Error fetching office space:', error);
+      }
+    };
+
     console.log('Fetching office space with id:', id);
     fetchData();
   }, [id]);
