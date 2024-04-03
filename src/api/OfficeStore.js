@@ -1,6 +1,6 @@
     import { create } from 'zustand'
     import { officeSpaces } from './data.js';
-    const url = 'https://officely.azurewebsites.net';
+    // const url = 'https://officely.azurewebsites.net';
     //const url = 'http://localhost:8080';
 
     const OfficeStore = create((set) => ({

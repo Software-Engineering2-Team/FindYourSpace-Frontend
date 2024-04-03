@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "./searchItem.css";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -23,7 +23,7 @@ const defaultTheme = createTheme({
   },
 });
 const SearchItem = ({ space, onUpdate }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   // const handleDeleteClick = async (office) => {

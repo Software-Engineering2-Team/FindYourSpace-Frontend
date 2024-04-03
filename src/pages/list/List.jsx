@@ -4,7 +4,7 @@ import SearchBar from './Search';
 import SearchItem from '../../components/searchItem/SearchItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
-import LoginStore from '../../api/LoginStore';
+// import LoginStore from '../../api/LoginStore';
 import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
 
 const List = () => {

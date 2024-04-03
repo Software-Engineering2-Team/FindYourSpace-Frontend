@@ -3,12 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import LoginStore from '../../api/LoginStore';
 import Navbar from '../../components/navbar/Navbar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -45,8 +41,8 @@ const defaultTheme = createTheme({
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  // const [emailError, setEmailError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
   const [loginError,setLoginError] = useState('');
 
   const navigate = useNavigate();
@@ -64,11 +60,11 @@ const Signup = () => {
   };
 
   const validatePassword = () => {
-    if (password.length < 3) {
-      setPasswordError('Password must be at least 3 characters');
-      return false;
-    }
-    setPasswordError('');
+    // if (password.length < 3) {
+    //   setPasswordError('Password must be at least 3 characters');
+    //   return false;
+    // }
+    // setPasswordError('');
     return true;
   };
 

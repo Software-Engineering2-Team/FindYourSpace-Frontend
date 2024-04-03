@@ -5,31 +5,10 @@ import Navbar from '../../components/navbar/Navbar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        findaspace.com
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
 
 const defaultTheme = createTheme({
   palette: {
@@ -46,8 +25,8 @@ const defaultTheme = createTheme({
 const Profile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  // const [emailError, setEmailError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
   const [loginError,setLoginError] = useState('');
 
   const navigate = useNavigate();
@@ -65,11 +44,11 @@ const Profile = () => {
   };
 
   const validatePassword = () => {
-    if (password.length < 3) {
-      setPasswordError('Password must be at least 3 characters');
-      return false;
-    }
-    setPasswordError('');
+    // if (password.length < 3) {
+    //   setPasswordError('Password must be at least 3 characters');
+    //   return false;
+    // }
+    // setPasswordError('');
     return true;
   };
 

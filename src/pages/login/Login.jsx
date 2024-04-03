@@ -11,7 +11,6 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -45,8 +44,8 @@ const defaultTheme = createTheme({
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  // const [emailError, setEmailError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
   const [loginError,setLoginError] = useState('');
 
   const navigate = useNavigate();
@@ -64,11 +63,11 @@ const Login = () => {
   };
 
   const validatePassword = () => {
-    if (password.length < 3) {
-      setPasswordError('Password must be at least 3 characters');
-      return false;
-    }
-    setPasswordError('');
+    // if (password.length < 3) {
+    //   setPasswordError('Password must be at least 3 characters');
+    //   return false;
+    // }
+    // setPasswordError('');
     return true;
   };
 

@@ -28,30 +28,30 @@ const defaultTheme = createTheme({
 
 const ExpandedSpacePage = () => {
   const [space, setSpace] = useState(null);
-  const [startDate, setStartDate] = useState(null);
+  // const [startDate, setStartDate] = useState(null);
   const [numberOfDays, setNumberOfDays] = useState(1);
   const { id } = useParams();
   console.log("The id is ", id);
 
-  const fetchData = async () => {
-    try {
-      const response = await OfficeStore.getState().fetchOffice(id);
-      const data = await response.json();
-      console.log('Fetched office space:', data);
-      setSpace(data);
-    } catch (error) {
-      console.error('Error fetching office space:', error);
-    }
-  };
+const fetchData = async () => {
+  try {
+    const response = await OfficeStore.getState().fetchOffice(id);
+    const data = await response.json();
+    console.log('Fetched office space:', data);
+    setSpace(data);
+  } catch (error) {
+    console.error('Error fetching office space:', error);
+  }
+};
 
   useEffect(() => {
     console.log('Fetching office space with id:', id);
     fetchData();
   }, [id]);
 
-  const handleStartDateChange = (newDate) => {
-    setStartDate(newDate);
-  };
+  // const handleStartDateChange = (newDate) => {
+  //   setStartDate(newDate);
+  // };
 
   const handleNumberOfDaysChange = (value) => {
     setNumberOfDays(value);
@@ -82,7 +82,8 @@ const ExpandedSpacePage = () => {
             {/* Add additional details like number of days counter and starting date selector */}
             <LocalizationProvider marginTop="10px" dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                <DatePicker label="Starting Date" onClick={()=>handleStartDateChange()} />
+                {/* <DatePicker label="Starting Date" onClick={()=>handleStartDateChange()} /> */}
+                <DatePicker label="Starting Date"/>
                 </DemoContainer>
             </LocalizationProvider>
 
