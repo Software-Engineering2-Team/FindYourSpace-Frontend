@@ -31,7 +31,7 @@ const ExpandedSpacePage = () => {
   // const [startDate, setStartDate] = useState(null);
   const [numberOfDays, setNumberOfDays] = useState(1);
   const { id } = useParams();
-  console.log("The id is ", id);
+  console.log("The id is: ", id);
 
   useEffect(() => {
     const fetchData = async () => {
