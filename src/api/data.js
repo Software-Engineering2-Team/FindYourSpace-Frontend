@@ -106,5 +106,15 @@ export const officeSpaces = [
       
       "mainPhoto": "https://as1.ftcdn.net/v2/jpg/06/12/20/06/1000_F_612200665_iIzNuEKxOfB09Vbpuns3dW7dXgrVnXCu.jpg",
       
-  }
+  },
+  {
+    "id": 48,
+    "name": "New Ad Space",
+    "description": "A modern conference room with a chill atmosphere, located a 5-minute walk from St. Florians Gate in Krakow, Tower.",
+    "pricePerDay": 800.0,
+
+    "address": "Aleje Jerozolimskie 123, Warsaw",
+    "mainPhoto": "https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg",
+
+  },
   ]
