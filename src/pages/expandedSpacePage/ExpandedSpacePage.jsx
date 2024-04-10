@@ -128,7 +128,10 @@
 
               <Grid container spacing={2} justifyContent="left" marginTop="10px">
                   <Grid item>
-                    <Button variant="contained">Reviews</Button>
+                    <Link to = {"/reviews/:id"}>
+                      <Button variant="contained">Reviews</Button>
+                    </Link>
+                  
                   </Grid>
                   <Grid item>
                     <Button
