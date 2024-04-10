@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Profile from "./pages/profile/Profile";
 import ExpandedSpacePage from "./pages/expandedSpacePage/ExpandedSpacePage";
+import Reviews from "./pages/reviews/Reviews";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/space/:id" element={<ExpandedSpacePage />} />
+        <Route path="/reviews/:id" element={<Reviews/>} />
       </Routes>
     </BrowserRouter>
   );
