@@ -156,8 +156,8 @@ const List = () => {
         <div style={{ width: '250px' ,marginTop: '30px'}}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" gutterBottom style={{ fontSize: '1.5rem', marginBottom: '5px', fontWeight: 'bold', marginRight: '10px' }}>Filters</Typography>
-          <Typography variant="subtitle2" gutterBottom style={{ fontSize: '1rem' }}>
-            <span style={{ color: 'blue', cursor: 'pointer' }} onClick={handleClearFilters}>Clear Filters</span>
+          <Typography  variant="subtitle2" gutterBottom style={{ fontSize: '1rem',marginTop:'1.5px',marginLeft:'20px'}}>
+            <span style={{ color: 'black', cursor: 'pointer' }} onClick={handleClearFilters}>Clear</span>
           </Typography>
         </div>
           <div style={{ marginBottom: '10px' }}>
@@ -309,7 +309,7 @@ const List = () => {
               <MenuItem value="features">Office Types</MenuItem>
             </Select>
           </FormControl>
-          <div className="listResult" style={{ display: 'flex', flexWrap: 'wrap'}}>
+          <div style={{ display: 'flex', flexWrap: 'wrap'}}>
             {filteredOfficeSpaces.map(space => (
               <div key={space.id} style={{ width: 'calc(100% / 3)' }}>
                 <SearchItem space={space} onUpdate={handleOfficeUpdate} />

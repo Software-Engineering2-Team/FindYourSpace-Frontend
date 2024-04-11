@@ -15,6 +15,7 @@
   import AddIcon from '@mui/icons-material/Add';
   import RemoveIcon from '@mui/icons-material/Remove';
   import axios from 'axios';
+  import { Link } from 'react-router-dom';
   const defaultTheme = createTheme({
     palette: {
       primary: {
@@ -60,7 +61,7 @@
     const handleRentNowClick = async () => {
       try {
         const response = await axios.post('http://localhost:4242/create-checkout-session', {
-          price: space.pricePerDay * numberOfDays, 
+          price: space.pricePerDay, 
           imageUrl: space.mainPhoto, 
           quantity: numberOfDays,
           name : space.address
@@ -128,10 +129,9 @@
 
               <Grid container spacing={2} justifyContent="left" marginTop="10px">
                   <Grid item>
-                    <Link to = {"/reviews/:id"}>
+                    <Link to={`/reviews/${id}`}>  
                       <Button variant="contained">Reviews</Button>
                     </Link>
-                  
                   </Grid>
                   <Grid item>
                     <Button

@@ -1,13 +1,15 @@
-.searchItem {
-    border: 1px solid lightgray;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between; /* Add this line */
-    gap: 20px; /* Add this line */
-    margin-bottom: 20px;
-  }
-  
+
+/* .searchItem {
+  border: 1px solid lightgray;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between; /* Add this line */
+ /* gap: 20px; /* Add this line */
+/*  margin-bottom: 20px;
+/*} */
+
+/*
   .siImg {
     width: 140px;
     height: 160px;
@@ -128,6 +130,7 @@
     color: #fff;
     text-align: center;
     border-radius: 6px;
+    /*
     padding: 10px;
     position: absolute;
     z-index: 1;
@@ -141,7 +144,6 @@
   .tooltip .tooltipText p {
     margin: 0;
   }
-  
   .tooltip:hover .tooltipText {
     visibility: visible;
     opacity: 1;
@@ -150,4 +152,10 @@
   .deleteIcon {
     cursor: pointer;
     margin-left: 86px;
+  }
+
+  */
+
+  .reviewItemContainer {
+    margin-bottom: 50px; /* Adjust the value as needed */
   }

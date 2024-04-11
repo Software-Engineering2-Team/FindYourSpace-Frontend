@@ -20,7 +20,7 @@ app.post('/create-checkout-session', async (req, res) => {
               name: name,
               images: [imageUrl],
             },
-            unit_amount: price * 100, 
+            unit_amount: price *100, 
           },
           quantity: quantity, // Use the quantity passed from the frontend
         },
