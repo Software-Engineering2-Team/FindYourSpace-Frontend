@@ -1,27 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  TextField,
-  Button,
-  Stack,
-  Typography,
-  IconButton,
-  Box,
-  ImageList,
-  ImageListItem, Grid,
-} from "@mui/material";
+import { TextField, Button, Stack, Typography, IconButton, Box, ImageListItem, Grid} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FlagIcon from '@mui/icons-material/Flag';
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Navbar from "../../components/navbar/Navbar";
 import OfficeStore from "../../api/OfficeStore";
 import {uploadAdditionalPhoto, uploadMainPhoto} from '../../api/photos';
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Chip from "@mui/material/Chip";
-
 
 const AddOfficeSpaceForm = () => {
   const navigate = useNavigate();
@@ -65,7 +50,7 @@ const AddOfficeSpaceForm = () => {
     for(let i = 0; i < uploadedImages.length; i++)
     {
       const image = uploadedImages[i];
-      if(mainImageIndex == i)
+      if(mainImageIndex === i)
         await uploadMainPhoto(officeId, image);
       else
         await uploadAdditionalPhoto(officeId, image);
@@ -80,7 +65,7 @@ const AddOfficeSpaceForm = () => {
   };
 
   const handleImageDelete = (index) => {
-    if(index == mainImageIndex)
+    if(index === mainImageIndex)
       setMainIndex(0);
     else if(index < mainImageIndex)
       setMainIndex(mainImageIndex-1);
@@ -149,7 +134,7 @@ const AddOfficeSpaceForm = () => {
                       <ImageListItem style = {{height: "250px" }}>
                         <img
                             src={URL.createObjectURL(image)}
-                            alt={`Uploaded Image ${index}`}
+                            alt={`Uploaded ${index}`}
                             style={{ width: "100%", height: "100%", objectFit: "contain", border: index === mainImageIndex ? '2px solid red' : 'none' }}
                         />
                         <IconButton

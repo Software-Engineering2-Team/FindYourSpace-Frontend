@@ -23,7 +23,6 @@ function App() {
         <Route path="/booking-history" element={<BookingHistory/>}/>
         {/* <Route path="/spaces/:id" element={<EditOfficeSpaceForm/>}/> */}
         <Route path="/add" element={<AddOfficeSpaceForm/>}/>
-        {/* <Route path="/reservations/:id" element={<ReservationsTable/>}/> */}
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/space/:id" element={<ExpandedSpacePage />} />
