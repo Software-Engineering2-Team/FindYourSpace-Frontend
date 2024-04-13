@@ -90,7 +90,7 @@ const AddOfficeSpaceForm = () => {
         <Navbar />
         <div className="ad_space_form">
           <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
-            <h2>Create A New Office Listing</h2>
+            <h2>Create A New Advertisement Space Listing</h2>
           </Typography>
           <Box
               sx={{
