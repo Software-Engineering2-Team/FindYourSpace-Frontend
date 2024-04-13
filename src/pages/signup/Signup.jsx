@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginStore from '../../api/LoginStore';
 import Navbar from '../../components/navbar/Navbar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,6 +8,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import SignupStore from '../../api/SignupStore';
 
 function Copyright(props) {
   return (
@@ -39,8 +39,11 @@ const defaultTheme = createTheme({
 });
 
 const Signup = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   // const [emailError, setEmailError] = useState('');
   // const [passwordError, setPasswordError] = useState('');
   const [loginError,setLoginError] = useState('');
@@ -68,6 +71,11 @@ const Signup = () => {
     return true;
   };
 
+  const handleUsernameChange = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+
+  };
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
@@ -80,14 +88,21 @@ const Signup = () => {
     setPassword(value);
     validatePassword(value);
   };
+  
+  const handleConfirmPasswordChange = (e) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+    validatePassword(value);
+
+  };
 
   const isValid = () => validateEmail() && validatePassword();
 
-  const fetchData = () =>{
+  const makeSignupRequest = () =>{
     // TODO: change to email or username and update .login() method
 
-    LoginStore.getState()
-      .login(email, password)
+    SignupStore.getState()
+      .signup(username,email,password,confirmPassword)
       .then(() =>
         {
           navigate('/spaces');
@@ -106,9 +121,12 @@ const Signup = () => {
     if (!isValid()) {
       return;
     }
+    console.log('A username was submitted: ', username);
     console.log('An email was submitted: ', email);
     console.log('A password was submitted: ', password);
-    fetchData();
+    console.log('Confirm Password was : ', confirmPassword);
+    
+    makeSignupRequest();
   };
 
   return (
@@ -151,20 +169,11 @@ const Signup = () => {
               margin="normal"
               required
               fullWidth
-              id="firstname"
-              label="First Name"
-              name="firstname"
-              autoComplete="First Name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="lastname"
-              label="Last Name"
-              name="lastname"
-              autoComplete="Last Name"
+              id="username"
+              label="Username"
+              name="username"
+              onChange={handleUsernameChange}
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -182,10 +191,10 @@ const Signup = () => {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="password1"
               label="Password"
               type="password"
-              id="password"
+              id="password1"
               onChange={handlePasswordChange}
               autoComplete="current-password"
             />
@@ -193,11 +202,11 @@ const Signup = () => {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="password2"
               label="Confirm Password"
               type="password"
-              id="password"
-              onChange={handlePasswordChange}
+              id="password2"
+              onChange={handleConfirmPasswordChange}
               autoComplete="current-password"
             />
             {loginError && (
