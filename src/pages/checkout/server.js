@@ -36,5 +36,5 @@ app.post('/create-checkout-session', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
+//Make request to payment model
 app.listen(4242, () => console.log('Server running on port 4242'));
