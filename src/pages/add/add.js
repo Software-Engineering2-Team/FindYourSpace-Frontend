@@ -15,7 +15,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Navbar from "../../components/navbar/Navbar";
 import OfficeStore from "../../api/OfficeStore";
-import { set } from "date-fns";
 import {uploadAdditionalPhoto, uploadMainPhoto} from '../../api/photos';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -23,36 +22,17 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Chip from "@mui/material/Chip";
 
-const officeTypes = ["CONFERENCE_ROOM", "COWORKING_SPACE", "DESK", "OFFICE"];
-const amenitiesOptions = [
-  "WIFI",
-  "COFFEE",
-  "TEA",
-  "PROJECTOR",
-  "WHITEBOARD",
-  "PRINTER",
-  "SCANNER",
-  "FAX",
-  "PHONE",
-  "KITCHEN",
-  "PARKING",
-  "ACCESSIBLE",
-  "SECURITY",
-  "LOCKERS",
-  "PETS_ALLOWED",
-  "SMOKING_AREA",
-];
 
 const AddOfficeSpaceForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    id: 0,
-    name: "",
     description: "",
-    pricePerDay: 0,
-    address: "",
-    rating: 1,
-    mainPhoto: "",
+    price: 0,
+    location: "",
+    size: "",
+    availability: true,
+    photos: "",
+    owner: ""
   });
 
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -70,14 +50,14 @@ const AddOfficeSpaceForm = () => {
     OfficeStore.getState().addOffice(formData)
         .then((response) => response.json())
         .then((data) => {
-          console.log("Office data:", data);
+          console.log("AdSpace data:", data);
           uploadPhotos(data[0].id)
-              .finally(() => navigate("/offices"))
+              .finally(() => navigate("/spaces"))
               .catch((error) => {
-                console.error("Error adding office photos:", error)});
+                console.error("Error adding AdSpace photos:", error)});
         })
         .catch((error) => {
-          console.error("Error adding office data:", error);
+          console.error("Error adding AdSpace data:", error);
         });
   };
 
@@ -117,13 +97,13 @@ const AddOfficeSpaceForm = () => {
   }
 
   const cancelHandler = () => {
-    navigate("/offices");
+    navigate("/spaces");
   };
 
   return (
       <div>
         <Navbar />
-        <div className="office_space_form">
+        <div className="ad_space_form">
           <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
             <h2>Create A New Office Listing</h2>
           </Typography>
@@ -192,40 +172,31 @@ const AddOfficeSpaceForm = () => {
               <Stack direction={{xs: "column", md: "row"}} spacing={3}>
                 <Stack spacing={3} flexGrow={4} width={1000}>
                   <TextField
-                      label="Price"
-                      placeholder="Price"
+                      label="Size"
+                      placeholder="Size"
                       type="number"
-                      value={formData.pricePerDay}
-                      onChange={(e) => handleInputChange("pricePerDay", e.target.value)}
+                      value={formData.size}
+                      onChange={(e) => handleInputChange("size", e.target.value)}
                       fullWidth
                       margin="normal"
                   />
                   <TextField
-                      label="Address"
-                      placeholder="Address"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange("address", e.target.value)}
+                      label="Price"
+                      placeholder="Price"
+                      type="number"
+                      value={formData.price}
+                      onChange={(e) => handleInputChange("price", e.target.value)}
                       fullWidth
                       margin="normal"
                   />
-                  <FormControl fullWidth margin="normal">
-                    <InputLabel id="officeType-label">Office Type</InputLabel>
-                    <Select
-                        label="Office Type"
-                        placeholder="Office Type"
-                        labelId="officeType-label"
-                        id="officeType"
-                        value={formData.officeType}
-                        onChange={(e) => handleInputChange("officeType", e.target.value)}
-                        fullWidth
-                    >
-                      {officeTypes.map((type) => (
-                          <MenuItem key={type} value={type}>
-                            {type}
-                          </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <TextField
+                      label="Location"
+                      placeholder="Location"
+                      value={formData.location}
+                      onChange={(e) => handleInputChange("location", e.target.value)}
+                      fullWidth
+                      margin="normal"
+                  />
                 </Stack>
 
                 <TextField
@@ -239,46 +210,10 @@ const AddOfficeSpaceForm = () => {
                     margin="normal"
                 />
               </Stack>
-              <FormControl fullWidth margin="normal">
-                <InputLabel id="amenities-label">Amenities</InputLabel>
-                <Select
-                    label="Amenities"
-                    placeholder="Amenities"
-                    labelId="amenities-label"
-                    id="amenities"
-                    multiple
-                    value={formData.amenities}
-                    onChange={(e) => handleInputChange("amenities", e.target.value)}
-                    renderValue={(selected) => (
-                        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                          {selected.map((value) => (
-                              <Chip
-                                  key={value}
-                                  label={value}
-                              />
-                          ))}
-                        </Box>
-                    )}
-                    fullWidth
-                    MenuProps={{
-                      sx: {
-                        '& .Mui-selected': {
-                          color: "#2c3994",
-                        },
-                      },
-                    }}
-                >
-                  {amenitiesOptions.map((amenity) => (
-                      <MenuItem key={amenity} value={amenity}>
-                        {amenity}
-                      </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
               <Stack
                   direction="row"
                   justifyContent="space-between"
-                  marginTop={2}
+                  marginTop={6}
                   sx={{ paddingLeft: "1.25%", paddingRight: "1.25%" }}
               >
                 <Button variant="outlined" color="error" onClick={cancelHandler}>
