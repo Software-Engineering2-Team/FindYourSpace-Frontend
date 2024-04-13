@@ -124,7 +124,7 @@ const Profile = () => {
               borderRadius: "8px",
               backgroundColor: "#fff",
               width: "40%",
-              textAlign: "center" 
+              textAlign: "center",
             }}
           >
             <Typography
@@ -242,7 +242,7 @@ const Profile = () => {
                   Reset Password
               </Button> 
           </Box>
-          <Button variant="outlined" color="error">
+          <Button variant="outlined" color="error" style={{marginTop: 50,marginBottom: 50}}>
                   Delete Account
           </Button>
         </Grid>

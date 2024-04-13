@@ -8,18 +8,27 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Profile from "./pages/profile/Profile";
 import ExpandedSpacePage from "./pages/expandedSpacePage/ExpandedSpacePage";
+import BookingHistory from "./pages/bookingHistory/BookingHistory";
+import ExpandedHistoryPage from "./pages/expandedSpacePage/ExpandedHistoryPage";
+import ContactOwner from "./pages/contactOwner/ContactOwner";
+import AddOfficeSpaceForm from "./pages/add/add";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/spaces" element={<List/>}/>
+        <Route path="/booking-history" element={<BookingHistory/>}/>
         {/* <Route path="/spaces/:id" element={<EditOfficeSpaceForm/>}/> */}
-        {/* <Route path="/add" element={<AddOfficeSpaceForm/>}/> */}
+        <Route path="/add" element={<AddOfficeSpaceForm/>}/>
         {/* <Route path="/reservations/:id" element={<ReservationsTable/>}/> */}
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/space/:id" element={<ExpandedSpacePage />} />
+        <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
+        <Route path="/contact/:id" element={<ContactOwner/>}/>
+
       </Routes>
     </BrowserRouter>
   );

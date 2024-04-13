@@ -50,16 +50,9 @@ const AddOfficeSpaceForm = () => {
     name: "",
     description: "",
     pricePerDay: 0,
-    isActive: true,
     address: "",
-    availableFrom: "2024-01-01T00:00:00.0000",
-    availableTo: "2030-01-01T00:00:00.0000",
-    amenities: [],
-    officeType: "",
     rating: 1,
-    officeArea: 1,
     mainPhoto: "",
-    photos: []
   });
 
   const [uploadedImages, setUploadedImages] = useState([]);

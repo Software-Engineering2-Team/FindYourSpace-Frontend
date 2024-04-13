@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link, useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -112,24 +112,15 @@ const ExpandedSpacePage = () => {
 
             <Grid container spacing={2} justifyContent="left" marginTop="10px">
                 <Grid item>
-                    <Button variant="contained">Reviews</Button>
+                <Button variant="contained">Reviews</Button>
                 </Grid>
                 <Grid item>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                    >
-                        Rent Now
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        component={Link}
-                        to={`/contact/${id}`}>
-                        Contact Space Owner
-                    </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                >
+                    Rent Now
+                </Button>
                 </Grid>
             </Grid>
         </Box>
