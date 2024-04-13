@@ -40,7 +40,7 @@ const uploadFile = async function(officeId, file, isMain)
 }
 
 const deletePhoto = async function(officeId, fileUrl)
-{
+{   
     return fetch(getUrl(officeId), {
         method: 'DELETE',
         headers: {
