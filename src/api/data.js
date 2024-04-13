@@ -4,7 +4,6 @@ export const officeSpaces = [
       "name": "Akhils Old Apartment",
       "description": "A modern conference room with a chill atmosphere, located a 5-minute walk from St. Florians Gate in Krakow, Tower.",
       "pricePerDay": 200.0,
-  
       "address": "Aleje Jerozolimskie 123, Warsaw",
       "mainPhoto": "https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg",
   

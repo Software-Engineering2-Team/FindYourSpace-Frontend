@@ -28,7 +28,6 @@ const MarketingComponent = () => {
                     </Typography>  
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1,fontSize:20,marginBottom:6}} marginLeft={10}>
                         Find the perfect spot to amplify your message!
-                    
                     </Typography>  
                     
                 </AppBar>
