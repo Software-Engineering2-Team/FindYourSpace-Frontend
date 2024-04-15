@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import MySpaces from '../pages/mySpaces/MySpaces';
 
 
-test('renders mySpaces page', () => {
+test('renders MySpaces page', () => {
     render(
       <MemoryRouter>
         <MySpaces/>

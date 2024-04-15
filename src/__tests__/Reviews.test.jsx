@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Reviews from '../pages/reviews/Reviews';
 
-test('renders reviews page', () => {
+test('renders Reviews page', () => {
     render(
       <MemoryRouter>
         <Reviews/>

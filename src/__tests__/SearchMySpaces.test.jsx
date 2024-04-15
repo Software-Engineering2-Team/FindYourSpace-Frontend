@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import SearchBar from '../pages/mySpaces/SearchMySpaces';
 
 
-test('renders profile page', () => {
+test('renders SearchMySpaces component', () => {
     render(
       <MemoryRouter>
         <SearchBar/>
