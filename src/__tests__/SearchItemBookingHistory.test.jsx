@@ -9,9 +9,8 @@ const mockSpaceBookingHistory = {
   price: 100,
   size: 1,
   availability: true,
-  owner: "Sam Smith"
+  owner: "Murdock"
 };
-
 
 test('renders search item of booking history', () => {
     render(
