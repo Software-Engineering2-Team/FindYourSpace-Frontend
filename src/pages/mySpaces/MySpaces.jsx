@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, FormControl, InputLabel, MenuItem, Select, Pagination } from '@mui/material';
 import SearchBar from './SearchMySpaces';
-import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
+import MySpaceItem from '../../components/mySpaceItem/mySpaceItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 
@@ -107,7 +107,7 @@ const MySpaces = () => {
               <div className="listWrapperMySpace">
                 <div className="listResultMySpace">
                   {filteredOfficeSpaces.map(space => (
-                      <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
+                      <MySpaceItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
                   ))}
                 </div>
                 <div

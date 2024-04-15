@@ -8,22 +8,14 @@ import {
   Typography,
   IconButton,
   Box,
-  ImageList,
-  ImageListItem, Grid,
+  //ImageListItem, 
+  Grid,
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from "../../api/OfficeStore";
-import FlagIcon from '@mui/icons-material/Flag';
-import { formatOfficeType } from '../../components/searchItem/SearchItem';
-import {deletePhoto, uploadAdditionalPhoto, uploadMainPhoto} from '../../api/photos';
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Chip from "@mui/material/Chip";
-import ReservationStore from "../../api/ReservationStore";
+// import FlagIcon from '@mui/icons-material/Flag';
 
 const EditOfficeSpaceForm = () => {
   const navigate = useNavigate();
@@ -36,22 +28,16 @@ const EditOfficeSpaceForm = () => {
     photos: "",
     owner: ""
   });
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchOfficeData = () => {
       OfficeStore.getState().fetchOffice(id)
           .then((response) => response.json())
           .then((data) => {
-            console.log("Office data:", data);
+            console.log("Ad Space data:", data);
             setFormData(data);
-
-            let downloaded = [];
-            for(let i = 0; i < data.photos.length; i++){
-              if(data.photos[i] === data.mainPhoto)
-                setMainIndex(i);
-              downloaded.push({url: data.photos[i], file: null});
-            }
-            setImages(downloaded);
+            // setImages(data.mainPhoto);
           })
           .catch((error) => {
             console.error("Error fetching office data:", error);
@@ -71,87 +57,88 @@ const EditOfficeSpaceForm = () => {
     }));
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const currentFiles = [...images];
-    currentFiles.push({url: URL.createObjectURL(file), file:file});
-    setImages(currentFiles);
-    console.log('Uploaded images:', currentFiles);
-  };
+  // const handleImageUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   const currentFiles = [...images];
+  //   currentFiles.push({url: URL.createObjectURL(file), file:file});
+  //   setImages(currentFiles);
+  //   console.log('Uploaded images:', currentFiles);
+  // };
 
-  const handleImageDelete = (index) => {
-    if(index == mainImageIndex)
-      setMainIndex(0);
-    else if(index < mainImageIndex)
-      setMainIndex(mainImageIndex-1);
+  // const handleImageDelete = (index) => {
+  //   if(index == mainImageIndex)
+  //     setMainIndex(0);
+  //   else if(index < mainImageIndex)
+  //     setMainIndex(mainImageIndex-1);
 
-    if(!images[index].file)
-    {
-      const file = images[index];
-      const currentToBeDeleted = [...imagesToRemove];
-      currentToBeDeleted.push(file);
-      setImagesToRemove(currentToBeDeleted);
-    }
+  //   if(!images[index].file)
+  //   {
+  //     const file = images[index];
+  //     const currentToBeDeleted = [...imagesToRemove];
+  //     currentToBeDeleted.push(file);
+  //     setImagesToRemove(currentToBeDeleted);
+  //   }
 
-    setImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages.splice(index, 1);
-      return updatedImages;
-    });
-  };
+  //   setImages((prevImages) => {
+  //     const updatedImages = [...prevImages];
+  //     updatedImages.splice(index, 1);
+  //     return updatedImages;
+  //   });
+  // };
 
   const submitHandler = async (event) => {
     console.log('Form data:', formData);
-    console.log('Uploaded images:', images);
-    console.log('Deleted images:', imagesToRemove);
+    // console.log('Uploaded images:', images);
+    // console.log('Deleted images:', imagesToRemove);
 
     event.preventDefault();
     OfficeStore.getState().updateOffice(formData)
         .then((response) => response.json())
         .then((data) => {
-          console.log('Office space updated:', data);
-          handlePhotos(data.id)
-              .then(() => navigate("/offices"))
-              .catch((error) => {console.error("Error adding office photos:", error)});
-        })
+          console.log('Office space updated:', data)})
+        .then(() => navigate("/myspaces")
+          // handlePhotos(data.id)
+          //     .then(() => navigate("/spaces"))     
+          //     .catch((error) => {console.error("Error adding office photos:", error)});
+        )
         .catch((error) => {})
   };
 
-  const handlePhotos = async (officeId) => {
-    console.log('Uploading photos for office:', images);
-    for(let i = 0; i < images.length; i++)
-    {
-      const image = images[i];
-      if(image.file)
-      {
-        if(mainImageIndex == i)
-          await uploadMainPhoto(officeId, image.file);
-        else
-          await uploadAdditionalPhoto(officeId, image.file);
-      }
-      else
-      {
-        if(mainImageIndex == i && image.url != formData.mainPhoto)
-        {
-          // update main photo
-          await deletePhoto(officeId, image.url);
-          await uploadMainPhoto(officeId, image.url);
-        }
-      }
-    }
-    for(let i = 0; i < imagesToRemove.length; i++)
-    {
-      const image = imagesToRemove[i];
-      await deletePhoto(officeId, image.url);
-    }
-  };
+  // const handlePhotos = async (officeId) => {
+  //   console.log('Uploading photos for office:', images);
+  //   for(let i = 0; i < images.length; i++)
+  //   {
+  //     const image = images[i];
+  //     if(image.file)
+  //     {
+  //       if(mainImageIndex == i)
+  //         await uploadMainPhoto(officeId, image.file);
+  //       else
+  //         await uploadAdditionalPhoto(officeId, image.file);
+  //     }
+  //     else
+  //     {
+  //       if(mainImageIndex == i && image.url != formData.mainPhoto)
+  //       {
+  //         // update main photo
+  //         await deletePhoto(officeId, image.url);
+  //         await uploadMainPhoto(officeId, image.url);
+  //       }
+  //     }
+  //   }
+  //   for(let i = 0; i < imagesToRemove.length; i++)
+  //   {
+  //     const image = imagesToRemove[i];
+  //     await deletePhoto(officeId, image.url);
+  //   }
+  // };
 
-  const handleMarkMainPhoto = (index) => {
-    setMainIndex(index);
-  }
+  // const handleMarkMainPhoto = (index) => {
+  //   setMainIndex(index);
+  // }
 
   const cancelHandler = () => {
-    navigate("/spaces");
+    navigate("/myspaces");
   };
 
   return (
@@ -185,7 +172,7 @@ const EditOfficeSpaceForm = () => {
                     type="file"
                     id="imageUpload"
                     style={{ display: "none" }}
-                    onChange={handleImageUpload}
+                    // onChange={handleImageUpload}
                 />
                 <label htmlFor="imageUpload">
                   <IconButton component="span" color="primary">
@@ -198,7 +185,7 @@ const EditOfficeSpaceForm = () => {
               </Stack>
               
               <Grid container spacing={2} style={{ maxHeight: "600px", overflowY: 'auto', marginBottom: '40px' }}>
-                {images.map((image, index) => (
+                {/* {images.map((image, index) => (
                     <Grid item key={index} xs={4} style={{ marginBottom: '16px', breakInside: 'avoid', height: "250px" }}>
                       <ImageListItem style={{ height: "250px" }}>
                         <img
@@ -220,7 +207,7 @@ const EditOfficeSpaceForm = () => {
                         </IconButton>
                       </ImageListItem>
                     </Grid>
-                ))}
+                ))} */}
               </Grid>
 
               <Stack direction={{xs: "column", md: "row"}} spacing={3}>
