@@ -22,7 +22,8 @@ const ReviewItem = ({review}) => {
     starIcons.push(<StarIcon sx={{ fontSize: 18 }} key={index} color="black" />);
   }
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div data-testid="reviewItem-1">
+      <ThemeProvider theme={defaultTheme}>
       <Box style={{marginBottom:"20px"}} 
       sx={ {
               boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
@@ -42,9 +43,10 @@ const ReviewItem = ({review}) => {
         </Stack>
         <div style={{ width: '100%' }}><Typography>{review.description}</Typography></div>
       </Box>
+      </ThemeProvider>
 
-
-    </ThemeProvider>
+    </div>
+    
     
   );
 };
