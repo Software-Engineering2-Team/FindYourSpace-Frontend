@@ -24,7 +24,7 @@ const EditOfficeSpaceForm = () => {
     price: 0,
     location: "",
     size: "",
-    availability: true,
+    availability:"",
     photos: "",
     owner: ""
   });

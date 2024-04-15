@@ -15,7 +15,7 @@ const AddOfficeSpaceForm = () => {
     price: 0,
     location: "",
     size: "",
-    availability: true,
+    availability: "",
     photos: "",
     owner: ""
   });
@@ -155,7 +155,7 @@ const AddOfficeSpaceForm = () => {
               </Grid>
 
               <Stack direction={{xs: "column", md: "row"}} spacing={3}>
-                <Stack spacing={13} flexGrow={4} width={1000}>
+                <Stack spacing={4} flexGrow={4} width={1000}>
                   <TextField
                       label="Size"
                       placeholder="Size"

@@ -126,7 +126,9 @@ export const officeSpaces = [
       "price": 200.0,
       "location": "Aleje Jerozolimskie 123, Warsaw",
       "photos": "https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg",
-      "size": 1
+      "size": 1,
+      "availability": true,
+      "owner": "John Doe"
     },
     {
       "id": 39,
@@ -134,7 +136,9 @@ export const officeSpaces = [
       "price": 300.0,
       "location": "Plac Bankowy 2, Warsaw",
       "photos": "https://as1.ftcdn.net/v2/jpg/06/55/09/56/1000_F_655095664_cs0g6ckTkQ54LEV6L32lIYTWKpJ61IIy.jpg",
-      "size": 2
+      "size": 2,
+      "availability": false,
+      "owner": "Jane Smith"
     },
     {
       "id": 40,
@@ -142,7 +146,9 @@ export const officeSpaces = [
       "price": 112.0,
       "location": "Nowy Świat 1, Warsaw",
       "photos": "https://as1.ftcdn.net/v2/jpg/05/67/72/74/1000_F_567727451_x06twcJGuKVgocC7fG0OrYESeMorwJ2G.jpg",
-      "size": 1
+      "size": 1,
+      "availability": true,
+      "owner": "Alice Johnson"
     },
     {
       "id": 41,
@@ -150,7 +156,9 @@ export const officeSpaces = [
       "price": 250.0,
       "location": "Downtown Dubai",
       "photos": "https://as2.ftcdn.net/v2/jpg/04/53/15/57/1000_F_453155722_1rL2eNHKZnFB4DdCVGWaM3oJDsJXE5Pd.jpg",
-      "size": 3
+      "size": 3,
+      "availability": true,
+      "owner": "Robert Brown"
     },
     {
       "id": 42,
@@ -158,7 +166,9 @@ export const officeSpaces = [
       "price": 400.0,
       "location": "Bangalore Main Town",
       "photos": "https://as1.ftcdn.net/v2/jpg/04/53/15/58/1000_F_453155844_VuVmryhbfgabMg2xwJmXyf7fKzRrWvR4.jpg",
-      "size": 3
+      "size": 3,
+      "availability": false,
+      "owner": "Michael Lee"
     },
     {
       "id": 43,
@@ -166,7 +176,9 @@ export const officeSpaces = [
       "price": 350.0,
       "location": "Świętokrzyska 20, Warsaw",
       "photos": "https://as2.ftcdn.net/v2/jpg/06/23/23/25/1000_F_623232559_AfWkkaeobDdXYPDORfrFHSc0vz3APGJp.jpg",
-      "size": 3
+      "size": 3,
+      "availability": true,
+      "owner": "Emily Davis"
     },
     {
       "id": 44,
@@ -174,7 +186,9 @@ export const officeSpaces = [
       "price": 280.0,
       "location": "Nowy Świat 10, Warsaw",
       "photos": "https://as1.ftcdn.net/v2/jpg/06/37/22/76/1000_F_637227621_KF5C4sDC21SzaYYTjh76UR2FlyrPRVLg.jpg",
-      "size": 2
+      "size": 2,
+      "availability": true,
+      "owner": "David Wilson"
     },
     {
       "id": 45,
@@ -182,7 +196,9 @@ export const officeSpaces = [
       "price": 320.0,
       "location": "Nowy Świat 20, Warsaw",
       "photos": "https://as2.ftcdn.net/v2/jpg/06/16/36/25/1000_F_616362522_GgSOSs5hYAmH7H7WnS5DWOecp0SmrNRe.jpg",
-      "size": 2
+      "size": 2,
+      "availability": true,
+      "owner": "Jennifer Taylor"
     },
     {
       "id": 46,
@@ -190,7 +206,9 @@ export const officeSpaces = [
       "price": 380.0,
       "location": "Warsaw Old Town",
       "photos": "https://as1.ftcdn.net/v2/jpg/06/13/56/76/1000_F_613567658_LUhzczNM7duEKc3Gt7ORopW7HTVPlzub.jpg",
-      "size": 3
+      "size": 3,
+      "availability": false,
+      "owner": "Daniel Garcia"
     },
     {
       "id": 47,
@@ -198,7 +216,9 @@ export const officeSpaces = [
       "price": 300.0,
       "location": "Cracow Old Town",
       "photos": "https://as1.ftcdn.net/v2/jpg/06/12/20/06/1000_F_612200665_iIzNuEKxOfB09Vbpuns3dW7dXgrVnXCu.jpg",
-      "size": 2
+      "size": 2,
+      "availability": true,
+      "owner": "Sophia Martinez"
     },
     {
       "id": 48,
@@ -206,6 +226,9 @@ export const officeSpaces = [
       "price": 800.0,
       "location": "Aleje Jerozolimskie 123, Warsaw",
       "photos": "https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg",
-      "size": 3
+      "size": 3,
+      "availability": true,
+      "owner": "Matthew Anderson"
     },
 ]
+
