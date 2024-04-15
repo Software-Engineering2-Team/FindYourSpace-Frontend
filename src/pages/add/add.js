@@ -15,7 +15,7 @@ const AddOfficeSpaceForm = () => {
     price: 0,
     location: "",
     size: "",
-    availability: true,
+    availability: "",
     photos: "",
     owner: ""
   });
@@ -86,7 +86,7 @@ const AddOfficeSpaceForm = () => {
   };
 
   return (
-      <div>
+      <div data-testid="addOfficeSpaceForm-1">
         <Navbar />
         <div className="ad_space_form">
           <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
@@ -103,9 +103,9 @@ const AddOfficeSpaceForm = () => {
           >
             <form onSubmit={submitHandler}>
               <TextField
-                  label="Title"
-                  placeholder="Title"
-                  value={formData.name}
+                  label="Location"
+                  placeholder="Location"
+                  value={formData.location}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   fullWidth
                   margin="normal"
@@ -155,7 +155,7 @@ const AddOfficeSpaceForm = () => {
               </Grid>
 
               <Stack direction={{xs: "column", md: "row"}} spacing={3}>
-                <Stack spacing={3} flexGrow={4} width={1000}>
+                <Stack spacing={4} flexGrow={4} width={1000}>
                   <TextField
                       label="Size"
                       placeholder="Size"
@@ -164,6 +164,7 @@ const AddOfficeSpaceForm = () => {
                       onChange={(e) => handleInputChange("size", e.target.value)}
                       fullWidth
                       margin="normal"
+                      sx={{marginBottom:"20"}}
                   />
                   <TextField
                       label="Price"
@@ -173,14 +174,7 @@ const AddOfficeSpaceForm = () => {
                       onChange={(e) => handleInputChange("price", e.target.value)}
                       fullWidth
                       margin="normal"
-                  />
-                  <TextField
-                      label="Location"
-                      placeholder="Location"
-                      value={formData.location}
-                      onChange={(e) => handleInputChange("location", e.target.value)}
-                      fullWidth
-                      margin="normal"
+                      sx={{marginBottom:"20"}}
                   />
                 </Stack>
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, FormControl, InputLabel, MenuItem, Select, Pagination } from '@mui/material';
-import SearchBar from './SearchBookingHistory';
-import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
+import SearchBar from './SearchMySpaces';
+import MySpaceItem from '../../components/mySpaceItem/mySpaceItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 
-const BookingHistory = () => {
+const MySpaces = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -91,7 +91,7 @@ const BookingHistory = () => {
   };
 
   return (
-      <div data-testid="bookingHistory-1">
+      <div data-testid="mySpacesPage-1">
         <Navbar />
         <Container ref={listRef}>
           <SearchBar onSearchHistory={handleSearch} />
@@ -103,11 +103,11 @@ const BookingHistory = () => {
               <MenuItem value="price">Price</MenuItem>
             </Select>
           </FormControl>
-          <div className="listContainer">
-              <div className="listWrapper">
-                <div className="listResult">
+          <div className="listContainerMySpace">
+              <div className="listWrapperMySpace">
+                <div className="listResultMySpace">
                   {filteredOfficeSpaces.map(space => (
-                      <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
+                      <MySpaceItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
                   ))}
                 </div>
                 <div
@@ -135,4 +135,4 @@ const BookingHistory = () => {
 );
 };
 
-export default BookingHistory;
+export default MySpaces;

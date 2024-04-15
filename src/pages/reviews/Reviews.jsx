@@ -52,7 +52,8 @@ const Reviews = () => {
   });
 
   return (
-      <ThemeProvider theme={defaultTheme}>
+      <div data-testid="reviewsPage-1">
+        <ThemeProvider theme={defaultTheme}>
         <div>
         <Navbar />
         <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
@@ -97,6 +98,9 @@ const Reviews = () => {
       </div>
 
     </ThemeProvider>
+
+  </div>
+      
       
 );
 };

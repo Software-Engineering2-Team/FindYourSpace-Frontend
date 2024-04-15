@@ -65,86 +65,88 @@ const ContactForm = () => {
     };
 
     return (
-        <ThemeProvider theme={defaultTheme} >
-            <CssBaseline />
-            <Navbar />
-            <Box
-                sx={{
-                    width: '100%',
-                    maxWidth: 600, // Increased max-width
-                    margin: 'auto',
-                    padding: 4, // Increased padding
-                    backgroundColor: '#f5f5f5',
-                    borderRadius: 8, // Increased border-radius
-                    boxShadow: 2,
-                    marginTop: 10,
-                    marginBottom: 5,
+        <div data-testid="contactForm-1">
+            <ThemeProvider theme={defaultTheme} >
+                <CssBaseline />
+                <Navbar />
+                <Box
+                    sx={{
+                        width: '100%',
+                        maxWidth: 600,
+                        margin: 'auto',
+                        padding: 4,
+                        backgroundColor: '#f5f5f5',
+                        borderRadius: 8,
+                        boxShadow: 2,
+                        marginTop: 10,
+                        marginBottom: 5,
 
-                }}
-            >
-                <Typography variant="h4" gutterBottom> {/* Increased font size */}
-                    Contact Space Owner
-                </Typography>
-                <form ref={form} onSubmit={sendEmail} >
-                    <TextField
-                        label="Full Name"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        name="user_name"
-                        value={fullName}
-                        onChange={handleFullNameChange}
-                        required
-                        size="large" // Increased size
-                    />
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        name="user_email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        required
-                        size="large" // Increased size
-                    />
-                    <TextField
-                        label="Subject"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        name="subject"
-                        value={subject}
-                        onChange={handleSubjectChange}
-                        required
-                        size="large" // Increased size
-                    />
-                    <TextField
-                        label="Message"
-                        variant="outlined"
-                        multiline
-                        rows={6} // Increased rows
-                        fullWidth
-                        margin="normal"
-                        name="message"
-                        value={message}
-                        onChange={handleMessageChange}
-                        required
-                        size="large" // Increased size
-                    />
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        size="large"
-                        style={{marginTop: 10}}
-                    >
-                        Send Message
-                    </Button>
-                </form>
-            </Box>
-        </ThemeProvider>
+                    }}
+                >
+                    <Typography variant="h4" gutterBottom>
+                        Contact Space Owner
+                    </Typography>
+                    <form ref={form} onSubmit={sendEmail} >
+                        <TextField
+                            label="Full Name"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            name="user_name"
+                            value={fullName}
+                            onChange={handleFullNameChange}
+                            required
+                            size="large"
+                        />
+                        <TextField
+                            label="Email"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            name="user_email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            required
+                            size="large"
+                        />
+                        <TextField
+                            label="Subject"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            name="subject"
+                            value={subject}
+                            onChange={handleSubjectChange}
+                            required
+                            size="large" 
+                        />
+                        <TextField
+                            label="Message"
+                            variant="outlined"
+                            multiline
+                            rows={6} 
+                            fullWidth
+                            margin="normal"
+                            name="message"
+                            value={message}
+                            onChange={handleMessageChange}
+                            required
+                            size="large" 
+                        />
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            size="large"
+                            style={{marginTop: 10}}
+                        >
+                            Send Message
+                        </Button>
+                    </form>
+                </Box>
+            </ThemeProvider>
+        </div>
     );
 };
 
