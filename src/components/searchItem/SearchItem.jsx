@@ -55,12 +55,12 @@ const SearchItem = ({ space, onUpdate }) => {
   return (
     <div className="searchItem" data-testid="searchItem-1">
       <ThemeProvider theme={defaultTheme}/>
-      {space.mainPhoto.length > 0 && (
+      {space.photos.length > 0 && (
         <div className="imageContainer">
           <Link to={`/space/${space.id}`}>
             <img
-              src={space.mainPhoto}
-              alt={space.name}
+              src={space.photos}
+              alt = {space.location}
               className="siImg"
             />
           </Link>
@@ -72,13 +72,13 @@ const SearchItem = ({ space, onUpdate }) => {
           variant="h5"
           fontWeight="bold"
           sx={{fontSize: '17px'}}>
-          {space.address}
+          {space.location}
         </Typography>
         <Typography
           component="h2"
           variant="h5"
           sx={{fontSize: '15px'}}>
-          {`$${space.pricePerDay}`}
+          {`$${space.price}`}
         </Typography>
       </div>
     </div>

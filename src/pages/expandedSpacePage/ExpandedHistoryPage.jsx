@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -65,16 +65,16 @@ const ExpandedSpacePage = () => {
         <Grid container component="main" sx={{ height: '100vh' }}>
 
         <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-20px',marginLeft:'75px' }}>
-          <img src={space?.mainPhoto} alt="Space" style={{ width: '500px', height: '500px' }} />
+          <img src={space?.photos} alt="Space" style={{ width: '500px', height: '500px' }} />
         </Grid>
-   
+  
         <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-30',flexDirection: 'column'  }}>
         <Box sx={{ maxWidth: '80%', marginLeft:'1px',marginBottom:'75px' }}>
             <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
-                {space?.address}
+                {space?.location}
             </Typography>
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '25px' }}>
-                {`$${space?.pricePerDay}/day`}
+                {`$${space?.price}/day`}
             </Typography>
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
                 {space?.description}
@@ -112,17 +112,20 @@ const ExpandedSpacePage = () => {
 
             <Grid container spacing={2} justifyContent="left" marginTop="10px">
                 <Grid item>
-                <Button variant="contained">Reviews</Button>
+                  <Link to={`/reviews/${id}`}>  
+                        <Button variant="contained">Reviews</Button>
+                  </Link>
                 </Grid>
                 <Grid item>
-                <Button
-                    variant="contained"
-                    color="primary"
-                >
-                    Rent Now
-                </Button>
-                </Grid>
-            </Grid>
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      component={Link}
+                      to={`/contact/${id}`}>
+                      Contact Space Owner
+                  </Button>
+              </Grid>
+          </Grid>
         </Box>
           
         </Grid>
@@ -131,5 +134,6 @@ const ExpandedSpacePage = () => {
     </div>
   );
 };
+
 
 export default ExpandedSpacePage;

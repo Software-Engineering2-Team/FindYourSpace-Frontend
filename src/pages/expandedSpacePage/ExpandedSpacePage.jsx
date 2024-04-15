@@ -60,10 +60,10 @@
     const handleRentNowClick = async () => {
       try {
         const response = await axios.post('http://localhost:4242/create-checkout-session', {
-          price: space.pricePerDay, 
-          imageUrl: space.mainPhoto, 
+          price: space.price, 
+          imageUrl: space.photos, 
           quantity: numberOfDays,
-          name : space.address
+          name : space.location
         });
         
         const { checkoutUrl } = response.data;
@@ -81,16 +81,16 @@
           <Grid container component="main" sx={{ height: '100vh' }}>
 
           <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginTop: '-20px',marginLeft:'75px' }}>
-            <img src={space?.mainPhoto} alt="Space" style={{ width: '500px', height: '500px' }} />
+            <img src={space?.photos} alt="Space" style={{ width: '500px', height: '500px' }} />
           </Grid>
     
           <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,marginTop: '-30',flexDirection: 'column'  }}>
           <Box sx={{ maxWidth: '80%', marginLeft:'1px',marginBottom:'75px' }}>
               <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
-                  {space?.address}
+                  {space?.location}
               </Typography>
               <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '25px' }}>
-                  {`$${space?.pricePerDay}/day`}
+                  {`$${space?.price}/day`}
               </Typography>
               <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
                   {space?.description}

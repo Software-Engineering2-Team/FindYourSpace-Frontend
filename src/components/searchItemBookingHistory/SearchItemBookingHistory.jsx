@@ -14,18 +14,17 @@ const SearchItem = ({ space, onUpdate }) => {
   return (
       <Link to={`/booking-history/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
           <div className="searchItemHis">
-            {space.mainPhoto.length > 0 && (
+            {space.photos.length > 0 && (
                 <img
-                    src={space.mainPhoto}
-                    alt={space.name}
+                    src={space.photos}
+                    alt={space.location}
                     className="siImgHis"
                 />
             )}
               <div className="siDescHis">
-                  <h1 className="siTitleHis">{space.name}</h1>
-                  <span className="siSubtitleHis">{space.address}</span>
+                  <h1 className="siTitleHis">{space.location}</h1>
                   <span className="siFeaturesHis">{space.description}</span>
-                  <span className="siPriceHis">{`$${space.pricePerDay}`}</span>
+                  <span className="siPriceHis">{`$${space.price}`}</span>
               </div>
           </div>
       </Link>

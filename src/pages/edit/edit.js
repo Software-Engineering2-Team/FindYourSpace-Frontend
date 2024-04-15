@@ -146,7 +146,7 @@ const EditOfficeSpaceForm = () => {
         <Navbar />
         <div className="ad_space_form">
           <Typography sx={{marginTop: "2%", paddingLeft: "1.5%"}}>
-            <h2>Edit and View the Office Space Listing</h2>
+            <h2>Edit and View the Advertisement Space Listing</h2>
           </Typography>
           <Box
               sx={{
@@ -159,9 +159,9 @@ const EditOfficeSpaceForm = () => {
           >
             <form onSubmit={submitHandler}>
               <TextField
-                  label="Title"
-                  placeholder="Title"
-                  value={formData.name}
+                  label="Location"
+                  placeholder="Location"
+                  value={formData.location}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   fullWidth
                   margin="normal"
@@ -223,18 +223,9 @@ const EditOfficeSpaceForm = () => {
                   />
                   <TextField
                       label="Price"
-                      placeholder="Price"
                       type="number"
                       value={formData.price}
                       onChange={(e) => handleInputChange("price", e.target.value)}
-                      fullWidth
-                      margin="normal"
-                  />
-                  <TextField
-                      label="Location"
-                      placeholder="Location"
-                      value={formData.location}
-                      onChange={(e) => handleInputChange("location", e.target.value)}
                       fullWidth
                       margin="normal"
                   />
