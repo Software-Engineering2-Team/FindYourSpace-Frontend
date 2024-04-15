@@ -91,7 +91,7 @@ const MySpaces = () => {
   };
 
   return (
-      <div>
+      <div data-testid="mySpacesPage-1">
         <Navbar />
         <Container ref={listRef}>
           <SearchBar onSearchHistory={handleSearch} />

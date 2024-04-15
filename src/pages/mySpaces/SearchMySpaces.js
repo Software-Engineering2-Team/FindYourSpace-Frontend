@@ -33,7 +33,7 @@ function SearchBar(props) {
     };
     
     return (
-        <div style={searchContainerStyle}>
+        <div data-testid="searchMySpacesPage-1" style={searchContainerStyle}>
             <Grid container spacing={5}>
                 <Grid item xs={9.5}>
                     <TextField
