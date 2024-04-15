@@ -12,6 +12,7 @@ export const formatOfficeType = (officeType) => {
 const SearchItem = ({ space, onUpdate }) => {
  
   return (
+    <div data-testid="searchItemBookingHistory-1">
       <Link to={`/booking-history/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
           <div className="searchItemHis">
             {space.photos.length > 0 && (
@@ -28,6 +29,7 @@ const SearchItem = ({ space, onUpdate }) => {
               </div>
           </div>
       </Link>
+    </div>
   );
 };
 

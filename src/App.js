@@ -14,7 +14,7 @@ import ExpandedHistoryPage from "./pages/expandedSpacePage/ExpandedHistoryPage";
 import ContactOwner from "./pages/contactOwner/ContactOwner";
 import AddOfficeSpaceForm from "./pages/add/add";
 import EditOfficeSpaceForm from "./pages/edit/edit";
-import MySpaces from "./pages/mySpaces/MySpaces";
+import MySpaces from "./pages/mySpaces/mySpaces";
 
 function App() {
   return (

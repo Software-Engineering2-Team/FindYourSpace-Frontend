@@ -91,7 +91,7 @@ const BookingHistory = () => {
   };
 
   return (
-      <div>
+      <div data-testid="bookingHistory-1">
         <Navbar />
         <Container ref={listRef}>
           <SearchBar onSearchHistory={handleSearch} />

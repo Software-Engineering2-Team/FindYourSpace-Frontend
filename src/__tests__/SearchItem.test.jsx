@@ -4,10 +4,12 @@ import { MemoryRouter } from 'react-router-dom';
 
 const mockSpace = {
   id: 1,
-  mainPhoto: 'https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg',
-  address: 'Warsaw',
-  pricePerDay: 100,
-  name: 'AdSpace1'
+  photos: 'https://t3.ftcdn.net/jpg/06/13/56/76/240_F_613567624_3sprurRaLiYV6jC4WbGdJRwbaFW09Suq.jpg',
+  location: 'Warsaw',
+  price: 100,
+  size: 1,
+  availability: true,
+  owner: "Sam Smith"
 };
 
 describe('SearchItem component', () => {
@@ -27,9 +29,9 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const imageElement = screen.getByAltText(mockSpace.name);
+    const imageElement = screen.getByAltText(mockSpace.location);
     expect(imageElement).toBeInTheDocument();
-    expect(imageElement.src).toBe(mockSpace.mainPhoto);
+    expect(imageElement.src).toBe(mockSpace.photos);
   });
 
   test('renders address', () => {
@@ -38,7 +40,7 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const addressElement = screen.getByText(mockSpace.address);
+    const addressElement = screen.getByText(mockSpace.location);
     expect(addressElement).toBeInTheDocument();
   });
 
@@ -48,7 +50,7 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const priceElement = screen.getByText(`$${mockSpace.pricePerDay}`);
+    const priceElement = screen.getByText(`$${mockSpace.price}`);
     expect(priceElement).toBeInTheDocument();
   });
 
@@ -58,7 +60,7 @@ describe('SearchItem component', () => {
         <SearchItem space={mockSpace} />
       </MemoryRouter>
     );
-    const imageElement = screen.getByAltText(mockSpace.name);
+    const imageElement = screen.getByAltText(mockSpace.location);
     expect(imageElement.parentElement).toHaveAttribute('href', `/space/${mockSpace.id}`);
   });
 });

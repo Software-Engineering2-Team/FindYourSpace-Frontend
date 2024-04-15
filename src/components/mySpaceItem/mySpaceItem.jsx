@@ -12,22 +12,24 @@ export const formatOfficeType = (officeType) => {
 const MySpaceItem = ({ space, onUpdate }) => {
  
   return (
-      <Link to={`/myspaces/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
-          <div className="searchItemHis">
-            {space.photos.length > 0 && (
-                <img
-                    src={space.photos}
-                    alt={space.location}
-                    className="siImgHis"
-                />
-            )}
-              <div className="siDescHis">
-                  <h1 className="siTitleHis">{space.location}</h1>
-                  <span className="siFeaturesHis">{space.description}</span>
-                  <span className="siPriceHis">{`$${space.price}`}</span>
-              </div>
-          </div>
-      </Link>
+    <div data-testid="mySpaceItem-1">
+        <Link to={`/myspaces/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            <div className="searchItemHis">
+              {space.photos.length > 0 && (
+                  <img
+                      src={space.photos}
+                      alt={space.location}
+                      className="siImgHis"
+                  />
+              )}
+                <div className="siDescHis">
+                    <h1 className="siTitleHis">{space.location}</h1>
+                    <span className="siFeaturesHis">{space.description}</span>
+                    <span className="siPriceHis">{`$${space.price}`}</span>
+                </div>
+            </div>
+        </Link>
+      </div>
   );
 };
 

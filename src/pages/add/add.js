@@ -86,7 +86,7 @@ const AddOfficeSpaceForm = () => {
   };
 
   return (
-      <div>
+      <div data-testid="addOfficeSpaceForm-1">
         <Navbar />
         <div className="ad_space_form">
           <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
