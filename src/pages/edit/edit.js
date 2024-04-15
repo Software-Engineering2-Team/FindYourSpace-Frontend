@@ -25,59 +25,19 @@ import FormControl from "@mui/material/FormControl";
 import Chip from "@mui/material/Chip";
 import ReservationStore from "../../api/ReservationStore";
 
-const officeTypes = ["CONFERENCE_ROOM", "COWORKING_SPACE", "DESK", "OFFICE"];
-const amenitiesOptions = [
-  "WIFI",
-  "COFFEE",
-  "TEA",
-  "PROJECTOR",
-  "WHITEBOARD",
-  "PRINTER",
-  "SCANNER",
-  "FAX",
-  "PHONE",
-  "KITCHEN",
-  "PARKING",
-  "ACCESSIBLE",
-  "SECURITY",
-  "LOCKERS",
-  "PETS_ALLOWED",
-  "SMOKING_AREA",
-];
-
 const EditOfficeSpaceForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-
-  const [mainImageIndex, setMainIndex] = useState(0);
-  const [images, setImages] = useState([]);
-  const [imagesToRemove, setImagesToRemove] = useState([]);
-
   const [formData, setFormData] = useState({
-    id: 0,
-    name: "",
     description: "",
-    pricePerDay: 0,
-    isActive: true,
-    address: "",
-    availableFrom: "2024-02-03T21:46:31.282Z",
-    availableTo: "2024-02-03T21:46:31.282Z",
-    amenities: [],
-    officeType: "",
-    rating: 0,
-    officeArea: 0,
-    mainPhoto: "",
-    photos: []
+    price: 0,
+    location: "",
+    size: "",
+    availability: true,
+    photos: "",
+    owner: ""
   });
 
   useEffect(() => {
-    ReservationStore.getState().fetchReservationsForOffice(10, 0, id)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Reservations for office:", data);
-        })
-    console.log("ID from params:", id);
-
     const fetchOfficeData = () => {
       OfficeStore.getState().fetchOffice(id)
           .then((response) => response.json())
@@ -191,13 +151,13 @@ const EditOfficeSpaceForm = () => {
   }
 
   const cancelHandler = () => {
-    navigate("/offices");
+    navigate("/spaces");
   };
 
   return (
       <div>
         <Navbar />
-        <div className="office_space_form">
+        <div className="ad_space_form">
           <Typography sx={{marginTop: "2%", paddingLeft: "1.5%"}}>
             <h2>Edit and View the Office Space Listing</h2>
           </Typography>
@@ -263,43 +223,34 @@ const EditOfficeSpaceForm = () => {
                 ))}
               </Grid>
 
-              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+              <Stack direction={{xs: "column", md: "row"}} spacing={3}>
                 <Stack spacing={3} flexGrow={4} width={1000}>
+                  <TextField
+                      label="Size"
+                      placeholder="Size"
+                      type="number"
+                      value={formData.size}
+                      onChange={(e) => handleInputChange("size", e.target.value)}
+                      fullWidth
+                      margin="normal"
+                  />
                   <TextField
                       label="Price"
                       placeholder="Price"
                       type="number"
-                      value={formData.pricePerDay}
-                      onChange={(e) => handleInputChange("pricePerDay", e.target.value)}
+                      value={formData.price}
+                      onChange={(e) => handleInputChange("price", e.target.value)}
                       fullWidth
                       margin="normal"
                   />
                   <TextField
-                      label="Address"
-                      placeholder="Address"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange("address", e.target.value)}
+                      label="Location"
+                      placeholder="Location"
+                      value={formData.location}
+                      onChange={(e) => handleInputChange("location", e.target.value)}
                       fullWidth
                       margin="normal"
                   />
-                  <FormControl fullWidth margin="normal">
-                    <InputLabel id="officeType-label">Office Type</InputLabel>
-                    <Select
-                        label="Office Type"
-                        placeholder="Office Type"
-                        labelId="officeType-label"
-                        id="officeType"
-                        value={formData.officeType}
-                        onChange={(e) => handleInputChange("officeType", e.target.value)}
-                        fullWidth
-                    >
-                      {officeTypes.map((type) => (
-                          <MenuItem key={type} value={type}>
-                            {type}
-                          </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
                 </Stack>
 
                 <TextField
@@ -313,44 +264,21 @@ const EditOfficeSpaceForm = () => {
                     margin="normal"
                 />
               </Stack>
-
-              <FormControl fullWidth margin="normal">
-                <InputLabel id="amenities-label">Amenities</InputLabel>
-                <Select
-                    label="Amenities"
-                    placeholder="Amenities"
-                    labelId="amenities-label"
-                    id="amenities"
-                    multiple
-                    value={formData.amenities}
-                    onChange={(e) => handleInputChange("amenities", e.target.value)}
-                    renderValue={(selected) => (
-                        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                          {selected.map((value) => (
-                              <Chip key={value} label={value} sx={{ margin: 0.5 }} />
-                          ))}
-                        </Box>
-                    )}
-                    fullWidth
-                >
-                  {amenitiesOptions.map((amenity) => (
-                      <MenuItem key={amenity} value={amenity}>
-                        {amenity}
-                      </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
               <Stack
                   direction="row"
                   justifyContent="space-between"
-                  marginTop={2}
+                  marginTop={6}
                   sx={{ paddingLeft: "1.25%", paddingRight: "1.25%" }}
               >
-
                 <Button variant="outlined" color="error" onClick={cancelHandler}>
                   Cancel
                 </Button>
-                <Button type="submit" variant="contained" sx={{ color: "#fff", backgroundColor: "#000" }} onClick={submitHandler}>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ color: "#fff", backgroundColor: "#000" }}
+                    onClick={submitHandler}
+                >
                   Submit
                 </Button>
               </Stack>

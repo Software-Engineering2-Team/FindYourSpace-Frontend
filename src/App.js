@@ -13,6 +13,7 @@ import BookingHistory from "./pages/bookingHistory/BookingHistory";
 import ExpandedHistoryPage from "./pages/expandedSpacePage/ExpandedHistoryPage";
 import ContactOwner from "./pages/contactOwner/ContactOwner";
 import AddOfficeSpaceForm from "./pages/add/add";
+import MySpaces from "./pages/mySpaces/MySpaces";
 
 function App() {
   return (
@@ -21,10 +22,11 @@ function App() {
         <Route path="/" element={<Login/>}/>
         <Route path="/spaces" element={<List/>}/>
         <Route path="/booking-history" element={<BookingHistory/>}/>
-        {/* <Route path="/spaces/:id" element={<EditOfficeSpaceForm/>}/> */}
         <Route path="/add" element={<AddOfficeSpaceForm/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/myspaces" element={<MySpaces/>}/>
+        {/* <Route path="/myspaces:id" element={<EditOfficeSpaceForm/>}/> */}
         <Route path="/space/:id" element={<ExpandedSpacePage />} />
         <Route path="/reviews/:id" element={<Reviews/>} />
         <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
