@@ -1,6 +1,7 @@
 import React from "react";
 import "./mySpaceItem.css";
 import {Link} from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 
 export const formatOfficeType = (officeType) => {
   const lowerCaseOfficeType = officeType.toLowerCase();
@@ -11,8 +12,10 @@ export const formatOfficeType = (officeType) => {
 
 const MySpaceItem = ({ space, onUpdate }) => {
  
+  const handleDelete = () => {};
+
   return (
-    <div data-testid="mySpaceItem-1">
+    <div data-testid="mySpaceItem-1" className="mySpaceItem-container">
         <Link to={`/myspaces/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
             <div className="searchItemHis">
               {space.photos.length > 0 && (
@@ -29,6 +32,7 @@ const MySpaceItem = ({ space, onUpdate }) => {
                 </div>
             </div>
         </Link>
+        <button className="deleteIcon" onClick={handleDelete}><FaTrash /></button>
       </div>
   );
 };
