@@ -157,3 +157,17 @@
   cursor: pointer;
   margin-left: 86px;
 }
+
+.mySpaceItem-container {
+  position: relative;
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+}
