@@ -28,6 +28,9 @@ const Navbar = () => {
                             Find your space
                         </Typography>
                         <div>
+                            <Button component={Link} to="/admin/stats" color="inherit">
+                                Admin Analytics
+                            </Button>
                             <Button component={Link} to="/spaces" color="inherit">
                                 Find spaces
                             </Button>
