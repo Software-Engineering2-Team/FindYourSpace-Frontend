@@ -30,6 +30,14 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: 'http://localhost:3000/spaces',
     });
     const checkoutUrl = session.url
+      // Transfer funds to customer balance
+    const transfer = await stripe.transfers.create({
+      amount: price * quantity * 90, // 90% of the total amount as a simulated payout
+      currency: 'pln',
+      destination: 'acct_1PCNQqRpSmnLP3ok', // Sample Space Owner Account
+    });
+
+    console.log('Transfer created:', transfer);
     res.json({ checkoutUrl });
   } catch (error) {
     console.error('Error creating checkout session:', error);

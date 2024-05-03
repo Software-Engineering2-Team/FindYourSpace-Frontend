@@ -110,8 +110,8 @@ const Signup = () => {
       )
       .catch((error) => 
         {
-          console.error('Invalid email or password');
-          setLoginError("Incorrect Username or Password Entered!")
+          console.error('Invalid password');
+          setLoginError("Passwords dont match!")
         })
   }
 

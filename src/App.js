@@ -15,8 +15,12 @@ import ContactOwner from "./pages/contactOwner/ContactOwner";
 import AddOfficeSpaceForm from "./pages/add/add";
 import EditOfficeSpaceForm from "./pages/edit/edit";
 import MySpaces from "./pages/mySpaces/MySpaces";
+<<<<<<< HEAD
 import BookingFrequencyChart from "./pages/statistics/BookingFrequencyChart";
 
+=======
+import Stats from "./pages/stats/Stats";
+>>>>>>> feature/space_owners_payment
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +37,12 @@ function App() {
         <Route path="/reviews/:id" element={<Reviews/>} />
         <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
         <Route path="/contact/:id" element={<ContactOwner/>}/>
+<<<<<<< HEAD
         <Route path="/admin/statistics" element={<BookingFrequencyChart/>}/>
+=======
+        <Route path="/admin/stats" element={<Stats/>}/>
+
+>>>>>>> feature/space_owners_payment
       </Routes>
     </BrowserRouter>
   );

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, FormControl, InputLabel, MenuItem, Select, Pagination } from '@mui/material';
+import { Container, FormControl, InputLabel, MenuItem, Select, Pagination,Typography} from '@mui/material';
 import SearchBar from './SearchBookingHistory';
 import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 const BookingHistory = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,9 +51,7 @@ const BookingHistory = () => {
 
   const handleSearch = (searchTerm) => {
     const filteredSpaces = officeSpaces.filter(space =>
-        space.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        space.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        space.officeType.toLowerCase().includes(searchTerm.toLowerCase())
+        space.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     setFilteredOfficeSpaces(filteredSpaces);
@@ -67,12 +65,12 @@ const BookingHistory = () => {
     switch (selectedSortOption) {
       case 'alphabetical':
         sortedSpaces = [...filteredOfficeSpaces].sort((a, b) =>
-            a.name.localeCompare(b.name)
+            a.location.localeCompare(b.location)
         );
         break;
       case 'price':
         sortedSpaces = [...filteredOfficeSpaces].sort((a, b) =>
-            parseFloat(a.pricePerDay) - parseFloat(b.pricePerDay)
+            parseFloat(a.price) - parseFloat(b.price)
         );
         break;
       default:
@@ -90,47 +88,65 @@ const BookingHistory = () => {
     }
   };
 
+  const defaultTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#000000',
+      },
+    },
+    typography: {
+      fontFamily: 'Dubai Medium',
+    },
+  });
+
   return (
       <div data-testid="bookingHistory-1">
-        <Navbar />
-        <Container ref={listRef}>
-          <SearchBar onSearchHistory={handleSearch} />
-          <FormControl style={{ margin: '20px 0' }}>
-            <InputLabel htmlFor="sort">Sort by:</InputLabel>
-            <Select id="sort" value={sortOption} onChange={handleSortChange} label="Sort by">
-              <MenuItem value="default">Default</MenuItem>
-              <MenuItem value="alphabetical">Alphabetical</MenuItem>
-              <MenuItem value="price">Price</MenuItem>
-            </Select>
-          </FormControl>
-          <div className="listContainer">
-              <div className="listWrapper">
-                <div className="listResult">
-                  {filteredOfficeSpaces.map(space => (
-                      <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
-                  ))}
+        <ThemeProvider theme={defaultTheme}>
+          <Navbar />
+          <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
+            Your Booking History
+          </Typography>
+          <Container ref={listRef}>
+            <SearchBar onSearchHistory={handleSearch} />
+            <FormControl style={{ margin: '20px 0' }}>
+              <InputLabel htmlFor="sort">Sort by:</InputLabel>
+              <Select id="sort" value={sortOption} onChange={handleSortChange} label="Sort by">
+                <MenuItem value="default">Default</MenuItem>
+                <MenuItem value="alphabetical">Alphabetical</MenuItem>
+                <MenuItem value="price">Price</MenuItem>
+              </Select>
+            </FormControl>
+            <div className="listContainer">
+                <div className="listWrapper">
+                  <div className="listResult">
+                    {filteredOfficeSpaces.map(space => (
+                        <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
+                    ))}
+                  </div>
+                  <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        paddingTop: '20px', // Adjust as needed
+                        marginBottom: '30px'
+                      }}
+                  >
+                    <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color="primary"
+                        size="large"
+                    />
+                    <div style={{marginLeft: '20px'}}>Page {currentPage} of {totalPages}</div>
+                  </div>
                 </div>
-                <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      alignItems: 'center',
-                      paddingTop: '20px', // Adjust as needed
-                      marginBottom: '30px'
-                    }}
-                >
-                  <Pagination
-                      count={totalPages}
-                      page={currentPage}
-                      onChange={handlePageChange}
-                      color="primary"
-                      size="large"
-                  />
-                  <div style={{marginLeft: '20px'}}>Page {currentPage} of {totalPages}</div>
-                </div>
-              </div>
-          </div>
-        </Container>
+            </div>
+          </Container>
+
+        </ThemeProvider>
+        
       </div>
 );
 };
