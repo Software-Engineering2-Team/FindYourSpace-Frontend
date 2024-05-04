@@ -1,44 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import Chart from 'chart.js/auto';
-// import prepareChartData from './prepareChart';
-// import BookingsStore from '../../api/BookingStore';
-// const Stats = () => {
-//     const [bookingsData, setBookingsData] = useState(null);
-
-//     useEffect(() => {
-//         const fetchBookings = async () => {
-//             try {
-//                 await BookingsStore.getState().fetchBookings();
-//                 setBookingsData(BookingsStore.getState().userData);
-//             } catch (error) {
-//                 console.error('Error fetching bookings:', error);
-//             }
-//         };
-
-//         fetchBookings();
-//     }, []);
-
-//     useEffect(() => {
-//         if (bookingsData) {
-//             const ctx = document.getElementById('bookingChart').getContext('2d');
-//             const data = prepareChartData(bookingsData);
-
-//             new Chart(ctx, {
-//                 type: 'line',
-//                 data: data,
-//             });
-//         }
-//     }, [bookingsData]);
-
-//     return (
-//         <div>
-//             <h1>Booking Stats</h1>
-//             <canvas id="bookingChart" width="400" height="400"></canvas>
-//         </div>
-//     );
-// };
-
-// export default Stats;
 import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import prepareChartData from './prepareChart';
@@ -46,6 +5,8 @@ import BookingsStore from '../../api/BookingStore';
 
 const Stats = () => {
     const [bookingsData, setBookingsData] = useState(null);
+    const [graphRange, setGraphRange] = useState('daily');
+    const [chartInstance, setChartInstance] = useState(null);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -63,10 +24,15 @@ const Stats = () => {
     useEffect(() => {
         if (bookingsData) {
             const ctx = document.getElementById('bookingChart').getContext('2d');
-            const data = prepareChartData(bookingsData);
+            const data = prepareChartData(bookingsData, graphRange);
 
-            new Chart(ctx, {
-                type: 'bar', // Change chart type to 'bar'
+            // Destroy existing chart to prevent duplicates
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const newChartInstance = new Chart(ctx, {
+                type: 'bar', // Default chart type to 'bar'
                 data: data,
                 options: {
                     scales: {
@@ -76,13 +42,27 @@ const Stats = () => {
                     }
                 }
             });
+
+            setChartInstance(newChartInstance);
         }
-    }, [bookingsData]);
+    }, [bookingsData, graphRange]);
+
+    const handleRangeChange = (event) => {
+        setGraphRange(event.target.value);
+    };
 
     return (
         <div>
             <h1>Booking Stats</h1>
-            <canvas id="bookingChart" width="400" height="400"></canvas>
+            <div>
+                <label htmlFor="graphRange">Select Graph Range: </label>
+                <select id="graphRange" value={graphRange} onChange={handleRangeChange}>
+                    <option value="hourly">Hour</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+            </div>
+            <canvas id="bookingChart" width="400" height="100"></canvas>
         </div>
     );
 };

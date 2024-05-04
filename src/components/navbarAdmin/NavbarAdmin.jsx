@@ -28,7 +28,7 @@ const Navbar = () => {
                             Find your space
                         </Typography>
                         <div>
-                            <Button component={Link} to="/admin/statistics" color="inherit">
+                            <Button component={Link} to="/admin/stats" color="inherit">
                                 Statistics
                             </Button>
                         </div>

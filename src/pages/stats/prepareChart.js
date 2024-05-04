@@ -1,58 +1,52 @@
-// const prepareChartData = (bookingsData) => {
-//     // Initialize arrays to store labels and data
-//     const labels = [];
-//     const bookingStatusData = [];
+const prepareChartData = (bookingsData, graphRange) => {
+    // Initialize an object to store the count of bookings per time interval (hour, day, month)
+    const bookingsPerInterval = {};
 
-//     // Loop through each booking in the bookings data
-//     bookingsData.forEach((booking) => {
-//         // Extract relevant information from each booking
-//         labels.push(`Booking ${booking.id}`); // Assuming there's an 'id' field in each booking
-//         bookingStatusData.push(booking.status ? 1 : 0); // Assuming 'status' indicates whether the booking is active
-
-//         // You may need to adjust this based on the actual structure of your bookings data
-//     });
-
-//     // Return an object with labels and datasets for Chart.js
-//     return {
-//         labels: labels,
-//         datasets: [
-//             {
-//                 label: 'Booking Status',
-//                 data: bookingStatusData,
-//                 fill: false,
-//                 borderColor: 'rgb(75, 192, 192)',
-//                 tension: 0.1,
-//             },
-//         ],
-//     };
-// };
-
-// export default prepareChartData
-
-const prepareChartData = (bookingsData) => {
-    // Initialize an object to store the count of bookings per day
-    const bookingsPerDay = {};
+    // Determine the time interval based on the selected graph range
+    let interval = 'hour';
+    if (graphRange === 'hourly') {
+        interval = 'hour'; // Aggregating by hour for daily
+    } else if (graphRange === 'weekly') {
+        interval = 'day'; // Aggregating by day for weekly
+    } else if (graphRange === 'monthly') {
+        interval = 'month'; // Aggregating by month for monthly
+    }
 
     // Loop through each booking in the bookings data
     bookingsData.forEach((booking) => {
         // Extract the booking date
-        const bookingDate = new Date(booking.bookingDate).toLocaleDateString();
+        let bookingDate;
+        if (interval === 'hour') {
+            // Extract the hour of the booking date with leading zeros
+            bookingDate = new Date(booking.bookingDate).toLocaleTimeString('en-US', { hour: '2-digit', hour12: false });
+        } else if (interval === 'day') {
+            // Extract the day of the booking date
+            bookingDate = new Date(booking.bookingDate).toLocaleDateString();
+        } else if (interval === 'month') {
+            // Extract the month and year of the booking date
+            bookingDate = new Date(booking.bookingDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        }
 
-        // Increase the count for the corresponding day or initialize it if it doesn't exist
-        bookingsPerDay[bookingDate] = (bookingsPerDay[bookingDate] || 0) + 1;
+        // Increase the count for the corresponding time interval or initialize it if it doesn't exist
+        bookingsPerInterval[bookingDate] = (bookingsPerInterval[bookingDate] || 0) + 1;
     });
 
-    // Extract the last few days from the bookings data
-    const lastFewDays = Object.keys(bookingsPerDay).slice(-7); // Change 7 to the number of days you want
+    // Extract the last few time intervals from the bookings data
+    let lastFewIntervals;
+    if (interval === 'hour') {
+        lastFewIntervals = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0')); // Pad with leading zeros
+    } else {
+        lastFewIntervals = Object.keys(bookingsPerInterval).slice(-7); // Change 7 to the number of intervals you want
+    }
 
     // Initialize arrays to store labels and data
     const labels = [];
     const bookingCountData = [];
 
-    // Loop through the last few days
-    lastFewDays.forEach((day) => {
-        labels.push(day);
-        bookingCountData.push(bookingsPerDay[day] || 0); // Push the count of bookings for the day, or 0 if no bookings
+    // Loop through the last few time intervals
+    lastFewIntervals.forEach((interval) => {
+        labels.push(interval);
+        bookingCountData.push(bookingsPerInterval[interval] || 0); // Push the count of bookings for the interval, or 0 if no bookings
     });
 
     // Return an object with labels and datasets for Chart.js
