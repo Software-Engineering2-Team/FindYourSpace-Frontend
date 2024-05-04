@@ -16,21 +16,21 @@ const defaultTheme = createTheme({
     },
 });
 
-const ContactForm = () => {
+const ContactAdminForm = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
-    const [spaceOwnerEmail, setSpaceOwnerEmail] = useState('davidabraham384@gmail.com');
+    const [adminEmail, setAdminEmail] = useState('akhilajithuni@gmail.com');
     
     const form = useRef();
 
     const sendEmail = (e) => {
         e.preventDefault();
         emailjs
-          .sendForm('service_0fkozoz', 'template_a6s6y9o', form.current, {
+          .sendForm('service_0fkozoz', 'template_7c06qpa', form.current, {
             publicKey: 'O_9E7yjTjSaZP0Fr9',
-            spaceOwnerEmail_email: spaceOwnerEmail,
+            adminEmail_email: adminEmail,
           })
           .then(
             () => {
@@ -45,7 +45,7 @@ const ContactForm = () => {
         setEmail('');
         setSubject('');
         setMessage('');
-        setSpaceOwnerEmail('');
+        setAdminEmail('');
       };
 
     const handleFullNameChange = (event) => {
@@ -64,8 +64,8 @@ const ContactForm = () => {
         setMessage(event.target.value);
     };
 
-    // const handleSpaceOwnerEmailChange = (event) => {
-    //     setSpaceOwnerEmail(event.target.value);
+    // const handleAdminEmailChange = (event) => {
+    //     setAdminEmail(event.target.value);
     // };
 
     return (
@@ -88,7 +88,7 @@ const ContactForm = () => {
                     }}
                 >
                     <Typography variant="h4" gutterBottom>
-                        Contact Space
+                        Contact Admin
                     </Typography>
                     <form ref={form} onSubmit={sendEmail} >
                         <TextField
@@ -114,13 +114,13 @@ const ContactForm = () => {
                             size="large"
                         />
                         <TextField
-                            label="Space Owner Email"
+                            label="Admin Email"
                             variant="outlined"
                             fullWidth
                             margin="normal"
-                            name="spaceOwner_email"
-                            value={spaceOwnerEmail}
-                            // onChange={handleSpaceOwnerEmailChange}
+                            name="admin_email"
+                            value={adminEmail}
+                            // onChange={handleAdminEmailChange}
                             required
                             size="large"
                         />
@@ -165,4 +165,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default ContactAdminForm;
