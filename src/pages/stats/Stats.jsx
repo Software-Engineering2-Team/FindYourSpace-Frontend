@@ -58,8 +58,8 @@ const Stats = () => {
                 <label htmlFor="graphRange">Select Graph Range: </label>
                 <select id="graphRange" value={graphRange} onChange={handleRangeChange}>
                     <option value="hourly">Hour</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Day</option>
+                    <option value="monthly">Month</option>
                 </select>
             </div>
             <canvas id="bookingChart" width="400" height="100"></canvas>
