@@ -16,6 +16,7 @@ import AddOfficeSpaceForm from "./pages/add/add";
 import EditOfficeSpaceForm from "./pages/edit/edit";
 import MySpaces from "./pages/mySpaces/MySpaces";
 import Stats from "./pages/stats/Stats";
+import PolicyPage from "./pages/policyEnforcement/Policy";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
         <Route path="/contact/:id" element={<ContactOwner/>}/>
         <Route path="/admin/stats" element={<Stats/>}/>
+        <Route path="/admin/policy-enforcement" element={<PolicyPage/>}/>
       </Routes>
     </BrowserRouter>
   );
