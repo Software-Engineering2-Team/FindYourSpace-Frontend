@@ -29,25 +29,7 @@ const Navbar = () => {
                         </Typography>
                         <div>
                             <Button component={Link} to="/admin/stats" color="inherit">
-                                Admin Analytics
-                            </Button>
-                            <Button component={Link} to="/spaces" color="inherit">
-                                Find spaces
-                            </Button>
-                            <Button component={Link} to="/booking-history" color="inherit">
-                                Booking History
-                            </Button>
-                            <Button component={Link} to="/add" color="inherit">
-                                Rent my space
-                            </Button>
-                            <Button component={Link} to="/myspaces" color="inherit">
-                                My Spaces
-                            </Button>
-                            <Button component={Link} to="/profile" color="inherit">
-                                Profile
-                            </Button>   
-                            <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
-                                Log Out
+                                Statistics
                             </Button>
                         </div>
                     </Toolbar>
