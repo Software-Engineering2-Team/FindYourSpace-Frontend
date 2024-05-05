@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import prepareChartData from './prepareChart';
 import BookingsStore from '../../api/BookingStore';
@@ -6,9 +6,7 @@ import { Container, Typography, FormControl, Select, MenuItem, Paper } from '@mu
 import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 const Stats = () => {
-
     const defaultTheme = createTheme({
         palette: {
             primary: {
@@ -18,11 +16,11 @@ const Stats = () => {
         typography: {
             fontFamily: 'Dubai Medium'
         },
-      });
+    });
 
     const [bookingsData, setBookingsData] = useState(null);
     const [graphRange, setGraphRange] = useState('hourly');
-    const [chartInstance, setChartInstance] = useState(null);
+    const chartInstanceRef = useRef(null);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -42,24 +40,23 @@ const Stats = () => {
             const ctx = document.getElementById('bookingChart').getContext('2d');
             const data = prepareChartData(bookingsData, graphRange);
 
-            // Destroy existing chart to prevent duplicates
-            if (chartInstance) {
-                chartInstance.destroy();
+            if (chartInstanceRef.current) {
+                chartInstanceRef.current.destroy();
             }
 
             const newChartInstance = new Chart(ctx, {
-                type: 'bar', // Default chart type to 'bar'
+                type: 'bar',
                 data: data,
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true // Start y-axis at 0
+                            beginAtZero: true
                         }
                     }
                 }
             });
 
-            setChartInstance(newChartInstance);
+            chartInstanceRef.current = newChartInstance;
         }
     }, [bookingsData, graphRange]);
 
@@ -72,14 +69,13 @@ const Stats = () => {
             <ThemeProvider theme={defaultTheme}>
                 <NavbarAdmin />
                 <Container>
-                    <Typography variant="h4" style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '40px' }}>
+                    <Typography variant="h5" style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '40px', paddingBottom: '20px' }}>
                         Booking Stats
-                        <FormControl style={{paddingBottom:'10px'}}>
+                        <FormControl style={{ position: 'absolute', right: '200px', top: '92px' }}>
                             <Select
                                 id="graphRange"
                                 value={graphRange}
                                 onChange={handleRangeChange}
-                                style={{fontSize:'1rem'}}
                             >
                                 <MenuItem value="hourly">Hour</MenuItem>
                                 <MenuItem value="weekly">Day</MenuItem>
