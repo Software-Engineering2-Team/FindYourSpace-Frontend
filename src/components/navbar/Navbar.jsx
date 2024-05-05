@@ -51,7 +51,10 @@ const Navbar = () => {
                             </Button>
                             <Button component={Link} to="/profile" color="inherit">
                                 Profile
-                            </Button>   
+                            </Button>
+                            <Button component={Link} to="/contact-us" color="inherit">
+                                Contact Us
+                            </Button>
                             <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
                                 Log Out
                             </Button>

@@ -1,3 +1,5 @@
+
+
 const prepareChartData = (bookingsData, graphRange) => {
     // Initialize an object to store the count of bookings per time interval (hour, day, month)
     const bookingsPerInterval = {};
