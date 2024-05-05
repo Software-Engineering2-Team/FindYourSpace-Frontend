@@ -61,7 +61,7 @@ const Stats = () => {
 
             setChartInstance(newChartInstance);
         }
-    }, [bookingsData, graphRange,chartInstance]);
+    }, [bookingsData, graphRange]);
 
     const handleRangeChange = (event) => {
         setGraphRange(event.target.value);

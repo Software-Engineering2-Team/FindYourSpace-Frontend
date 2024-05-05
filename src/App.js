@@ -16,6 +16,9 @@ import AddOfficeSpaceForm from "./pages/add/add";
 import EditOfficeSpaceForm from "./pages/edit/edit";
 import MySpaces from "./pages/mySpaces/MySpaces";
 import Stats from "./pages/stats/Stats";
+import PolicyPage from "./pages/policyEnforcement/Policy";
+import ApproveSpacesPage from "./pages/approveSpaces/ApproveSpaces"
+import ContactAdminForm from "./pages/contactAdmin/ContactAdmin"
 
 function App() {
   return (
@@ -36,7 +39,6 @@ function App() {
         <Route path="/admin/stats" element={<Stats/>}/>
         <Route path="/admin/policy-enforcement" element={<PolicyPage/>}/>
         <Route path="/admin/review-spaces" element={<ApproveSpacesPage/>}/>
-        
         <Route path="/contact-us" element={<ContactAdminForm/>}/>
       </Routes>
     </BrowserRouter>
