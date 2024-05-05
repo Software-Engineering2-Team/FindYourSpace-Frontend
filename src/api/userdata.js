@@ -26,5 +26,4 @@ export const userManagementUsers = [
       "date_joined": "2023-06-10 12:45:00",
       "contact_info": "+1122334455"
     },
-    // Add more users as needed
 ]
