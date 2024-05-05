@@ -37,7 +37,7 @@ app.post('/create-checkout-session', async (req, res) => {
       destination: 'acct_1PCNQqRpSmnLP3ok', // Sample Space Owner Account
     });
 
-    console.log('Transfer created:', transfer);
+    console.log('Transfer to Space Owner Completed:', transfer);
     res.json({ checkoutUrl });
   } catch (error) {
     console.error('Error creating checkout session:', error);
