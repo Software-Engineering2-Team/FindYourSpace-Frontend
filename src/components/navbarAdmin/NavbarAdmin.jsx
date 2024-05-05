@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginStore from '../../api/LoginStore';
 
 const theme = createTheme({
     palette: {
@@ -28,7 +29,13 @@ const NavbarAdmin = () => {
                         </Typography>
                         <div>
                             <Button component={Link} to="/admin/stats" color="inherit">
-                                Statistics
+                                Admin Analytics
+                            </Button>
+                            <Button component={Link} to="/admin/policy-enforcement" color="inherit" onClick={LoginStore.getState().logout}>
+                                Policy Enforcement
+                            </Button>
+                            <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
+                                Log Out
                             </Button>
                         </div>
                     </Toolbar>
