@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import OfficeStore from '../../api/OfficeStore';
 import Button from '@mui/material/Button';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -14,6 +13,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import ExpandedAdSpaceStore from '../../api/ExpandedAdSpaceStore';
 
 const defaultTheme = createTheme({
   palette: {
@@ -36,16 +36,16 @@ const ExpandedSpacePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await OfficeStore.getState().fetchOffice(id);
-        const data = await response.json();
-        console.log('Fetched office space:', data);
-        setSpace(data);
+        await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id); // Fetch data and set it in the store
+        const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace; // Access the updated state
+        console.log('Fetched ad space:', fetchedData);
+        setSpace(fetchedData);
       } catch (error) {
-        console.error('Error fetching office space:', error);
+        console.error('Error fetching expanded ad space:', error);
       }
     };
-
-    console.log('Fetching office space with id:', id);
+  
+    console.log('Fetching expanded ad space with id:', id);
     fetchData();
   }, [id]);
 
