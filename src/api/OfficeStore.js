@@ -1,5 +1,4 @@
     import { create } from 'zustand'
-    // const url = 'https://officely.azurewebsites.net';
     const url = 'http://localhost:8000';
 
     const OfficeStore = create((set) => ({
