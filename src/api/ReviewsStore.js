@@ -1,15 +1,29 @@
 import { create } from 'zustand';
-import { reviewEntries } from './reviewsdata.js';
-
+const url = 'http://localhost:8000';
 const ReviewsStore = create((set) => ({
     reviews: [],
     setReviews: (reviews) => set({ reviews }),
+    fetchReviews: async () => {
+        try {
+            const response = await fetch(`${url}/api/get-all-ratings/`, {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                }
+            });
+            const reviews = await response.json();
+            set({ reviews });
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+        }
+    },
     fetchReviewsBySpaceId: async (spaceId) => {
         try {
-            // Find the entry with the matching id
-            console.log(spaceId)
-            const entry = reviewEntries.find(entry => entry.id === parseInt(spaceId, 10));
-            console.log(entry)
+
+            await ReviewsStore.getState().fetchReviews();
+            
+            const entry = ReviewsStore.getState().reviews.find(entry => entry.id === parseInt(spaceId, 10));
             
             if (entry) {
                 const reviews = entry.reviews;
