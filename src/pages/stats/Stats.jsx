@@ -65,7 +65,7 @@ const Stats = () => {
     };
 
     return (
-        <div>
+        <div data-testid="statsPage-1">
             <ThemeProvider theme={defaultTheme}>
                 <NavbarAdmin />
                 <Container>

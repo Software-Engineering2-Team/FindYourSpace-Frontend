@@ -84,7 +84,7 @@ const PolicyPage = () => {
   });
 
   return (
-    <div data-testid="policyPage">
+    <div data-testid="policyPage-1">
       <ThemeProvider theme={defaultTheme}>
         <NavbarAdmin/>
         <Typography variant="h5" gutterBottom sx={{ fontSize: '30px', marginLeft: '25px', marginTop: '30px' }}>
