@@ -28,6 +28,9 @@ const Navbar = () => {
                             Find your space
                         </Typography>
                         <div>
+                            <Button component={Link} to="/admin/platform-health" color="inherit">
+                                Platform Health
+                            </Button>
                             <Button component={Link} to="/admin/stats" color="inherit">
                                 Admin Analytics
                             </Button>
