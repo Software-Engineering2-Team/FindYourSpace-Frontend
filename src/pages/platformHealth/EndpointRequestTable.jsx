@@ -58,26 +58,26 @@ const EndpointRequestsTable = () => {
     <div>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
-        <Typography sx={{ marginTop: "2%", marginLeft: "2.5%" }}>
+        <Typography sx={{ marginTop: "2%", marginLeft: "5%" }}>
             <h2>Endpoint Requests</h2>
         </Typography>
-        <Box sx={{ marginTop: "3%", marginLeft: "2.5%", width: "95%" }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
-                <Paper elevation={5} sx={{ padding: '30px' ,marginRight:'35px'}}>
+        <Box sx={{padding: '5%'}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '60px',marginLeft:"4%" }}>
+                <Paper elevation={5} sx={{ padding: '30px' ,marginRight:'45px'}}>
                     <Typography variant="h6" color = "green">Successful Requests</Typography>
                     <Typography variant="h4" color = "green" align="center">{successfulRequestsCount}</Typography>
                 </Paper>
-                <Paper elevation={5} sx={{ padding: '30px',marginRight:'35px'}}>
+                <Paper elevation={5} sx={{ padding: '30px',marginRight:'45px'}}>
                     <Typography variant="h6" color = "red">Failed Requests</Typography>
                     <Typography variant="h4" color = "red" align="center">{failedRequestsCount}</Typography>
                 </Paper>
                 <Paper elevation={5} sx={{ padding: '30px' }}>
-                    <Typography variant="h6" color = {successPercentageColor}>Success Percentage for Requests</Typography>
+                    <Typography variant="h6" color = {successPercentageColor}>Success Percentage</Typography>
                     <Typography variant="h4" align="center" color = {successPercentageColor} >{successPercentage}%</Typography>
                 </Paper>
             </Box>
             <Paper elevation={4}>
-                <TableContainer>
+                <TableContainer width= '80%'>
                 <Table>
                     <TableHead align="center">
                     <TableRow>
