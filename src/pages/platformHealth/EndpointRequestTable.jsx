@@ -55,7 +55,7 @@ const EndpointRequestsTable = () => {
   });
 
   return (
-    <div>
+    <div data-testid="platformHealth-1">
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <Typography sx={{ marginTop: "2%", marginLeft: "5%" }}>
