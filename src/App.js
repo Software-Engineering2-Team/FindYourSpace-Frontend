@@ -19,7 +19,7 @@ import Stats from "./pages/stats/Stats";
 import PolicyPage from "./pages/policyEnforcement/Policy";
 import ApproveSpacesPage from "./pages/approveSpaces/ApproveSpaces"
 import ContactAdminForm from "./pages/contactAdmin/ContactAdmin"
-
+import EndpointRequestsTable from "./pages/platformHealth/EndpointRequestTable";
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +40,7 @@ function App() {
         <Route path="/admin/policy-enforcement" element={<PolicyPage/>}/>
         <Route path="/admin/review-spaces" element={<ApproveSpacesPage/>}/>
         <Route path="/contact-us" element={<ContactAdminForm/>}/>
+        <Route path="/admin/platform-health" element={<EndpointRequestsTable/>}/>
       </Routes>
     </BrowserRouter>
   );
