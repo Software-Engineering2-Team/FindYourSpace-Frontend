@@ -21,15 +21,15 @@ const ApproveSpacesPage = () => {
 
   useEffect(() => {
     ApproveSpaceStore.getState()
-      .fetchNonApprovedSpaces(1000, 0)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Spaces:", data);
-        setTotalPages(Math.ceil(data.length / itemsPerPage));
-        setApprovedSpaces(data);
-        setFilteredSpaces(data);
-      })
-      .catch((error) => console.error("Error fetching users:", error));
+        .fetchNonApprovedSpaces(1000, 0)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Spaces:", data);
+          setTotalPages(Math.ceil(data.length / itemsPerPage));
+          setApprovedSpaces(data);
+          setFilteredSpaces(data);
+        })
+        .catch((error) => console.error("Error fetching spaces:", error));
   }, []);
 
   useEffect(() => {
@@ -75,6 +75,41 @@ const ApproveSpacesPage = () => {
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
+  };
+
+  const handleApprove = (id) => {
+    fetch(`http://localhost:8000/api/adspace/${id}/update/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ isApproved: true }),
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(() => {
+          setApprovedSpaces(prevSpaces => prevSpaces.filter(space => space.id !== id));
+          setFilteredSpaces(prevSpaces => prevSpaces.filter(space => space.id !== id));
+        })
+        .catch(error => console.error('Error approving space:', error));
+  };
+
+  const handleDisapprove = (id) => {
+    fetch(`http://localhost:8000/api/adspace/${id}/delete/`, {
+      method: 'DELETE',
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          setApprovedSpaces(prevSpaces => prevSpaces.filter(space => space.id !== id));
+          setFilteredSpaces(prevSpaces => prevSpaces.filter(space => space.id !== id));
+        })
+        .catch(error => console.error('Error deleting space:', error));
   };
 
   const defaultTheme = createTheme({
@@ -133,12 +168,12 @@ const ApproveSpacesPage = () => {
                             spacing={2}
                             sx={{ justifyContent: 'center' }} // Add this line
                         >
-                            <Button variant="outlined" color="success">
-                            Approve
-                            </Button>
-                            <Button variant="outlined" color="error">
-                            Disapprove
-                            </Button>
+                        <Button variant="outlined" color="success" onClick={() => handleApprove(space.id)}>
+                          Approve
+                        </Button>
+                        <Button variant="outlined" color="error" onClick={() => handleDisapprove(space.id)}>
+                          Disapprove
+                        </Button>
                         </Stack>
                      </TableCell>
                     </TableRow>
