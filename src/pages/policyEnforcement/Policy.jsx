@@ -22,7 +22,7 @@ const PolicyPage = () => {
   useEffect(() => {
     // Fetch user data when the component mounts
     UserStore.getState()
-      .fetchUsers(1000, 0)
+      .fetchUsers()
       .then((response) => response.json())
       .then((data) => {
         console.log("Users:", data);
@@ -70,6 +70,19 @@ const PolicyPage = () => {
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
+  };
+  const handleDelete = async (id) => {
+    await UserStore.getState().deleteUser(id);
+    UserStore.getState()
+      .fetchUsers()
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Users:", data);
+        setTotalPages(Math.ceil(data.length / itemsPerPage));
+        setUsers(data);
+        setFilteredUsers(data);
+      })
+      .catch((error) => console.error("Error fetching users:", error));
   };
 
   const defaultTheme = createTheme({
@@ -123,7 +136,7 @@ const PolicyPage = () => {
                       <TableCell align="center">{user.email}</TableCell>
                       <TableCell align="center">{user.date_joined}</TableCell>
                       <TableCell align="center">
-                        <Button variant="outlined" color="error">
+                        <Button variant="outlined" color="error" onClick={() => handleDelete(user.id)}>
                               Delete Account
                         </Button>   
                       </TableCell>
