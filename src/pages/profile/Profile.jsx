@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginStore from '../../api/LoginStore';
 import Navbar from '../../components/navbar/Navbar';
@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ProfileStore from '../../api/ProfileStore';
 
 const defaultTheme = createTheme({
   palette: {
@@ -31,68 +32,44 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const validateEmail = () => {
-    // TODO: consider if want to use email or username to login
-
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   setEmailError('Invalid email address');
-    //   return false;
-    // }
-    // setEmailError('');
-    return true;
-  };
-
-  const validatePassword = () => {
-    // if (password.length < 3) {
-    //   setPasswordError('Password must be at least 3 characters');
-    //   return false;
-    // }
-    // setPasswordError('');
-    return true;
-  };
-
-
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    validateEmail(value);
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    validatePassword(value);
   };
 
-  const isValid = () => validateEmail() && validatePassword();
-
+  const [userData, setUserData] = useState('');
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const username = LoginStore.getState().userData;
+        const username_value = username.username;
+        await ProfileStore.getState().fetchUserProfile(username_value); // Fetch data and set it in the store
+        const fetchedData = ProfileStore.getState().userData; // Access the updated state
+        console.log('Fetched user:', fetchedData);
+        setUserData(fetchedData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+  
+    console.log('Fetching user data');
+    fetchData();
+  }, []);
+  
   const fetchData = () =>{
     // TODO: change to email or username and update .login() method
 
-    LoginStore.getState()
-      .login(email, password)
-      .then(() =>
-        {
-          navigate('/spaces');
-        }
-      )
-      .catch((error) => 
-        {
-          console.error('Invalid email or password');
-          setLoginError("Incorrect Username or Password Entered!")
-        })
+    ProfileStore.getState()
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!isValid()) {
-      return;
-    }
-    console.log('An email was submitted: ', email);
-    console.log('A password was submitted: ', password);
-    fetchData();
   };
 
   const handlePasswordChangeSubmit = (e) => {
@@ -144,9 +121,13 @@ const Profile = () => {
                 fullWidth
                 id="firstname"
                 label="First Name"
+                value={userData.first_name}
                 name="firstname"
                 autoComplete="First Name"
                 autoFocus
+                InputLabelProps={{
+                  shrink: userData.first_name 
+                }}
               />
               <TextField
                 margin="normal"
@@ -155,8 +136,12 @@ const Profile = () => {
                 id="lastname"
                 label="Last Name"
                 name="lastname"
+                value={userData.last_name}
                 autoComplete="Last Name"
                 autoFocus
+                InputLabelProps={{
+                  shrink: userData.last_name 
+                }}
               />
               <TextField
                 margin="normal"
@@ -165,9 +150,13 @@ const Profile = () => {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={userData.email}
                 onChange={handleEmailChange}
                 autoComplete="email"
                 autoFocus
+                InputLabelProps={{
+                  shrink: userData.email 
+                }}
               />
               <TextField
                 margin="normal"
@@ -176,8 +165,12 @@ const Profile = () => {
                 id="contactinfo"
                 label="Contact Info"
                 name="contactinfo"
+                value={userData.contactInfo}
                 autoComplete="Contact Info"
                 autoFocus
+                InputLabelProps={{
+                  shrink: userData.contactInfo 
+                }}
               />
             
               {loginError && (

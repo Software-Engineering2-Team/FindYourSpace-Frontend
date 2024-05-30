@@ -25,7 +25,6 @@ const LoginStore = create((set) => ({
 
       const data = await response.json();
       LoginStore.getState().setUserData(data);
-
       console.log(data);
     } catch (error) {
       console.error('Login failed:', error.message);
