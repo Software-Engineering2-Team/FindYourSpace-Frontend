@@ -1,6 +1,7 @@
 import React from "react";
 import "./mySpaceItem.css";
 import {Link} from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export const formatOfficeType = (officeType) => {
   const lowerCaseOfficeType = officeType.toLowerCase();
@@ -9,10 +10,22 @@ export const formatOfficeType = (officeType) => {
   return formattedOfficeType;
 };
 
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+  },
+  typography: {
+    fontFamily: 'Dubai Medium',
+  },
+});
+
 const MySpaceItem = ({ space, onUpdate }) => {
 
   return (
     <div data-testid="mySpaceItem-1" className="mySpaceItem-container">
+      <ThemeProvider theme={defaultTheme}>
         <Link to={`/myspaces/${space.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
             <div className="searchItemHis">
               {space.photos.length > 0 && (
@@ -29,6 +42,7 @@ const MySpaceItem = ({ space, onUpdate }) => {
                 </div>
             </div>
         </Link>
+        </ThemeProvider>
       </div>
   );
 };

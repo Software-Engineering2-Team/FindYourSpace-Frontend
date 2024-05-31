@@ -3,6 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, Stack, Typography, Box, Grid, IconButton } from "@mui/material";
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from "../../api/OfficeStore";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const defaultTheme = createTheme({
+  palette: {
+      primary: {
+          main: '#000000', // Set primary color to black
+      },
+  },
+  typography: {
+      fontFamily: 'Dubai Medium',
+       // Replace with your desired font
+  },
+});
 
 const EditOfficeSpaceForm = () => {
   const navigate = useNavigate();
@@ -70,6 +83,7 @@ const EditOfficeSpaceForm = () => {
 
   return (
     <div data-testid="editPage-1">
+      <ThemeProvider theme={defaultTheme}>
       <Navbar />
       <div className="ad_space_form">
         <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
@@ -166,6 +180,7 @@ const EditOfficeSpaceForm = () => {
           </form>
         </Box>
       </div>
+      </ThemeProvider>
     </div>
   );
 };

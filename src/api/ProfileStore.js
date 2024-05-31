@@ -32,6 +32,29 @@ const ProfileStore = create((set) => ({
     }
   },
 
+  updateUserProfile: async (userData) => {
+    try {
+      const response = await fetch(`${url}/update_user/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update user profile');
+      }
+
+      const data = await response.json();
+      ProfileStore.getState().setUserData(data);
+
+      console.log('Profile updated successfully');
+    } catch (error) {
+      console.error('Updating user profile failed:', error.message);
+      throw error;
+    }
+  },
 }));
 
 export default ProfileStore;
