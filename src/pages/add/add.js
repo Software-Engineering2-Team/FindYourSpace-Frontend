@@ -126,17 +126,6 @@ const AddOfficeSpaceForm = () => {
                         sx={{marginBottom:"20"}}
                     />
                   </Stack>
-
-                  <TextField
-                      label="Description"
-                      placeholder="Description"
-                      multiline
-                      rows={8}
-                      value={formData.description}
-                      onChange={(e) => handleInputChange("description", e.target.value)}
-                      fullWidth
-                      margin="normal"
-                  />
                 </Stack>
                 <Stack
                     direction="row"

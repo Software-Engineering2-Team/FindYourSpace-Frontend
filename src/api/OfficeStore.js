@@ -5,23 +5,6 @@
         offices: [],
         setOffices:
             (offices) => set({ offices }),
-        // fetchOffice: async (id) => {
-        //     try {
-        //         console.log('Fetching office with id:', id);
-        //         const office = OfficeStore.getState.offices.find((office) => office.id === parseInt(id));
-        //         console.log('Fetched office:', office);
-        //         if (office) {
-        //             return Promise.resolve({
-        //                 json: () => Promise.resolve(office),
-        //             });
-        //         } else {
-        //             return Promise.reject(new Error(`Office with id ${id} not found`));
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching office:', error);
-        //         return Promise.reject(error);
-        //     }
-        // },
         
         fetchOffices:
             async (pageSize, pageNum) => fetch(`${url}/api/get-all-adspaces/`, {

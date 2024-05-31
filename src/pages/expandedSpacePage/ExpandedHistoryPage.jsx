@@ -77,7 +77,7 @@ const ExpandedSpacePage = () => {
                 {`$${space?.price}/day`}
             </Typography>
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
-                {`$${space?.size} meter square`}
+                {`${space?.size} meter square`}
             </Typography>
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
                 {space?.description}

@@ -4,9 +4,8 @@ import SearchBar from './SearchBookingHistory';
 import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
-import LoginStore from '../../api/LoginStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
+
 const BookingHistory = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);

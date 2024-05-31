@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, FormControl, InputLabel, MenuItem, Select, Pagination, Typography,Paper,Button,Stack} from '@mui/material';
 import SearchBar from './SearchApproveSpaces';
-import Navbar from '../../components/navbar/Navbar';
 import ApproveSpaceStore from '../../api/ApproveSpaceStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from '@mui/material/Table';
