@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Stack, Typography, IconButton, Box, ImageListItem, Grid} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FlagIcon from '@mui/icons-material/Flag';
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { TextField, Button, Stack, Typography, Box,Grid} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
-import OfficeStore from "../../api/OfficeStore";
-import {uploadAdditionalPhoto, uploadMainPhoto} from '../../api/photos';
+import AddOfficeStore from "../../api/AddOfficeStore";
+import LoginStore from "../../api/LoginStore";
 
 const AddOfficeSpaceForm = () => {
   const navigate = useNavigate();
+  const loginInfo = LoginStore.getState().userData;
+  const ownerId = loginInfo.id;
+  console.log(ownerId);
   const [formData, setFormData] = useState({
     description: "",
     price: 0,
     location: "",
     size: "",
-    availability: "",
+    availability: "true",
+    isApproved:"false",
     photos: "",
-    owner: ""
+    owner: ownerId
   });
 
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [mainImageIndex, setMainIndex] = useState(0);
 
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({
@@ -32,54 +31,13 @@ const AddOfficeSpaceForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    OfficeStore.getState().addOffice(formData)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("AdSpace data:", data);
-          uploadPhotos(data[0].id)
-              .finally(() => navigate("/spaces"))
-              .catch((error) => {
-                console.error("Error adding AdSpace photos:", error)});
-        })
-        .catch((error) => {
-          console.error("Error adding AdSpace data:", error);
-        });
-  };
-
-  const uploadPhotos = async (officeId) => {
-    for(let i = 0; i < uploadedImages.length; i++)
-    {
-      const image = uploadedImages[i];
-      if(mainImageIndex === i)
-        await uploadMainPhoto(officeId, image);
-      else
-        await uploadAdditionalPhoto(officeId, image);
+    try {
+      await AddOfficeStore.getState().createAdSpace(formData);
+      navigate("/spaces");
+    } catch (error) {
+      console.error("Error adding AdSpace data:", error);
     }
   };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const currentFiles = [...uploadedImages];
-    currentFiles.push(file);
-    setUploadedImages(currentFiles);
-  };
-
-  const handleImageDelete = (index) => {
-    if(index === mainImageIndex)
-      setMainIndex(0);
-    else if(index < mainImageIndex)
-      setMainIndex(mainImageIndex-1);
-
-    setUploadedImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages.splice(index, 1);
-      return updatedImages;
-    });
-  };
-
-  const handleMarkMainPhoto = (index) => {
-    setMainIndex(index);
-  }
 
   const cancelHandler = () => {
     navigate("/spaces");
@@ -106,61 +64,40 @@ const AddOfficeSpaceForm = () => {
                   label="Location"
                   placeholder="Location"
                   value={formData.location}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  onChange={(e) => handleInputChange("location", e.target.value)}
                   fullWidth
                   margin="normal"
               />
-
               <Stack direction="row" alignItems="center" marginY={2}>
-                <input
-                    type="file"
-                    id="imageUpload"
-                    style={{display: "none"}}
-                    onChange={handleImageUpload}
-                />
-                <label htmlFor="imageUpload">
-                  <IconButton component="span" color="primary">
-                    <AddPhotoAlternateIcon/>
-                  </IconButton>
-                </label>
-                <Typography variant="body1" component="label">
-                  Add Images
-                </Typography>
-              </Stack>
+              <TextField
+                label="Image URL"
+                placeholder="Image URL"
+                value={formData.photos}
+                onChange={(e) => handleInputChange("photos", e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Stack>
 
-              <Grid container spacing={2} style={{ maxHeight: "600px", overflowY: 'auto',marginBottom: '40px' }}>
-                {uploadedImages.map((image, index) => (
-                    <Grid item key={index} xs={4} style={{marginBottom:'16px', breakInside: 'avoid', height: "250px" }}>
-                      <ImageListItem style = {{height: "250px" }}>
-                        <img
-                            src={URL.createObjectURL(image)}
-                            alt={`Uploaded ${index}`}
-                            style={{ width: "100%", height: "100%", objectFit: "contain", border: index === mainImageIndex ? '2px solid red' : 'none' }}
-                        />
-                        <IconButton
-                            style={{ position: "absolute", top: "5px", right: "40px", color: "orange" }}
-                            onClick={() => handleMarkMainPhoto(index)}
-                        >
-                          <FlagIcon />
-                        </IconButton>
-                        <IconButton
-                            style={{ position: "absolute", top: "5px", right: "5px", color: "red" }}
-                            onClick={() => handleImageDelete(index)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ImageListItem>
-                    </Grid>
-                ))}
+            {formData.photos && (
+              <Grid container spacing={2} style={{ maxHeight: "600px", overflowY: 'auto', marginBottom: '40px' }}>
+                <Grid item xs={12} style={{ marginBottom: '16px', breakInside: 'avoid', height: "250px" }}>
+                  <img
+                    src={formData.photos}
+                    alt="Office Space"
+                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                  />
+                </Grid>
               </Grid>
+            )}
 
               <Stack direction={{xs: "column", md: "row"}} spacing={3}>
                 <Stack spacing={4} flexGrow={4} width={1000}>
                   <TextField
                       label="Size"
                       placeholder="Size"
-                      type="number"
                       value={formData.size}
+                      type = "number"
                       onChange={(e) => handleInputChange("size", e.target.value)}
                       fullWidth
                       margin="normal"
@@ -169,8 +106,8 @@ const AddOfficeSpaceForm = () => {
                   <TextField
                       label="Price"
                       placeholder="Price"
-                      type="number"
                       value={formData.price}
+                      type = "number"
                       onChange={(e) => handleInputChange("price", e.target.value)}
                       fullWidth
                       margin="normal"
