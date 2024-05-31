@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
-import { TextField, Button, Stack, Typography, Box, Grid } from "@mui/material";
+import { TextField, Button, Stack, Typography, Box, Grid, IconButton } from "@mui/material";
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from "../../api/OfficeStore";
 
@@ -16,6 +16,7 @@ const EditOfficeSpaceForm = () => {
 
   const fetchOffice = OfficeStore((state) => state.fetchOffice);
   const updateOffice = OfficeStore((state) => state.updateOffice);
+  const deleteOffice = OfficeStore((state) => state.deleteOffice);
 
   useEffect(() => {
     const fetchOfficeData = async () => {
@@ -55,6 +56,16 @@ const EditOfficeSpaceForm = () => {
 
   const cancelHandler = () => {
     navigate("/myspaces");
+  };
+
+  const deleteHandler = async () => {
+    try {
+      await deleteOffice(id);
+      console.log('Office space deleted');
+      navigate("/myspaces");
+    } catch (error) {
+      console.error("Error deleting office space:", error);
+    }
   };
 
   return (
@@ -135,6 +146,14 @@ const EditOfficeSpaceForm = () => {
             >
               <Button variant="outlined" color="error" onClick={cancelHandler}>
                 Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ backgroundColor: "red"}}
+                onClick={deleteHandler}
+              >
+                Delete
               </Button>
               <Button
                 type="submit"

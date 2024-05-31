@@ -75,6 +75,24 @@
                 throw error;
             }
         },
+        deleteOffice: async (id) => {
+            try {
+              const response = await fetch(`${url}/api/adspace/${id}/delete/`, {
+                method: 'DELETE',
+              });
+        
+              if (!response.ok) {
+                throw new Error('Failed to delete office');
+              }
+        
+              set((state) => ({
+                offices: state.offices.filter((office) => office.id !== id)
+              }));
+            } catch (error) {
+              console.error('Error deleting office:', error);
+              throw error;
+            }
+          },
     }));
 
     export default OfficeStore;
