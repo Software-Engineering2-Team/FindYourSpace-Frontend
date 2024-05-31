@@ -34,10 +34,10 @@ const Navbar = () => {
                             <Button component={Link} to="/admin/stats" color="inherit">
                                 Admin Analytics
                             </Button>
-                            <Button component={Link} to="/admin/policy-enforcement" color="inherit" onClick={LoginStore.getState().logout}>
+                            <Button component={Link} to="/admin/policy-enforcement" color="inherit">
                                 Policy Enforcement
                             </Button>
-                            <Button component={Link} to="/admin/review-spaces" color="inherit" onClick={LoginStore.getState().logout}>
+                            <Button component={Link} to="/admin/review-spaces" color="inherit">
                                 Review Spaces
                             </Button>
                             <Button component={Link} to="/spaces" color="inherit">
