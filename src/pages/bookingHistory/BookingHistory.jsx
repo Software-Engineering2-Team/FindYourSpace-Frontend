@@ -105,6 +105,7 @@ const BookingHistory = () => {
   return (
       <div data-testid="bookingHistory-1">
         <ThemeProvider theme={defaultTheme}>
+          <Navbar/>
           <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
             Your Booking History
           </Typography>
