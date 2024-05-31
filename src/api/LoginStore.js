@@ -121,27 +121,54 @@ const LoginStore = create((set) => ({
     }
   },
 
+  // logout: async () => {
+  //   try {
+  //     const response = await fetch(`${url}/api/logout/`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Logout failed');
+  //     }
+
+  //     // Clear user data
+  //     LoginStore.getState().setUserData(null);
+  //     console.log('Logout successful');
+  //   } catch (error) {
+  //     console.error('Logout failed:', error.message);
+  //     throw error;
+  //   }
+  // },
+
   logout: async () => {
     try {
-      const response = await fetch(`${url}/api/logout/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+        const response = await fetch(`${url}/api/logout/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-      if (!response.ok) {
-        throw new Error('Logout failed');
-      }
+        if (!response.ok) {
+            throw new Error('Logout failed');
+        }
 
-      // Clear user data
-      LoginStore.getState().setUserData(null);
-      console.log('Logout successful');
+        // Clear user data
+        set(() => {
+            localStorage.removeItem('userData'); // Remove user data from local storage
+            return { userData: null };
+        });
+        console.log('Logout successful');
     } catch (error) {
-      console.error('Logout failed:', error.message);
-      throw error;
+        console.error('Logout failed:', error.message);
+        throw error;
     }
-  },
+}
+
+
 }));
 
 export default LoginStore;

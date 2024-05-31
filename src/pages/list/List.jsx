@@ -6,6 +6,9 @@ import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginStore from '../../api/LoginStore';
+import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
+
 
 const List = () => {
   const itemsPerPage = 10;
@@ -19,7 +22,6 @@ const List = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
-
 
   useEffect(() => {
     OfficeStore.getState()
@@ -160,7 +162,7 @@ const List = () => {
   return (
     <div data-testid="list-1">
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <Navbar/>
         <div style={{ height: '1px', backgroundColor: 'white' }} />
         <MarketingComponent/>
         <Container ref={listRef} style={{ display: 'flex', justifyContent: 'center'}}>

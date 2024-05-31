@@ -25,14 +25,20 @@ const NavbarAdmin = () => {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                            Find your space
+                            Find your space Admin
                         </Typography>
                         <div>
+                            <Button component={Link} to="/admin/platform-health" color="inherit">
+                                Platform Health
+                            </Button>
                             <Button component={Link} to="/admin/stats" color="inherit">
                                 Admin Analytics
                             </Button>
                             <Button component={Link} to="/admin/policy-enforcement" color="inherit">
                                 Policy Enforcement
+                            </Button>
+                            <Button component={Link} to="/admin/review-spaces" color="inherit">
+                                Review Spaces
                             </Button>
                             <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
                                 Log Out

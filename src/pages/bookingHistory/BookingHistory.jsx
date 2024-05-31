@@ -4,7 +4,9 @@ import SearchBar from './SearchBookingHistory';
 import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
+import LoginStore from '../../api/LoginStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
 const BookingHistory = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,6 +15,7 @@ const BookingHistory = () => {
   const [filteredOfficeSpaces, setFilteredOfficeSpaces] = useState(OfficeStore.getState().offices);
   const [sortOption, setSortOption] = useState('default');
   const listRef = React.createRef();
+
 
   useEffect(() => {
     OfficeStore.getState()
@@ -102,7 +105,6 @@ const BookingHistory = () => {
   return (
       <div data-testid="bookingHistory-1">
         <ThemeProvider theme={defaultTheme}>
-          <Navbar />
           <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
             Your Booking History
           </Typography>
