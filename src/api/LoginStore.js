@@ -95,6 +95,7 @@ const LoginStore = create((set) => ({
     set({ userData });
     // Store userData in localStorage
     localStorage.setItem('userData', JSON.stringify(userData));
+    console.log("Value inside userData",userData);
   },
 
   login: async (username, password) => {
@@ -135,8 +136,6 @@ const LoginStore = create((set) => ({
 
       // Clear user data
       LoginStore.getState().setUserData(null);
-      localStorage.removeItem('userData');
-
       console.log('Logout successful');
     } catch (error) {
       console.error('Logout failed:', error.message);

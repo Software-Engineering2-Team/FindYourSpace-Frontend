@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,6 +20,22 @@ const theme = createTheme({
 });
 
 const Navbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(LoginStore.getState().userData !== null);
+
+    useEffect(() => {
+        const unsubscribe = LoginStore.subscribe(
+            (userData) => setIsLoggedIn(userData !== null)
+        );
+        console.log("Is Logged In state",isLoggedIn)
+        return () => unsubscribe();
+    }, []);
+
+    const handleLogout = async () => {
+        await LoginStore.getState().logout();
+        setIsLoggedIn(LoginStore.getState().userData !== null);
+        console.log("Is Logged In state",isLoggedIn)
+    };
+
     return (
         <div data-testid="navbar-1">
             <ThemeProvider theme={theme}>
@@ -58,9 +75,16 @@ const Navbar = () => {
                             <Button component={Link} to="/contact-us" color="inherit">
                                 Contact Us
                             </Button>
-                            <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
-                                Log Out
-                            </Button>
+                            {/* Conditionally render the "Log Out" button if user is logged in */}
+                            {isLoggedIn ? (
+                                <Button component={Link} to="/" color="inherit" onClick={handleLogout}>
+                                    Log Out
+                                </Button>
+                            ) : (
+                                <Button component={Link} to="/" color="inherit">
+                                    Login
+                                </Button>
+                            )}
                         </div>
                     </Toolbar>
                 </AppBar>
