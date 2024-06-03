@@ -24,7 +24,7 @@ const SearchItem = ({ space, onUpdate }) => {
             )}
               <div className="siDescHis">
                   <h1 className="siTitleHis">{space.location}</h1>
-                  <span className="siFeaturesHis">{space.description}</span>
+                  <span className="siFeaturesHis">{`${space.price} meter square`}</span>
                   <span className="siPriceHis">{`$${space.price}`}</span>
               </div>
           </div>

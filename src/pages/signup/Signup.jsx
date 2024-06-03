@@ -105,7 +105,7 @@ const Signup = () => {
       .signup(username,email,password,confirmPassword)
       .then(() =>
         {
-          navigate('/spaces');
+          navigate('/');
         }
       )
       .catch((error) => 
