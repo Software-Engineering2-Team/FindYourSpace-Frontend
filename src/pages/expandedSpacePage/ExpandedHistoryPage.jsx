@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import ExpandedAdSpaceStore from '../../api/ExpandedAdSpaceStore';
+import useBookingStore from '../../api/BookingStore';
 
 const defaultTheme = createTheme({
   palette: {
@@ -21,6 +22,7 @@ const defaultTheme = createTheme({
 });
 
 const ExpandedSpacePage = () => {
+
   const [space, setSpace] = useState(null);
   const { id } = useParams();
   console.log("The id is: ", id);
@@ -28,7 +30,12 @@ const ExpandedSpacePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const bookings = useBookingStore.getState().bookings;
+        console.log("Bookings", bookings)
+        const booking = bookings.find(booking => booking.id === id);
+        console.log("Booking", booking)
         await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id); // Fetch data and set it in the store
+        console.log(id);
         const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace; // Access the updated state
         console.log('Fetched ad space:', fetchedData);
         setSpace(fetchedData);

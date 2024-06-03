@@ -1,37 +1,34 @@
 import { create } from 'zustand';
 
-const url = 'http://localhost:8000';
+const apiUrl = 'http://localhost:8000';
 
-const BookingsStore = create((set) => ({
-  userData: null,
-
-  setBookingsData: (userData) => {
-    set({ userData });
+const useBookingStore = create((set) => ({
+  bookings: JSON.parse(localStorage.getItem('bookings')) || null,
+  setBookings: (bookings) => {
+    set({ bookings });
+    // Store userData in localStorage
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+    console.log("Value inside bookings",bookings);
   },
-
-  fetchBookings: async () => {
+  
+  fetchBookingsByClient: async (clientId) => {
     try {
-      const response = await fetch(`${url}/api/get-all-bookings/`, {
+      const response = await fetch(`${apiUrl}/api/bookings/client/${clientId}/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
       if (!response.ok) {
-        throw new Error('Invalid credentials');
+        throw new Error('Failed to fetch bookings');
       }
-
       const data = await response.json();
-      BookingsStore.getState().setBookingsData(data);
-
-      console.log(data);
+      useBookingStore.getState().setBookings(data);
     } catch (error) {
-      console.error('Fetching Bookings failed:', error.message);
+      console.error('Error fetching bookings:', error);
       throw error;
     }
   },
- 
 }));
 
-export default BookingsStore;
+export default useBookingStore;
