@@ -41,13 +41,16 @@ const ProfileStore = create((set) => ({
         },
         body: JSON.stringify(userData),
       });
-
+      console.log("Response: ",response)
       if (!response.ok) {
-        throw new Error('Failed to update user profile');
+        const errorData = await response.json();
+        throw new Error(errorData);
       }
 
       const data = await response.json();
+      console.log("DATA: ",data)
       ProfileStore.getState().setUserData(data);
+
 
       console.log('Profile updated successfully');
     } catch (error) {

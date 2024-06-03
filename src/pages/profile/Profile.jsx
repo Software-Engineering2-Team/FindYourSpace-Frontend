@@ -56,7 +56,6 @@ const Profile = () => {
     e.preventDefault();
     try {
       await ProfileStore.getState().updateUserProfile(userData);
-      console.log('Profile updated successfully');
     } catch (error) {
       console.error('Error updating profile:', error);
       setLoginError('Failed to update profile');
@@ -65,6 +64,7 @@ const Profile = () => {
 
   const handlePasswordChangeSubmit = (e) => {
     e.preventDefault();
+    // Implement password change logic here
   };
 
   return (
