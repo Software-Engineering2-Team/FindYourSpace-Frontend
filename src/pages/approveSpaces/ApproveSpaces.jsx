@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, FormControl, InputLabel, MenuItem, Select, Pagination, Typography,Paper,Button,Stack} from '@mui/material';
 import SearchBar from './SearchApproveSpaces';
-import Navbar from '../../components/navbar/Navbar';
 import ApproveSpaceStore from '../../api/ApproveSpaceStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -10,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
 
 const ApproveSpacesPage = () => {
   const itemsPerPage = 10;
@@ -126,7 +126,7 @@ const ApproveSpacesPage = () => {
   return (
     <div data-testid="ApproveSpacesPage-1">
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarAdmin/>
         <Typography variant="h5" gutterBottom sx={{ fontSize: '30px', marginLeft: '25px', marginTop: '30px' }}>
           Reviewing and Approving Spaces
         </Typography>

@@ -4,7 +4,6 @@ import SearchBar from './Search';
 import SearchItem from '../../components/searchItem/SearchItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
-// import LoginStore from '../../api/LoginStore';
 import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -20,7 +19,6 @@ const List = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
-
 
   useEffect(() => {
     OfficeStore.getState()
@@ -161,7 +159,7 @@ const List = () => {
   return (
     <div data-testid="list-1">
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <Navbar/>
         <div style={{ height: '1px', backgroundColor: 'white' }} />
         <MarketingComponent/>
         <Container ref={listRef} style={{ display: 'flex', justifyContent: 'center'}}>

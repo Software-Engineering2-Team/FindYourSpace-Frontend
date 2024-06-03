@@ -15,6 +15,9 @@
   import AddIcon from '@mui/icons-material/Add';
   import RemoveIcon from '@mui/icons-material/Remove';
   import axios from 'axios';
+  import LoginStore from '../../api/LoginStore';
+
+
   const defaultTheme = createTheme({
     palette: {
       primary: {
@@ -63,9 +66,10 @@
           price: space.price, 
           imageUrl: space.photos, 
           quantity: numberOfDays,
-          name : space.location
+          name : space.location,
+          ad_space_id : id,
+          client_id : LoginStore.getState().userData.id
         });
-        
         const { checkoutUrl } = response.data;
         window.location.href = checkoutUrl;
       } catch (error) {

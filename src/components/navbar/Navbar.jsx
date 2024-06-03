@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,6 +20,38 @@ const theme = createTheme({
 });
 
 const Navbar = () => {
+    // const [isLoggedIn, setIsLoggedIn] = useState(() => LoginStore.getState().userData !== null);
+
+    // const handleLogout = async () => {
+    //     await LoginStore.getState().logout();
+    //     setIsLoggedIn(false); // Update isLoggedIn state after logout
+    // };
+    
+    // // Inside the useEffect, remove isLoggedIn from the dependency array
+    // useEffect(() => {
+    //     const unsubscribe = LoginStore.subscribe(
+    //         (userData) => setIsLoggedIn(userData !== null)
+    //     );
+    //     return () => unsubscribe();
+    // }, [isLoggedIn]);
+
+    const [isLoggedIn, setIsLoggedIn] = useState(() => LoginStore.getState().userData !== null);
+
+    useEffect(() => {
+        const unsubscribe = LoginStore.subscribe(
+            (state) => setIsLoggedIn(state.userData !== null)
+        );
+        return () => unsubscribe();
+        
+    }, []);
+
+    const handleLogout = async () => {
+        await LoginStore.getState().logout();
+        setIsLoggedIn(false); // Explicitly set state after logout completes
+
+    };
+    
+
     return (
         <div data-testid="navbar-1">
             <ThemeProvider theme={theme}>
@@ -28,39 +61,37 @@ const Navbar = () => {
                             Find your space
                         </Typography>
                         <div>
-                            <Button component={Link} to="/admin/platform-health" color="inherit">
-                                Platform Health
-                            </Button>
-                            <Button component={Link} to="/admin/stats" color="inherit">
-                                Admin Analytics
-                            </Button>
-                            <Button component={Link} to="/admin/policy-enforcement" color="inherit" onClick={LoginStore.getState().logout}>
-                                Policy Enforcement
-                            </Button>
-                            <Button component={Link} to="/admin/review-spaces" color="inherit" onClick={LoginStore.getState().logout}>
-                                Review Spaces
-                            </Button>
+                            {isLoggedIn && (
+                                <>
+                                    <Button component={Link} to="/booking-history" color="inherit">
+                                        Booking History
+                                    </Button>
+                                    <Button component={Link} to="/add" color="inherit">
+                                        Rent my space
+                                    </Button>
+                                    <Button component={Link} to="/myspaces" color="inherit">
+                                        My Spaces
+                                    </Button>
+                                    <Button component={Link} to="/profile" color="inherit">
+                                        Profile
+                                    </Button>
+                                </>
+                            )}
                             <Button component={Link} to="/spaces" color="inherit">
                                 Find spaces
-                            </Button>
-                            <Button component={Link} to="/booking-history" color="inherit">
-                                Booking History
-                            </Button>
-                            <Button component={Link} to="/add" color="inherit">
-                                Rent my space
-                            </Button>
-                            <Button component={Link} to="/myspaces" color="inherit">
-                                My Spaces
-                            </Button>
-                            <Button component={Link} to="/profile" color="inherit">
-                                Profile
                             </Button>
                             <Button component={Link} to="/contact-us" color="inherit">
                                 Contact Us
                             </Button>
-                            <Button component={Link} to="/" color="inherit" onClick={LoginStore.getState().logout}>
-                                Log Out
-                            </Button>
+                            {isLoggedIn ? (
+                                <Button component={Link} to="/" color="inherit" onClick={handleLogout}>
+                                    Log Out
+                                </Button>
+                            ) : (
+                                <Button component={Link} to="/" color="inherit">
+                                    Login
+                                </Button>
+                            )}
                         </div>
                     </Toolbar>
                 </AppBar>

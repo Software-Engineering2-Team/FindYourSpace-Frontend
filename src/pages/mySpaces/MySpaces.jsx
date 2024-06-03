@@ -5,6 +5,8 @@ import MySpaceItem from '../../components/mySpaceItem/mySpaceItem';
 import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginStore from '../../api/LoginStore';
+
 const MySpaces = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,25 +18,21 @@ const MySpaces = () => {
 
   useEffect(() => {
     OfficeStore.getState()
-        .fetchOffices(1000, 0)
-        .then(response => response.json())
+        .fetchOfficesByOwner(LoginStore.getState().userData.id)
         .then(response => {
-          console.log(response);
-          const totalItems = response.length;
-          setTotalPages(Math.ceil(totalItems / itemsPerPage));
-          OfficeStore.getState().setOffices(response);
-          setOfficeSpaces(response);
-          setFilteredOfficeSpaces(response);
+            console.log(response);
+            const totalItems = response.length;
+            setTotalPages(Math.ceil(totalItems / itemsPerPage));
+            setOfficeSpaces(response);
+            setFilteredOfficeSpaces(response);
         })
         .catch(error => console.error(error));
-  }, []);
+}, []);
 
   const handleOfficeUpdate = async () => {
     try {
-      const response = await OfficeStore.getState().fetchOffices(1000, 0);
+      const response = await OfficeStore.getState().fetchOfficesByOwner(LoginStore.getState().userData.id);
       const data = await response.json();
-      
-      OfficeStore.getState().setOffices(data);
       setOfficeSpaces(data);
       setFilteredOfficeSpaces(data);
     } catch (error) {

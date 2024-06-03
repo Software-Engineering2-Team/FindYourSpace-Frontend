@@ -14,7 +14,6 @@ const OfficeStore = create((set) => ({
             method: 'GET',
             headers: {
               'Accept': '*/*', 
-              'Authorization': `Bearer ${LoginStore.getState().jwttoken}`
             }
           }),
         //async (pageSize, pageNum) => console.log('fetching offices'),

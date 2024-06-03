@@ -93,11 +93,16 @@ const Login = () => {
 
     LoginStore.getState()
       .login(email, password)
-      .then(() =>
-        {
-          navigate('/spaces');
+      .then(() => {
+        const userData = LoginStore.getState().userData;
+        if (userData) {
+            if (userData.username === 'admin') {
+                navigate('/admin/platform-health');
+            } else {
+                navigate('/spaces');
+            }
         }
-      )
+    })
       .catch((error) => 
         {
           console.error('Invalid email or password');

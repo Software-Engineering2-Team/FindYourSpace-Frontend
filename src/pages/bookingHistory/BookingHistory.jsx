@@ -1,84 +1,77 @@
+// BookingHistory.js
 import React, { useState, useEffect } from 'react';
-import { Container, FormControl, InputLabel, MenuItem, Select, Pagination,Typography} from '@mui/material';
+import { Container, FormControl, InputLabel, MenuItem, Select, Pagination, Typography } from '@mui/material';
 import SearchBar from './SearchBookingHistory';
 import SearchItem from '../../components/searchItemBookingHistory/SearchItemBookingHistory';
 import Navbar from '../../components/navbar/Navbar';
-import OfficeStore from '../../api/OfficeStore';
+import useBookingStore from '../../api/BookingStore';
+import LoginStore from '../../api/LoginStore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 const BookingHistory = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [officeSpaces, setOfficeSpaces] = useState(OfficeStore.getState().offices);
-  const [filteredOfficeSpaces, setFilteredOfficeSpaces] = useState(OfficeStore.getState().offices);
+  const [filteredBookings, setFilteredBookings] = useState([]);
   const [sortOption, setSortOption] = useState('default');
   const listRef = React.createRef();
+  
+  const { bookings, fetchBookingsByClient} = useBookingStore();
+  const { userData } = LoginStore.getState();
 
   useEffect(() => {
-    OfficeStore.getState()
-        .fetchOffices(1000, 0)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response);
-          const totalItems = response.length;
-          setTotalPages(Math.ceil(totalItems / itemsPerPage));
-          OfficeStore.getState().setOffices(response);
-          setOfficeSpaces(response);
-          setFilteredOfficeSpaces(response);
-        })
-        .catch(error => console.error(error));
-  }, []);
+    const fetchBookings = async () => {
+      try {
+        const parsedUserData = userData;
+        const clientId = parsedUserData.id;
+        await fetchBookingsByClient(clientId);
+      } catch (error) {
+        console.error('Error fetching booking data:', error);
+      }
+    };
+    fetchBookings();
+  }, [fetchBookingsByClient, userData]);
 
-  const handleOfficeUpdate = async () => {
-    try {
-      const response = await OfficeStore.getState().fetchOffices(1000, 0);
-      const data = await response.json();
-      
-      OfficeStore.getState().setOffices(data);
-      setOfficeSpaces(data);
-      setFilteredOfficeSpaces(data);
-    } catch (error) {
-      console.error("Error updating offices:", error);
-    }
-  };
+  useEffect(() => {
+    setFilteredBookings(bookings);
+    setTotalPages(Math.ceil(bookings.length / itemsPerPage));
+  }, [bookings]);
 
   useEffect(() => {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    const slicedSpaces = officeSpaces.slice(start, end);
-    setFilteredOfficeSpaces(slicedSpaces);
-  }, [currentPage, officeSpaces]);
+    setFilteredBookings(bookings.slice(start, end));
+  }, [currentPage, bookings]);
 
   const handleSearch = (searchTerm) => {
-    const filteredSpaces = officeSpaces.filter(space =>
-        space.location.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = bookings.filter(booking =>
+      booking.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    setFilteredOfficeSpaces(filteredSpaces);
+    setFilteredBookings(filtered);
   };
 
   const handleSortChange = (event) => {
     const selectedSortOption = event.target.value;
     setSortOption(selectedSortOption);
 
-    let sortedSpaces;
+    let sortedBookings;
     switch (selectedSortOption) {
       case 'alphabetical':
-        sortedSpaces = [...filteredOfficeSpaces].sort((a, b) =>
-            a.location.localeCompare(b.location)
+        sortedBookings = [...filteredBookings].sort((a, b) =>
+          a.location.localeCompare(b.location)
         );
         break;
       case 'price':
-        sortedSpaces = [...filteredOfficeSpaces].sort((a, b) =>
-            parseFloat(a.price) - parseFloat(b.price)
+        sortedBookings = [...filteredBookings].sort((a, b) =>
+          parseFloat(a.price) - parseFloat(b.price)
         );
         break;
       default:
-        sortedSpaces = [...officeSpaces];
+        sortedBookings = [...bookings];
         break;
     }
 
-    setFilteredOfficeSpaces(sortedSpaces);
+    setFilteredBookings(sortedBookings);
   };
 
   const handlePageChange = (event, newPage) => {
@@ -100,55 +93,53 @@ const BookingHistory = () => {
   });
 
   return (
-      <div data-testid="bookingHistory-1">
-        <ThemeProvider theme={defaultTheme}>
-          <Navbar />
-          <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
-            Your Booking History
-          </Typography>
-          <Container ref={listRef}>
-            <SearchBar onSearchHistory={handleSearch} />
-            <FormControl style={{ margin: '20px 0' }}>
-              <InputLabel htmlFor="sort">Sort by:</InputLabel>
-              <Select id="sort" value={sortOption} onChange={handleSortChange} label="Sort by">
-                <MenuItem value="default">Default</MenuItem>
-                <MenuItem value="alphabetical">Alphabetical</MenuItem>
-                <MenuItem value="price">Price</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="listContainer">
-                <div className="listWrapper">
-                  <div className="listResult">
-                    {filteredOfficeSpaces.map(space => (
-                        <SearchItem key={space.id} space={space} onUpdate={handleOfficeUpdate}/>
-                    ))}
-                  </div>
-                  <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                        paddingTop: '20px', // Adjust as needed
-                        marginBottom: '30px'
-                      }}
-                  >
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        color="primary"
-                        size="large"
-                    />
-                    <div style={{marginLeft: '20px'}}>Page {currentPage} of {totalPages}</div>
-                  </div>
-                </div>
+    <div data-testid="bookingHistory-1">
+      <ThemeProvider theme={defaultTheme}>
+        <Navbar />
+        <Typography variant="h5" gutterBottom sx={{ fontSize: '30px', marginLeft: '25px', marginTop: '30px' }}>
+          Your Booking History
+        </Typography>
+        <Container ref={listRef}>
+          <SearchBar onSearchHistory={handleSearch} />
+          <FormControl style={{ margin: '20px 0' }}>
+            <InputLabel htmlFor="sort">Sort by:</InputLabel>
+            <Select id="sort" value={sortOption} onChange={handleSortChange} label="Sort by">
+              <MenuItem value="default">Default</MenuItem>
+              <MenuItem value="alphabetical">Alphabetical</MenuItem>
+              <MenuItem value="price">Price</MenuItem>
+            </Select>
+          </FormControl>
+          <div className="listContainer">
+            <div className="listWrapper">
+              <div className="listResult">
+                {filteredBookings.map(booking => (
+                  <SearchItem key={booking.id} booking={booking} />
+                ))}
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  paddingTop: '20px',
+                  marginBottom: '30px'
+                }}
+              >
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  color="primary"
+                  size="large"
+                />
+                <div style={{ marginLeft: '20px' }}>Page {currentPage} of {totalPages}</div>
+              </div>
             </div>
-          </Container>
-
-        </ThemeProvider>
-        
-      </div>
-);
+          </div>
+        </Container>
+      </ThemeProvider>
+    </div>
+  );
 };
 
 export default BookingHistory;

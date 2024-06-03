@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import EndPointLogStore from "../../api/EndpointLogStore";
-import Navbar from "../../components/navbar/Navbar";
 import {
   Typography,
   Box,
@@ -13,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import NavbarAdmin from "../../components/navbarAdmin/NavbarAdmin";
 const EndpointRequestsTable = () => {
   const [requests, setRequests] = useState([]);
 
@@ -57,7 +57,7 @@ const EndpointRequestsTable = () => {
   return (
     <div data-testid="platformHealth-1">
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarAdmin/>
         <Typography sx={{ marginTop: "2%", marginLeft: "5%" }}>
             <h2>Endpoint Requests</h2>
         </Typography>
