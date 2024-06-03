@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import LoginStore from '../../api/LoginStore';
 import Navbar from '../../components/navbar/Navbar';
 import Button from '@mui/material/Button';
@@ -21,7 +20,6 @@ const defaultTheme = createTheme({
 });
 
 const Profile = () => {
-  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     first_name: '',
     last_name: '',
