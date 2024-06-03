@@ -3,7 +3,6 @@ import React from "react";
 import "./searchItemBookingHistory.css";
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import useBookingStore from "../../api/BookingStore";
 
 export const formatOfficeType = (officeType) => {
   const lowerCaseOfficeType = officeType.toLowerCase();

@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { logs } from './endpointLogData';
 const url = 'http://localhost:8000';
 
 const EndPointLogStore = create((set) => ({

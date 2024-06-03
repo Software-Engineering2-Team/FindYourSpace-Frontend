@@ -6,9 +6,6 @@ import Navbar from '../../components/navbar/Navbar';
 import OfficeStore from '../../api/OfficeStore';
 import MarketingComponent from '../../components/marketingComponent/MarketingComponent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LoginStore from '../../api/LoginStore';
-import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
-
 
 const List = () => {
   const itemsPerPage = 10;
