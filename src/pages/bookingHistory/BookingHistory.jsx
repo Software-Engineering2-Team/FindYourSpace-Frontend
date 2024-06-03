@@ -16,7 +16,7 @@ const BookingHistory = () => {
   const [sortOption, setSortOption] = useState('default');
   const listRef = React.createRef();
   
-  const { bookings, fetchBookingsByClient, setBookings } = useBookingStore();
+  const { bookings, fetchBookingsByClient} = useBookingStore();
   const { userData } = LoginStore.getState();
 
   useEffect(() => {

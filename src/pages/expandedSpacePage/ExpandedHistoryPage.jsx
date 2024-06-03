@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import ExpandedAdSpaceStore from '../../api/ExpandedAdSpaceStore';
 import useBookingStore from '../../api/BookingStore';
 
 const defaultTheme = createTheme({
@@ -22,31 +21,43 @@ const defaultTheme = createTheme({
 });
 
 const ExpandedSpacePage = () => {
-
   const [space, setSpace] = useState(null);
   const { id } = useParams();
-  console.log("The id is: ", id);
+  const bookingId = parseInt(id, 10); // Ensure id is a number
+  const [booking, setBooking] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const bookings = useBookingStore.getState().bookings;
-        console.log("Bookings", bookings)
-        const booking = bookings.find(booking => booking.id === id);
-        console.log("Booking", booking)
-        await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id); // Fetch data and set it in the store
-        console.log(id);
-        const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace; // Access the updated state
+        console.log("Bookings", bookings);
+        const booking = bookings.find(booking => booking.id === bookingId);
+        console.log("Booking", booking);
+        setBooking(booking);
+        console.log("Set booking as ", booking);
+        if (!booking) {
+          console.error(`No booking found with id: ${bookingId}`);
+          return;
+        }
+        const fetchedData = booking.adSpace;
         console.log('Fetched ad space:', fetchedData);
         setSpace(fetchedData);
       } catch (error) {
         console.error('Error fetching expanded ad space:', error);
       }
     };
-  
-    console.log('Fetching expanded ad space with id:', id);
+
+    console.log('Fetching expanded ad space with booking id:', bookingId);
     fetchData();
-  }, [id]);
+  }, [bookingId]);
+
+  console.log("Here",booking)
+  const bookingDate = new Date(booking.bookingDate);
+  const formattedBookingDate = bookingDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   return (
     <div data-testid="expandedSpacePage-1">
@@ -67,10 +78,10 @@ const ExpandedSpacePage = () => {
             </Typography>
             {/* New Booking Details Section */}
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
-                <strong>Booking ID:</strong> {space?.id}
+                <strong>Booking ID:</strong> {booking?.id}
             </Typography>
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
-                Booking Date: {space?.bookingDate}
+                Booking Date: {formattedBookingDate}
             </Typography>
 
             <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
