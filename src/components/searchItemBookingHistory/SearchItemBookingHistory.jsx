@@ -24,6 +24,23 @@ const defaultTheme = createTheme({
 
 
 const SearchItem = ({ booking }) => { // Changed prop name to 'booking'
+  if(!booking){
+    booking = {
+      "id": 0,
+      "adSpace": {
+          "id": 0,
+          "location": "",
+          "size": 0,
+          "price": 0,
+          "availability": true,
+          "photos": "",
+          "isApproved": 0,
+          "owner": 0
+      },
+      "bookingDate": "2024-05-04T12:00:00",
+      "status": true
+    }
+  }
   const bookingDate = new Date(booking.bookingDate);
   const formattedBookingDate = bookingDate.toLocaleDateString('en-US', {
     year: 'numeric',

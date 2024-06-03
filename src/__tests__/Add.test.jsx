@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AddOfficeSpaceForm from '../pages/add/add';
 
-test('renders profile page', () => {
+test('renders add page', () => {
     render(
       <MemoryRouter>
         <AddOfficeSpaceForm/>

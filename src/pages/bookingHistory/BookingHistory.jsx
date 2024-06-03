@@ -33,14 +33,24 @@ const BookingHistory = () => {
   }, [fetchBookingsByClient, userData]);
 
   useEffect(() => {
-    setFilteredBookings(bookings);
-    setTotalPages(Math.ceil(bookings.length / itemsPerPage));
+    if(!bookings){
+      console.error("Bookings are null")
+    }else{
+      setFilteredBookings(bookings);
+      setTotalPages(Math.ceil(bookings.length / itemsPerPage));
+    }
+    
   }, [bookings]);
 
   useEffect(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    setFilteredBookings(bookings.slice(start, end));
+    if(!bookings){
+      console.error("Bookings is null")
+    }else{
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      setFilteredBookings(bookings.slice(start, end));
+    }
+    
   }, [currentPage, bookings]);
 
   const handleSearch = (searchTerm) => {

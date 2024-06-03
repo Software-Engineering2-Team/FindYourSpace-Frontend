@@ -8,8 +8,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const AddOfficeSpaceForm = () => {
   const navigate = useNavigate();
-  const loginInfo = LoginStore.getState().userData;
+  var loginInfo = LoginStore.getState().userData;
+  if(loginInfo == null){
+    loginInfo = {
+      username:"",
+      id: 0
+    }
+  }
   const ownerId = loginInfo.id;
+  
   console.log(ownerId);
   const [formData, setFormData] = useState({
     description: "",

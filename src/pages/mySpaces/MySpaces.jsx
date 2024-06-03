@@ -17,17 +17,24 @@ const MySpaces = () => {
   const listRef = React.createRef();
 
   useEffect(() => {
+    const userData = LoginStore.getState().userData;
+  
+    if (!userData) {
+      console.error('User is not logged in');
+      return;
+    }
+  
     OfficeStore.getState()
-        .fetchOfficesByOwner(LoginStore.getState().userData.id)
-        .then(response => {
-            console.log(response);
-            const totalItems = response.length;
-            setTotalPages(Math.ceil(totalItems / itemsPerPage));
-            setOfficeSpaces(response);
-            setFilteredOfficeSpaces(response);
-        })
-        .catch(error => console.error(error));
-}, []);
+      .fetchOfficesByOwner(userData.id)
+      .then(response => {
+        console.log(response);
+        const totalItems = response.length;
+        setTotalPages(Math.ceil(totalItems / itemsPerPage));
+        setOfficeSpaces(response);
+        setFilteredOfficeSpaces(response);
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   const handleOfficeUpdate = async () => {
     try {
