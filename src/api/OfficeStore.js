@@ -76,6 +76,26 @@
               throw error;
             }
           },
+
+          fetchOfficesByOwner: async (id) => {
+            try {
+                const response = await fetch(`${url}/api/adspaces/owner/${id}/`);
+                console.log("Owner id: ",id)
+                if (!response.ok) {
+                throw new Error('Failed to fetch office');
+                }
+                const data = await response.json();
+                set((state) => ({
+                offices: state.offices.map((office) => 
+                    office.id === id ? { ...office, ...data } : office
+                )
+                }));
+                return data;
+            } catch (error) {
+                console.error('Error fetching office:', error);
+                throw error;
+            }
+        },
     }));
 
     export default OfficeStore;
