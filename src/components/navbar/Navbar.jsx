@@ -61,7 +61,7 @@ const Navbar = () => {
                             Find your space
                         </Typography>
                         <div>
-                            {isLoggedIn && (
+                            {isLoggedIn ? (
                                 <>
                                     <Button component={Link} to="/booking-history" color="inherit">
                                         Booking History
@@ -72,25 +72,31 @@ const Navbar = () => {
                                     <Button component={Link} to="/myspaces" color="inherit">
                                         My Spaces
                                     </Button>
+                                    <Button component={Link} to="/spaces" color="inherit">
+                                        Find spaces
+                                    </Button>
                                     <Button component={Link} to="/profile" color="inherit">
                                         Profile
                                     </Button>
+                                    <Button component={Link} to="/contact-us" color="inherit">
+                                        Contact Us
+                                    </Button>
+                                    <Button component={Link} to="/" color="inherit" onClick={handleLogout}>
+                                        Log Out
+                                    </Button>
                                 </>
-                            )}
-                            <Button component={Link} to="/spaces" color="inherit">
-                                Find spaces
-                            </Button>
-                            <Button component={Link} to="/contact-us" color="inherit">
-                                Contact Us
-                            </Button>
-                            {isLoggedIn ? (
-                                <Button component={Link} to="/" color="inherit" onClick={handleLogout}>
-                                    Log Out
-                                </Button>
-                            ) : (
-                                <Button component={Link} to="/" color="inherit">
-                                    Login
-                                </Button>
+                            ):(
+                                <>
+                                    <Button component={Link} to="/spaces" color="inherit">
+                                        Find spaces
+                                    </Button>
+                                    <Button component={Link} to="/contact-us" color="inherit">
+                                        Contact Us
+                                    </Button>
+                                    <Button component={Link} to="/" color="inherit">
+                                        Login
+                                    </Button>
+                                </>
                             )}
                         </div>
                     </Toolbar>

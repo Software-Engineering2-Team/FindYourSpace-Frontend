@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import prepareChartData from './prepareChart';
-import BookingsStore from '../../api/BookingStore';
+import useBookingsStore from '../../api/BookingStore';
 import { Container, Typography, FormControl, Select, MenuItem, Paper } from '@mui/material';
 import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -25,8 +25,8 @@ const Stats = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                await BookingsStore.getState().fetchBookings();
-                setBookingsData(BookingsStore.getState().userData);
+                await useBookingsStore.getState().fetchBookings();
+                setBookingsData(useBookingsStore.getState().bookings);
             } catch (error) {
                 console.error('Error fetching bookings:', error);
             }

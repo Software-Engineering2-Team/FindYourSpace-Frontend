@@ -25,7 +25,15 @@ const Profile = () => {
     last_name: '',
     email: '',
     contactInfo: '',
+    password: ''
   });
+
+  
+  const [passwordData, setPasswordData] = useState({
+    password: '',
+    confirm_password: ''
+  });
+
   const [loginError, setLoginError] = useState('');
 
   useEffect(() => {
@@ -35,6 +43,7 @@ const Profile = () => {
         await ProfileStore.getState().fetchUserProfile(username);
         const fetchedData = ProfileStore.getState().userData;
         setUserData(fetchedData);
+        console.log("User Data Fetched From Store ",fetchedData)
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -42,12 +51,23 @@ const Profile = () => {
     fetchData();
   }, []);
 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    console.log("Changed data ",userData)
+  };
+
+   
+   const handlePasswordInputChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData({
+      ...passwordData,
+      [name]: value
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -60,9 +80,37 @@ const Profile = () => {
     }
   };
 
-  const handlePasswordChangeSubmit = (e) => {
+  // Handle password change form submission
+  const handlePasswordChangeSubmit = async (e) => {
     e.preventDefault();
-    // Implement password change logic here
+    const { password, confirm_password } = passwordData;
+
+    // Validate if passwords match
+    if (password !== confirm_password) {
+      setLoginError('Passwords do not match');
+      return;
+    }
+
+    console.log("Changed Password ", password);
+
+    
+    // Prepare updated userData
+    const updatedUserData = {
+      ...userData,
+      password: password
+    };
+
+    console.log("UserData after Changed Password ", updatedUserData);
+    setUserData(updatedUserData);
+
+    try {
+      await ProfileStore.getState().updateUserProfile(updatedUserData);
+      setPasswordData({ password: '', confirm_password: '' });
+      setLoginError('');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      setLoginError('Failed to update profile');
+    }
   };
 
   return (
@@ -98,8 +146,8 @@ const Profile = () => {
               Reset or Change Password
             </Typography>
             <Box component="form" noValidate onSubmit={handlePasswordChangeSubmit} sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="password" label="New Password" type="password" id="password" autoComplete="current-password" onChange={handleInputChange} />
-              <TextField margin="normal" required fullWidth name="confirm_password" label="Confirm Password" type="password" id="confirm_password" autoComplete="current-password" onChange={handleInputChange} />
+              <TextField margin="normal" required fullWidth name="password" label="New Password" type="password" id="password" autoComplete="current-password" onChange={handlePasswordInputChange} value={passwordData.password} />
+              <TextField margin="normal" required fullWidth name="confirm_password" label="Confirm Password" type="password" id="confirm_password" autoComplete="current-password" onChange={handlePasswordInputChange} value={passwordData.confirm_password} />
               <Button type="submit" variant="contained" sx={{ color: '#fff', backgroundColor: '#000', marginY: 2 }}>
                 Reset Password
               </Button>

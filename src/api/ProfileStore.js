@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import LoginStore from "./LoginStore";
 
 const url = 'http://localhost:8000';
 
@@ -34,13 +35,14 @@ const ProfileStore = create((set) => ({
 
   updateUserProfile: async (userData) => {
     try {
-      const response = await fetch(`${url}/update_user/`, {
+      const response = await fetch(`${url}/update_user/${LoginStore.getState().userData.id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
+      console.log("Request: ",JSON.stringify(userData))
       console.log("Response: ",response)
       if (!response.ok) {
         const errorData = await response.json();

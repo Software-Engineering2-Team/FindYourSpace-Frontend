@@ -10,6 +10,29 @@ const useBookingStore = create((set) => ({
     localStorage.setItem('bookings', JSON.stringify(bookings));
     console.log("Value inside bookings",bookings);
   },
+
+  fetchBookings: async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/get-all-bookings/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Invalid credentials');
+      }
+
+      const data = await response.json();
+      useBookingStore.getState().setBookings(data);
+
+      console.log(data);
+    } catch (error) {
+      console.error('Fetching Bookings failed:', error.message);
+      throw error;
+    }
+  },
   
   fetchBookingsByClient: async (clientId) => {
     try {
