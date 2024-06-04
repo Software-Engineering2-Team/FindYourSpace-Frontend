@@ -20,6 +20,8 @@ import PolicyPage from "./pages/policyEnforcement/Policy";
 import ApproveSpacesPage from "./pages/approveSpaces/ApproveSpaces"
 import ContactAdminForm from "./pages/contactAdmin/ContactAdmin"
 import EndpointRequestsTable from "./pages/platformHealth/EndpointRequestTable";
+import AddReviewForm from "./pages/reviews/AddReview";
+
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +36,7 @@ function App() {
         <Route path="/myspaces/:id" element={<EditOfficeSpaceForm/>}/>
         <Route path="/space/:id" element={<ExpandedSpacePage />} />
         <Route path="/reviews/:id" element={<Reviews/>} />
+        <Route path="/create-review/:id" element={<AddReviewForm/>} />
         <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
         <Route path="/contact/:id" element={<ContactOwner/>}/>
         <Route path="/admin/stats" element={<Stats/>}/>

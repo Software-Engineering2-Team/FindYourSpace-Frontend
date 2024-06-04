@@ -7,6 +7,9 @@ import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import {Button} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
   const {id} = useParams()
@@ -56,9 +59,23 @@ const Reviews = () => {
         <ThemeProvider theme={defaultTheme}>
         <div>
         <Navbar />
-        <Typography variant="h5" gutterBottom sx={{ fontSize: '30px',marginLeft:'25px',marginTop:'30px' }}>
+        <Stack direction="row" spacing={150} sx={{marginLeft:'25px',marginTop:'30px'}} >
+        <Typography variant="h5" gutterBottom sx={{ fontSize: '30px'}}>
           Reviews
         </Typography>
+        <Button component={Link} to= {`/create-review/${id}`}
+            type="submit"
+            variant="contained"
+            color="primary"
+            width = "100px"
+            size="large"
+            style={{marginTop: 10}}
+        >
+            Add a Review
+        </Button>   
+
+        </Stack>
+        
         <Container ref={listRef}>
           <div className="listContainer">
               <Box sx={{
