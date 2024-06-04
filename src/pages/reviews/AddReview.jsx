@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import LoginStore from '../../api/LoginStore';
 import ReviewsStore from '../../api/ReviewsStore';
 
@@ -19,7 +19,7 @@ const defaultTheme = createTheme({
 });
 
 const AddReviewForm = () => {
-
+    const navigate = useNavigate();
     var userData = LoginStore.getState().userData;
     if(userData == null){
         userData = {
@@ -59,6 +59,7 @@ const AddReviewForm = () => {
         try {
           await ReviewsStore.getState().createReview(reviewData);
           setReviewData(initialReviewData)
+          navigate(`/reviews/${id}`)
         } catch (error) {
           console.error('Error updating profile:', error);
         }
