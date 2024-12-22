@@ -213,8 +213,8 @@ const Login = () => {
                   onChange={handleUsernameChange}
                   autoComplete="username"
                   autoFocus
-                  error={!!usernameError}
-                  helperText={usernameError} // Show error message
+                  error={!!usernameError || !!loginError}
+                  helperText={usernameError || loginError} // Show error message
                 />
                 <TextField
                   margin="normal"
@@ -227,14 +227,9 @@ const Login = () => {
                   value={password}
                   onChange={handlePasswordChange}
                   autoComplete="current-password"
-                  error={!!passwordError}
-                  helperText={passwordError} // Show error message
+                  error={!!passwordError || !!loginError}
+                  helperText={passwordError || loginError} // Show error message
                 />
-                {loginError && (
-                  <p style={{ color: "red", textAlign: "center" }}>
-                    {loginError}
-                  </p>
-                )}
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
