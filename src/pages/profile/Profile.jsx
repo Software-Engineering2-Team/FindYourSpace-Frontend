@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import LoginStore from '../../api/LoginStore';
-import Navbar from '../../components/navbar/Navbar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ProfileStore from '../../api/ProfileStore';
+import React, { useState, useEffect } from "react";
+import LoginStore from "../../api/LoginStore";
+import Navbar from "../../components/navbar/Navbar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ProfileStore from "../../api/ProfileStore";
 
 const defaultTheme = createTheme({
   palette: {
-    primary: { main: '#000000' },
+    primary: { main: "#000000" },
   },
   typography: {
-    fontFamily: 'Dubai Medium',
+    fontFamily:
+      "Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   },
 });
 
 const Profile = () => {
   const [userData, setUserData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    contactInfo: '',
-    password: ''
+    first_name: "",
+    last_name: "",
+    email: "",
+    contactInfo: "",
+    password: "",
   });
 
-  
   const [passwordData, setPasswordData] = useState({
-    password: '',
-    confirm_password: ''
+    password: "",
+    confirm_password: "",
   });
 
-  const [loginError, setLoginError] = useState('');
+  const [loginError, setLoginError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +43,13 @@ const Profile = () => {
         await ProfileStore.getState().fetchUserProfile(username);
         const fetchedData = ProfileStore.getState().userData;
         setUserData(fetchedData);
-        console.log("User Data Fetched From Store ",fetchedData)
+        console.log("User Data Fetched From Store ", fetchedData);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       }
     };
     fetchData();
   }, []);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,15 +57,14 @@ const Profile = () => {
       ...prevData,
       [name]: value,
     }));
-    console.log("Changed data ",userData)
+    console.log("Changed data ", userData);
   };
 
-   
-   const handlePasswordInputChange = (e) => {
+  const handlePasswordInputChange = (e) => {
     const { name, value } = e.target;
     setPasswordData({
       ...passwordData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -75,8 +73,8 @@ const Profile = () => {
     try {
       await ProfileStore.getState().updateUserProfile(userData);
     } catch (error) {
-      console.error('Error updating profile:', error);
-      setLoginError('Failed to update profile');
+      console.error("Error updating profile:", error);
+      setLoginError("Failed to update profile");
     }
   };
 
@@ -87,17 +85,16 @@ const Profile = () => {
 
     // Validate if passwords match
     if (password !== confirm_password) {
-      setLoginError('Passwords do not match');
+      setLoginError("Passwords do not match");
       return;
     }
 
     console.log("Changed Password ", password);
 
-    
     // Prepare updated userData
     const updatedUserData = {
       ...userData,
-      password: password
+      password: password,
     };
 
     console.log("UserData after Changed Password ", updatedUserData);
@@ -105,11 +102,11 @@ const Profile = () => {
 
     try {
       await ProfileStore.getState().updateUserProfile(updatedUserData);
-      setPasswordData({ password: '', confirm_password: '' });
-      setLoginError('');
+      setPasswordData({ password: "", confirm_password: "" });
+      setLoginError("");
     } catch (error) {
-      console.error('Error updating profile:', error);
-      setLoginError('Failed to update profile');
+      console.error("Error updating profile:", error);
+      setLoginError("Failed to update profile");
     }
   };
 
@@ -118,42 +115,160 @@ const Profile = () => {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />
-        <Grid container sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop:'40px'
-          }}>
-          <Box sx={{ padding: '32px', boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: '#fff', width: '40%', textAlign: 'center' }}>
-            <Typography component="h1" variant="h5" sx={{ fontSize: '30px', textAlign: 'center' }}>
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "40px",
+          }}
+        >
+          <Box
+            sx={{
+              padding: "32px",
+              boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
+              borderRadius: "8px",
+              backgroundColor: "#fff",
+              width: "40%",
+              textAlign: "center",
+            }}
+          >
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ fontSize: "30px", textAlign: "center" }}
+            >
               Profile Details
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth id="firstname" label="First Name" name="first_name" value={userData.first_name} onChange={handleInputChange} InputLabelProps={{ shrink: true }} />
-              <TextField margin="normal" required fullWidth id="lastname" label="Last Name" name="last_name" value={userData.last_name} onChange={handleInputChange} InputLabelProps={{ shrink: true }} />
-              <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" value={userData.email} onChange={handleInputChange} InputLabelProps={{ shrink: true }} />
-              <TextField margin="normal" required fullWidth id="contactinfo" label="Contact Info" name="contactInfo" value={userData.contactInfo} onChange={handleInputChange} InputLabelProps={{ shrink: true }} />
-              {loginError && <p style={{ color: 'red', textAlign: 'center' }}>{loginError}</p>}
-              <Button type="submit" variant="contained" sx={{ color: '#fff', backgroundColor: '#000', marginY: 2 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="firstname"
+                label="First Name"
+                name="first_name"
+                value={userData.first_name}
+                onChange={handleInputChange}
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="lastname"
+                label="Last Name"
+                name="last_name"
+                value={userData.last_name}
+                onChange={handleInputChange}
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                value={userData.email}
+                onChange={handleInputChange}
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="contactinfo"
+                label="Contact Info"
+                name="contactInfo"
+                value={userData.contactInfo}
+                onChange={handleInputChange}
+                InputLabelProps={{ shrink: true }}
+              />
+              {loginError && (
+                <p style={{ color: "red", textAlign: "center" }}>
+                  {loginError}
+                </p>
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}
+              >
                 Save Changes
               </Button>
             </Box>
           </Box>
 
-          <Box sx={{ padding: '32px', boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: '#fff', width: '40%', textAlign: 'center', marginTop: '20px' }}>
-            <Typography component="h2" variant="h5" sx={{ fontSize: '24px', textAlign: 'center' }}>
+          <Box
+            sx={{
+              padding: "32px",
+              boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
+              borderRadius: "8px",
+              backgroundColor: "#fff",
+              width: "40%",
+              textAlign: "center",
+              marginTop: "20px",
+            }}
+          >
+            <Typography
+              component="h2"
+              variant="h5"
+              sx={{ fontSize: "24px", textAlign: "center" }}
+            >
               Reset or Change Password
             </Typography>
-            <Box component="form" noValidate onSubmit={handlePasswordChangeSubmit} sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth name="password" label="New Password" type="password" id="password" autoComplete="current-password" onChange={handlePasswordInputChange} value={passwordData.password} />
-              <TextField margin="normal" required fullWidth name="confirm_password" label="Confirm Password" type="password" id="confirm_password" autoComplete="current-password" onChange={handlePasswordInputChange} value={passwordData.confirm_password} />
-              <Button type="submit" variant="contained" sx={{ color: '#fff', backgroundColor: '#000', marginY: 2 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handlePasswordChangeSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="New Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handlePasswordInputChange}
+                value={passwordData.password}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="confirm_password"
+                label="Confirm Password"
+                type="password"
+                id="confirm_password"
+                autoComplete="current-password"
+                onChange={handlePasswordInputChange}
+                value={passwordData.confirm_password}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}
+              >
                 Reset Password
               </Button>
             </Box>
           </Box>
-          <Button variant="outlined" color="error" style={{ marginTop: 50, marginBottom: 50 }}>
+          <Button
+            variant="outlined"
+            color="error"
+            style={{ marginTop: 50, marginBottom: 50 }}
+          >
             Delete Account
           </Button>
         </Grid>

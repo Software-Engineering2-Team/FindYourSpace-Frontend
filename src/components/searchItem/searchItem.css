@@ -13,5 +13,6 @@
 .siImg {
   width: 276px;
   height: 280px;
-  object-fit: cover;  
+  object-fit: cover;
+  border-radius: 20px;
 }

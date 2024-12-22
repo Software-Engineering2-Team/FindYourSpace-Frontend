@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar';
-import Grid from '@mui/material/Grid';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import useBookingStore from '../../api/BookingStore';
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
+import Grid from "@mui/material/Grid";
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import useBookingStore from "../../api/BookingStore";
 
 const defaultTheme = createTheme({
   palette: {
     primary: {
-      main: '#000000',
+      main: "#000000",
     },
   },
   typography: {
-    fontFamily: 'Dubai Medium',
+    fontFamily:
+      "Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   },
 });
 
@@ -31,7 +32,7 @@ const ExpandedSpacePage = () => {
       try {
         const bookings = useBookingStore.getState().bookings;
         console.log("Bookings", bookings);
-        const booking = bookings.find(booking => booking.id === bookingId);
+        const booking = bookings.find((booking) => booking.id === bookingId);
         console.log("Booking", booking);
         setBooking(booking);
         console.log("Set booking as ", booking);
@@ -40,79 +41,129 @@ const ExpandedSpacePage = () => {
           return;
         }
         const fetchedData = booking.adSpace;
-        console.log('Fetched ad space:', fetchedData);
+        console.log("Fetched ad space:", fetchedData);
         setSpace(fetchedData);
       } catch (error) {
-        console.error('Error fetching expanded ad space:', error);
+        console.error("Error fetching expanded ad space:", error);
       }
     };
 
-    console.log('Fetching expanded ad space with booking id:', bookingId);
+    console.log("Fetching expanded ad space with booking id:", bookingId);
     fetchData();
   }, [bookingId]);
 
-  console.log("Here",booking)
+  console.log("Here", booking);
   const bookingDate = new Date(booking.bookingDate);
-  const formattedBookingDate = bookingDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const formattedBookingDate = bookingDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <div data-testid="expandedSpacePage-1">
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <CssBaseline />
-        <Grid container component="main" sx={{ height: '100vh' }}>
+        <Grid container component="main" sx={{ height: "100vh" }}>
+          <Grid
+            item
+            xs={5}
+            md={6}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "-20px",
+              marginLeft: "75px",
+            }}
+          >
+            <img
+              src={space?.photos}
+              alt="Space"
+              style={{ width: "500px", height: "500px" }}
+            />
+          </Grid>
 
-        <Grid item xs={5} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-20px', marginLeft: '75px' }}>
-          <img src={space?.photos} alt="Space" style={{ width: '500px', height: '500px' }} />
-        </Grid>
-
-        <Grid item xs={5} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-30', flexDirection: 'column'  }}>
-        <Box sx={{ maxWidth: '80%', marginLeft: '1px', marginBottom: '75px' }}>
-
-            <Typography variant="h5" gutterBottom sx={{ fontSize: '40px' }}>
+          <Grid
+            item
+            xs={5}
+            md={4}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "-30",
+              flexDirection: "column",
+            }}
+          >
+            <Box
+              sx={{ maxWidth: "80%", marginLeft: "1px", marginBottom: "75px" }}
+            >
+              <Typography variant="h5" gutterBottom sx={{ fontSize: "40px" }}>
                 {space?.location}
-            </Typography>
-            {/* New Booking Details Section */}
-            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
+              </Typography>
+              {/* New Booking Details Section */}
+              <Typography
+                marginTop="10px"
+                variant="body1"
+                gutterBottom
+                sx={{ fontSize: "18px" }}
+              >
                 <strong>Booking ID:</strong> {booking?.id}
-            </Typography>
-            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
+              </Typography>
+              <Typography
+                marginTop="10px"
+                variant="body1"
+                gutterBottom
+                sx={{ fontSize: "18px" }}
+              >
                 Booking Date: {formattedBookingDate}
-            </Typography>
+              </Typography>
 
-            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
+              <Typography
+                marginTop="10px"
+                variant="body1"
+                gutterBottom
+                sx={{ fontSize: "18px" }}
+              >
                 Fare per day: {`$${space?.price}/day`}
-            </Typography>
-            <Typography marginTop="10px" variant="body1" gutterBottom sx={{ fontSize: '18px' }}>
+              </Typography>
+              <Typography
+                marginTop="10px"
+                variant="body1"
+                gutterBottom
+                sx={{ fontSize: "18px" }}
+              >
                 Size: {`${space?.size} meter square`}
-            </Typography>
+              </Typography>
 
-
-            <Grid container spacing={2} justifyContent="left" marginTop="10px">
+              <Grid
+                container
+                spacing={2}
+                justifyContent="left"
+                marginTop="10px"
+              >
                 <Grid item>
-                  <Link to={`/reviews/${id}`}>  
-                        <Button variant="contained">Reviews</Button>
+                  <Link to={`/reviews/${id}`}>
+                    <Button variant="contained">Reviews</Button>
                   </Link>
                 </Grid>
                 <Grid item>
                   <Button
-                      variant="contained"
-                      color="primary"
-                      component={Link}
-                      to={`/contact/${id}`}>
-                      Contact Space Owner
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    to={`/contact/${id}`}
+                  >
+                    Contact Space Owner
                   </Button>
+                </Grid>
               </Grid>
+            </Box>
           </Grid>
-        </Box>
-          
         </Grid>
-      </Grid>
-    </ThemeProvider>
+      </ThemeProvider>
     </div>
   );
 };

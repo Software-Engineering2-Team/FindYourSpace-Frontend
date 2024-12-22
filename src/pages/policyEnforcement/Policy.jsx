@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Container, FormControl, InputLabel, MenuItem, Select, Pagination, Typography,Paper,Button} from '@mui/material';
-import SearchBar from './SearchUsers';
-import UserStore from '../../api/UserStore';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import NavbarAdmin from '../../components/navbarAdmin/NavbarAdmin';
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Pagination,
+  Typography,
+  Paper,
+  Button,
+} from "@mui/material";
+import SearchBar from "./SearchUsers";
+import UserStore from "../../api/UserStore";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import NavbarAdmin from "../../components/navbarAdmin/NavbarAdmin";
 
 const PolicyPage = () => {
   const itemsPerPage = 10;
@@ -17,7 +27,7 @@ const PolicyPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [sortOption, setSortOption] = useState('default');
+  const [sortOption, setSortOption] = useState("default");
 
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -41,9 +51,11 @@ const PolicyPage = () => {
   }, [currentPage, users]);
 
   const handleSearch = (searchTerm) => {
-    const filteredUsers = users.filter(user =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) || user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
-      || user.last_name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredUsers = users.filter(
+      (user) =>
+        user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.last_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredUsers(filteredUsers);
   };
@@ -54,7 +66,7 @@ const PolicyPage = () => {
 
     let sortedUsers;
     switch (selectedSortOption) {
-      case 'alphabetical':
+      case "alphabetical":
         sortedUsers = [...filteredUsers].sort((a, b) =>
           a.username.localeCompare(b.username)
         );
@@ -88,26 +100,36 @@ const PolicyPage = () => {
   const defaultTheme = createTheme({
     palette: {
       primary: {
-        main: '#000000',
+        main: "#000000",
       },
     },
     typography: {
-      fontFamily: 'Dubai Medium',
+      fontFamily:
+        "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
     },
   });
 
   return (
     <div data-testid="policyPage-1">
       <ThemeProvider theme={defaultTheme}>
-        <NavbarAdmin/>
-        <Typography variant="h5" gutterBottom sx={{ fontSize: '30px', marginLeft: '25px', marginTop: '30px' }}>
+        <NavbarAdmin />
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ fontSize: "30px", marginLeft: "25px", marginTop: "30px" }}
+        >
           List of Users
         </Typography>
         <Container>
           <SearchBar onSearchHistory={handleSearch} />
-          <FormControl style={{ margin: '20px 0' }}>
+          <FormControl style={{ margin: "20px 0" }}>
             <InputLabel htmlFor="sort">Sort by:</InputLabel>
-            <Select id="sort" value={sortOption} onChange={handleSortChange} label="Sort by">
+            <Select
+              id="sort"
+              value={sortOption}
+              onChange={handleSortChange}
+              label="Sort by"
+            >
               <MenuItem value="default">Default</MenuItem>
               <MenuItem value="alphabetical">Alphabetical</MenuItem>
             </Select>
@@ -117,13 +139,13 @@ const PolicyPage = () => {
               <Table>
                 <TableHead align="center">
                   <TableRow>
-                  <TableCell align="center">User ID</TableCell>
-                  <TableCell align="center">Username</TableCell>
-                  <TableCell align="center">First Name</TableCell>
-                  <TableCell align="center">Last Name</TableCell>
-                  <TableCell align="center">Email</TableCell>
-                  <TableCell align="center">Date Joined</TableCell>
-                  <TableCell align="center">Actions</TableCell>
+                    <TableCell align="center">User ID</TableCell>
+                    <TableCell align="center">Username</TableCell>
+                    <TableCell align="center">First Name</TableCell>
+                    <TableCell align="center">Last Name</TableCell>
+                    <TableCell align="center">Email</TableCell>
+                    <TableCell align="center">Date Joined</TableCell>
+                    <TableCell align="center">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody align="center">
@@ -136,9 +158,13 @@ const PolicyPage = () => {
                       <TableCell align="center">{user.email}</TableCell>
                       <TableCell align="center">{user.date_joined}</TableCell>
                       <TableCell align="center">
-                        <Button variant="outlined" color="error" onClick={() => handleDelete(user.id)}>
-                              Delete Account
-                        </Button>   
+                        <Button
+                          variant="outlined"
+                          color="error"
+                          onClick={() => handleDelete(user.id)}
+                        >
+                          Delete Account
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -146,15 +172,19 @@ const PolicyPage = () => {
               </Table>
             </TableContainer>
           </Paper>
-          
-          <Pagination sx={{ marginLeft: '88%', marginTop:'50px' }}
+
+          <Pagination
+            sx={{ marginLeft: "88%", marginTop: "50px" }}
             count={totalPages}
             page={currentPage}
             onChange={handlePageChange}
             color="primary"
             size="large"
           />
-          <Typography variant="body2" sx={{marginLeft: '91%', marginTop:'10px' }}>{`Page ${currentPage} of ${totalPages}`}</Typography>
+          <Typography
+            variant="body2"
+            sx={{ marginLeft: "91%", marginTop: "10px" }}
+          >{`Page ${currentPage} of ${totalPages}`}</Typography>
         </Container>
       </ThemeProvider>
     </div>
