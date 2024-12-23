@@ -135,8 +135,8 @@ const Signup = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.error("Invalid password");
-        setSignupError("Passwords dont match!");
+        const response = error.response.json();
+        setSignupError(response.error || "An unexpected error occurred.");
       });
   };
 

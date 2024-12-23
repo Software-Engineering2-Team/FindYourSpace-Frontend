@@ -97,13 +97,15 @@ const Login = () => {
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     setUsername(value);
-    validateUsername(value); // Validate while typing
+    setLoginError("");
+    validateUsername(value);
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
     console.log(password);
+    setLoginError("");
     validatePassword(value);
   };
 
@@ -121,8 +123,8 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.error("Invalid email or password");
-        setLoginError("Incorrect Username or Password Entered!");
+        console.log("Error response content", error);
+        setLoginError("Invalid Credentials!");
       });
   };
 
@@ -184,6 +186,7 @@ const Login = () => {
                 boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
                 borderRadius: "8px",
                 backgroundColor: "#fff",
+                width: { xs: "95%", sm: "80%", md: "60%" }, // Adjust width for responsiveness
               }}
             >
               <Typography
