@@ -59,10 +59,16 @@ const BookingHistory = () => {
   }, [currentPage, bookings]);
 
   const handleSearch = (searchTerm) => {
-    const filtered = filteredBookings.filter((booking) =>
-      booking.adSpace.location.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBookings(filtered);
+    if (!searchTerm.trim()) {
+      setFilteredBookings(bookings);
+    } else {
+      const filtered = bookings.filter((booking) =>
+        booking.adSpace.location
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      );
+      setFilteredBookings(filtered);
+    }
   };
 
   const handleSortChange = (event) => {
@@ -120,33 +126,35 @@ const BookingHistory = () => {
           Your Booking History
         </Typography>
         <Container ref={listRef}>
-          <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "50px",
-            gap: "20px"
-          }}>
-            <SearchBar onSearchHistory={handleSearch}/>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "50px",
+              gap: "20px",
+            }}
+          >
+            <SearchBar onSearchHistory={handleSearch} />
             <FormControl
-                style={{
-                  width: "100%",
-                  maxWidth: "200px",
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Same border radius
-                    height: "40px", // Set consistent height
-                  },
-                }}
+              style={{
+                width: "100%",
+                maxWidth: "200px",
+              }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "6px", // Same border radius
+                  height: "40px", // Set consistent height
+                },
+              }}
             >
               <InputLabel htmlFor="sort">Sort by:</InputLabel>
               <Select
-                  id="sort"
-                  value={sortOption}
-                  onChange={handleSortChange}
-                  label="Sort by"
+                id="sort"
+                value={sortOption}
+                onChange={handleSortChange}
+                label="Sort by"
               >
                 <MenuItem value="default">Default</MenuItem>
                 <MenuItem value="alphabetical">Alphabetical</MenuItem>
@@ -158,35 +166,35 @@ const BookingHistory = () => {
             <div className="listWrapper">
               <div className="listResult">
                 {filteredBookings.length > 0 ? (
-                    filteredBookings.map((booking) => (
-                        <SearchItem key={booking.id} booking={booking}/>
-                    ))
+                  filteredBookings.map((booking) => (
+                    <SearchItem key={booking.id} booking={booking} />
+                  ))
                 ) : (
-                    <div
-                        style={{
-                          textAlign: "center",
-                          padding: "20px",
-                          color: "gray",
-                        }}
-                    >
-                      No bookings found.
-                    </div>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      color: "gray",
+                    }}
+                  >
+                    No bookings found.
+                  </div>
                 )}
               </div>
               <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    paddingTop: "20px",
-                    marginBottom: "30px",
-                  }}
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  paddingTop: "20px",
+                  marginBottom: "30px",
+                }}
               >
                 {filteredBookings.length > 0 && (
-                    <>
-                      <Pagination
-                          count={totalPages}
-                          page={currentPage}
+                  <>
+                    <Pagination
+                      count={totalPages}
+                      page={currentPage}
                       onChange={handlePageChange}
                       color="primary"
                       size="large"
