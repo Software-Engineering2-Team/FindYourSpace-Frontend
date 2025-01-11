@@ -127,12 +127,14 @@ const Profile = () => {
         >
           <Box
             sx={{
-              padding: "32px",
-              boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-              borderRadius: "8px",
+              padding: 4,
+              boxShadow: 2,
+              borderRadius: "9px",
               backgroundColor: "#fff",
               width: "40%",
               textAlign: "center",
+              marginTop: 5,
+              marginBottom: 5,
             }}
           >
             <Typography
@@ -158,6 +160,11 @@ const Profile = () => {
                 value={userData.first_name}
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               <TextField
                 margin="normal"
@@ -169,6 +176,11 @@ const Profile = () => {
                 value={userData.last_name}
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               <TextField
                 margin="normal"
@@ -180,6 +192,11 @@ const Profile = () => {
                 value={userData.email}
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               <TextField
                 margin="normal"
@@ -191,6 +208,11 @@ const Profile = () => {
                 value={userData.contactInfo}
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               {loginError && (
                 <p style={{ color: "red", textAlign: "center" }}>
@@ -201,6 +223,7 @@ const Profile = () => {
                 type="submit"
                 variant="contained"
                 sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}
+                style={{ marginTop: 20, borderRadius: 7 }}
               >
                 Save Changes
               </Button>
@@ -209,13 +232,14 @@ const Profile = () => {
 
           <Box
             sx={{
-              padding: "32px",
-              boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-              borderRadius: "8px",
+              padding: 4,
+              boxShadow: 2,
+              borderRadius: "9px",
               backgroundColor: "#fff",
               width: "40%",
               textAlign: "center",
-              marginTop: "20px",
+              marginTop: 5,
+              marginBottom: 5,
             }}
           >
             <Typography
@@ -242,6 +266,11 @@ const Profile = () => {
                 autoComplete="current-password"
                 onChange={handlePasswordInputChange}
                 value={passwordData.password}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               <TextField
                 margin="normal"
@@ -254,11 +283,17 @@ const Profile = () => {
                 autoComplete="current-password"
                 onChange={handlePasswordInputChange}
                 value={passwordData.confirm_password}
+                sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
               />
               <Button
                 type="submit"
                 variant="contained"
                 sx={{ color: "#fff", backgroundColor: "#000", marginY: 2 }}
+                style={{ marginTop: 20, borderRadius: 7 }}
               >
                 Reset Password
               </Button>

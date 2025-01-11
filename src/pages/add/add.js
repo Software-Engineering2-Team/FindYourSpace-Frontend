@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Stack, Typography, Box, Grid } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Stack,
+  Typography,
+  Box,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import AddOfficeStore from "../../api/AddOfficeStore";
 import LoginStore from "../../api/LoginStore";
@@ -29,6 +37,8 @@ const AddOfficeSpaceForm = () => {
     owner: ownerId,
   });
 
+  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for Snackbar
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -52,10 +62,15 @@ const AddOfficeSpaceForm = () => {
     event.preventDefault();
     try {
       await AddOfficeStore.getState().createAdSpace(formData);
-      navigate("/spaces");
+      setConfirmationOpen(true); // Show confirmation message
     } catch (error) {
       console.error("Error adding AdSpace data:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    setConfirmationOpen(false);
+    navigate("/spaces"); // Navigate to the spaces page after confirmation
   };
 
   const cancelHandler = () => {
@@ -67,15 +82,24 @@ const AddOfficeSpaceForm = () => {
       <ThemeProvider theme={theme}>
         <Navbar />
         <div className="ad_space_form">
-          <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
-            <h2>Create A New Advertisement Space Listing</h2>
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{
+              fontSize: "30px",
+              marginLeft: "25px",
+              marginTop: "30px",
+              marginBottom: "30px",
+            }}
+          >
+            Create A New Advertisement Space Listing
           </Typography>
           <Box
             sx={{
               padding: { xs: "24px", md: "32px" },
               margin: { xs: "16px", md: "32px" },
               boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-              borderRadius: "8px",
+              borderRadius: "9px",
               backgroundColor: "#fff",
             }}
           >
@@ -89,7 +113,7 @@ const AddOfficeSpaceForm = () => {
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Custom border radius
+                    borderRadius: "9px", // Custom border radius
                   },
                 }}
                 margin="normal"
@@ -104,42 +128,32 @@ const AddOfficeSpaceForm = () => {
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Custom border radius
+                    borderRadius: "9px", // Custom border radius
                   },
                 }}
                 margin="normal"
               />
 
               {formData.photos && (
-                <Grid
-                  container
-                  spacing={2}
+                <div
                   style={{
-                    maxHeight: "600px",
-                    overflowY: "auto",
-                    marginBottom: "40px",
+                    display: "flex", // Flexbox for centering
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    margin: "20px",
                   }}
                 >
-                  <Grid
-                    item
-                    xs={12}
+                  <img
+                    src={formData.photos}
+                    alt="Office Space"
                     style={{
-                      marginBottom: "16px",
-                      breakInside: "avoid",
-                      height: "250px",
+                      width: "50%",
+                      height: "50%",
+                      objectFit: "contain",
+                      borderRadius: "13px", // Apply rounded corners
                     }}
-                  >
-                    <img
-                      src={formData.photos}
-                      alt="Office Space"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </Grid>
-                </Grid>
+                  />
+                </div>
               )}
 
               <TextField
@@ -153,7 +167,7 @@ const AddOfficeSpaceForm = () => {
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Custom border radius
+                    borderRadius: "9px", // Custom border radius
                   },
                 }}
               />
@@ -168,21 +182,21 @@ const AddOfficeSpaceForm = () => {
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Custom border radius
+                    borderRadius: "9px", // Custom border radius
                   },
                 }}
               />
               <Stack
                 direction="row"
                 justifyContent="space-between"
-                marginTop={6}
+                marginTop={3}
                 sx={{ paddingLeft: "1.25%", paddingRight: "1.25%" }}
               >
                 <Button
                   variant="outlined"
                   color="error"
                   onClick={cancelHandler}
-                  style={{ borderRadius: "6px" }}
+                  style={{ borderRadius: "7px" }}
                 >
                   Cancel
                 </Button>
@@ -190,8 +204,7 @@ const AddOfficeSpaceForm = () => {
                   type="submit"
                   variant="contained"
                   sx={{ color: "#fff", backgroundColor: "#000" }}
-                  onClick={submitHandler}
-                  style={{ borderRadius: "6px" }}
+                  style={{ borderRadius: "7px" }}
                 >
                   Submit
                 </Button>
@@ -199,6 +212,21 @@ const AddOfficeSpaceForm = () => {
             </form>
           </Box>
         </div>
+        {/* Snackbar for confirmation */}
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your ad space has been submitted for review!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

@@ -148,33 +148,49 @@ const MySpaces = () => {
           <div className="listContainerMySpace">
             <div className="listWrapperMySpace">
               <div className="listResultMySpace">
-                {filteredOfficeSpaces.map((space) => (
-                  <MySpaceItem
-                    key={space.id}
-                    space={space}
-                    onUpdate={handleOfficeUpdate}
-                  />
-                ))}
+                {filteredOfficeSpaces.length > 0 ? (
+                  filteredOfficeSpaces.map((space) => (
+                    <MySpaceItem
+                      key={space.id}
+                      space={space}
+                      onUpdate={handleOfficeUpdate}
+                    />
+                  ))
+                ) : (
+                  <div
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      color: "gray",
+                    }}
+                  >
+                    No office spaces available.
+                  </div>
+                )}
               </div>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
                   alignItems: "center",
-                  paddingTop: "20px", // Adjust as needed
+                  paddingTop: "20px",
                   marginBottom: "30px",
                 }}
               >
-                <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  color="primary"
-                  size="large"
-                />
-                <div style={{ marginLeft: "20px" }}>
-                  Page {currentPage} of {totalPages}
-                </div>
+                {filteredOfficeSpaces.length > 0 && (
+                  <>
+                    <Pagination
+                      count={totalPages}
+                      page={currentPage}
+                      onChange={handlePageChange}
+                      color="primary"
+                      size="large"
+                    />
+                    <div style={{ marginLeft: "20px" }}>
+                      Page {currentPage} of {totalPages}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

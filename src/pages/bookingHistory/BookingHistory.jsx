@@ -138,9 +138,21 @@ const BookingHistory = () => {
           <div className="listContainer">
             <div className="listWrapper">
               <div className="listResult">
-                {filteredBookings.map((booking) => (
-                  <SearchItem key={booking.id} booking={booking} />
-                ))}
+                {filteredBookings.length > 0 ? (
+                  filteredBookings.map((booking) => (
+                    <SearchItem key={booking.id} booking={booking} />
+                  ))
+                ) : (
+                  <div
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      color: "gray",
+                    }}
+                  >
+                    No bookings found.
+                  </div>
+                )}
               </div>
               <div
                 style={{
@@ -151,16 +163,20 @@ const BookingHistory = () => {
                   marginBottom: "30px",
                 }}
               >
-                <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  color="primary"
-                  size="large"
-                />
-                <div style={{ marginLeft: "20px" }}>
-                  Page {currentPage} of {totalPages}
-                </div>
+                {filteredBookings.length > 0 && (
+                  <>
+                    <Pagination
+                      count={totalPages}
+                      page={currentPage}
+                      onChange={handlePageChange}
+                      color="primary"
+                      size="large"
+                    />
+                    <div style={{ marginLeft: "20px" }}>
+                      Page {currentPage} of {totalPages}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

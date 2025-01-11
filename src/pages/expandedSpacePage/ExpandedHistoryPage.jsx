@@ -65,41 +65,53 @@ const ExpandedSpacePage = () => {
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <CssBaseline />
-        <Grid container component="main" sx={{ height: "100vh" }}>
+        <Grid
+          container
+          component="main"
+          sx={{
+            height: "90vh", // Full viewport height
+            display: "flex", // Flex display for alignment
+            alignItems: "center", // Center vertically
+            justifyContent: "center", // Center horizontally
+            padding: "10%",
+          }}
+        >
+          {/* Image Section */}
           <Grid
             item
-            xs={5}
+            xs={12}
             md={6}
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginTop: "-20px",
-              marginLeft: "75px",
             }}
           >
             <img
               src={space?.photos}
               alt="Space"
-              style={{ width: "500px", height: "500px" }}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "13px",
+                objectFit: "cover",
+              }}
             />
           </Grid>
 
           <Grid
             item
-            xs={5}
-            md={4}
+            xs={12}
+            md={6}
             sx={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "-30",
               flexDirection: "column",
+              alignItems: "flex-start", // Ensures text is left-aligned
+              justifyContent: "center", // Centers the text section vertically
+              padding: "5%",
             }}
           >
-            <Box
-              sx={{ maxWidth: "80%", marginLeft: "1px", marginBottom: "75px" }}
-            >
+            <Box sx={{ width: "100%" }}>
               <Typography variant="h5" gutterBottom sx={{ fontSize: "40px" }}>
                 {space?.location}
               </Typography>
@@ -146,13 +158,16 @@ const ExpandedSpacePage = () => {
               >
                 <Grid item>
                   <Link to={`/reviews/${id}`}>
-                    <Button variant="contained">Reviews</Button>
+                    <Button style={{ borderRadius: "6px" }} variant="contained">
+                      Reviews
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item>
                   <Button
                     variant="contained"
                     color="primary"
+                    style={{ borderRadius: "6px" }}
                     component={Link}
                     to={`/contact/${id}`}
                   >

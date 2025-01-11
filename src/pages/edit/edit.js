@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Stack, Typography, Box, Grid } from "@mui/material";
+import {TextField, Button, Stack, Typography, Box, Alert, Snackbar} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -30,6 +30,8 @@ const EditOfficeSpaceForm = () => {
   const fetchOffice = OfficeStore((state) => state.fetchOffice);
   const updateOffice = OfficeStore((state) => state.updateOffice);
   const deleteOffice = OfficeStore((state) => state.deleteOffice);
+
+  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for Snackbar
 
   useEffect(() => {
     const fetchOfficeData = async () => {
@@ -61,10 +63,15 @@ const EditOfficeSpaceForm = () => {
     try {
       const data = await updateOffice(formData);
       console.log("Office space updated:", data);
-      navigate("/myspaces");
+      setConfirmationOpen(true);
     } catch (error) {
       console.error("Error updating office space:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    setConfirmationOpen(false);
+    navigate("/myspaces"); // Navigate to the spaces page after confirmation
   };
 
   const cancelHandler = () => {
@@ -86,15 +93,24 @@ const EditOfficeSpaceForm = () => {
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <div className="ad_space_form">
-          <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
-            <h2>Edit and View the Advertisement Space Listing</h2>
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{
+              fontSize: "30px",
+              marginLeft: "25px",
+              marginTop: "30px",
+              marginBottom: "30px",
+            }}
+          >
+            Edit and View the Advertisement Space Listing
           </Typography>
           <Box
             sx={{
               padding: { xs: "24px", md: "32px" },
               margin: { xs: "16px", md: "32px" },
               boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-              borderRadius: "8px",
+              borderRadius: "9px",
               backgroundColor: "#fff",
             }}
           >
@@ -105,91 +121,104 @@ const EditOfficeSpaceForm = () => {
                 value={formData.location}
                 onChange={(e) => handleInputChange("location", e.target.value)}
                 fullWidth
+                sx={{
+                  marginBottom: "20px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px", // Custom border radius
+                  },
+                }}
                 margin="normal"
               />
 
-              <Stack direction="row" alignItems="center" marginY={2}>
-                <TextField
-                  label="Image URL"
-                  placeholder="Image URL"
-                  value={formData.photos}
-                  onChange={(e) => handleInputChange("photos", e.target.value)}
-                  fullWidth
-                  margin="normal"
-                />
-              </Stack>
+
+              <TextField
+                label="Image URL"
+                placeholder="Image URL"
+                value={formData.photos}
+                onChange={(e) => handleInputChange("photos", e.target.value)}
+                fullWidth
+                sx={{
+                  marginBottom: "20px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px", // Custom border radius
+                  },
+                }}
+                margin="normal"
+              />
 
               {formData.photos && (
-                <Grid
-                  container
-                  spacing={2}
-                  style={{
-                    maxHeight: "600px",
-                    overflowY: "auto",
-                    marginBottom: "40px",
-                  }}
-                >
-                  <Grid
-                    item
-                    xs={12}
-                    style={{
-                      marginBottom: "16px",
-                      breakInside: "avoid",
-                      height: "250px",
-                    }}
+                  <div
+                      style={{
+                        display: "flex", // Flexbox for centering
+                        justifyContent: "center", // Center horizontally
+                        alignItems: "center", // Center vertically
+                        margin: "20px",
+                      }}
                   >
                     <img
-                      src={formData.photos}
-                      alt="Office Space"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                      }}
+                        src={formData.photos}
+                        alt="Office Space"
+                        style={{
+                          width: "50%",
+                          height: "50%",
+                          objectFit: "contain",
+                          borderRadius: "13px", // Apply rounded corners
+                        }}
                     />
-                  </Grid>
-                </Grid>
+                  </div>
               )}
 
-              <Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-                <Stack spacing={3} flexGrow={4}>
-                  <TextField
-                    label="Size"
-                    placeholder="Size"
-                    type="number"
-                    value={formData.size}
-                    onChange={(e) => handleInputChange("size", e.target.value)}
-                    fullWidth
-                    margin="normal"
-                  />
-                  <TextField
-                    label="Price"
-                    type="number"
-                    value={formData.price}
-                    onChange={(e) => handleInputChange("price", e.target.value)}
-                    fullWidth
-                    margin="normal"
-                  />
-                </Stack>
-              </Stack>
+             <TextField
+                label="Size"
+                placeholder="Size"
+                value={formData.size}
+                type="number"
+                onChange={(e) => handleInputChange("size", e.target.value)}
+                fullWidth
+                margin="normal"
+                sx={{
+                  marginBottom: "20px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px", // Custom border radius
+                  },
+                }}
+              />
+
+              <TextField
+                label="Price"
+                placeholder="Price"
+                value={formData.price}
+                type="number"
+                onChange={(e) => handleInputChange("price", e.target.value)}
+                fullWidth
+                margin="normal"
+                sx={{
+                  marginBottom: "20px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px", // Custom border radius
+                  },
+                }}
+              />
+
               <Stack
                 direction="row"
                 justifyContent="space-between"
-                marginTop={6}
+                marginTop={3}
                 sx={{ paddingLeft: "1.25%", paddingRight: "1.25%" }}
               >
                 <Button
                   variant="outlined"
                   color="error"
                   onClick={cancelHandler}
+                  style={{ borderRadius: "7px" }}
                 >
                   Cancel
                 </Button>
                 <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{ backgroundColor: "red" }}
+                  variant="outlined"
+                  color="error"
                   onClick={deleteHandler}
+                  style={{ borderRadius: "7px" }}
                 >
                   Delete
                 </Button>
@@ -197,6 +226,7 @@ const EditOfficeSpaceForm = () => {
                   type="submit"
                   variant="contained"
                   sx={{ color: "#fff", backgroundColor: "#000" }}
+                  style={{ borderRadius: "7px" }}
                 >
                   Submit
                 </Button>
@@ -204,6 +234,20 @@ const EditOfficeSpaceForm = () => {
             </form>
           </Box>
         </div>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your ad space has been updated!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );
