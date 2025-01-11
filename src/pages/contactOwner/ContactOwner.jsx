@@ -85,7 +85,7 @@ const ContactForm = () => {
   // };
 
   return (
-    <div data-testid="contactForm-1">
+    <div data-testid="contactForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />

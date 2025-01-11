@@ -30,8 +30,7 @@ const BookingHistory = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const parsedUserData = userData;
-        const clientId = parsedUserData.id;
+        const clientId = userData.id;
         await fetchBookingsByClient(clientId);
       } catch (error) {
         console.error("Error fetching booking data:", error);
@@ -60,8 +59,8 @@ const BookingHistory = () => {
   }, [currentPage, bookings]);
 
   const handleSearch = (searchTerm) => {
-    const filtered = bookings.filter((booking) =>
-      booking.location.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = filteredBookings.filter((booking) =>
+      booking.adSpace.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredBookings(filtered);
   };
@@ -110,7 +109,7 @@ const BookingHistory = () => {
   });
 
   return (
-    <div data-testid="bookingHistory-1">
+    <div data-testid="bookingHistory-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <Typography
@@ -121,53 +120,73 @@ const BookingHistory = () => {
           Your Booking History
         </Typography>
         <Container ref={listRef}>
-          <SearchBar onSearchHistory={handleSearch} />
-          <FormControl style={{ margin: "20px 0" }}>
-            <InputLabel htmlFor="sort">Sort by:</InputLabel>
-            <Select
-              id="sort"
-              value={sortOption}
-              onChange={handleSortChange}
-              label="Sort by"
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "50px",
+            gap: "20px"
+          }}>
+            <SearchBar onSearchHistory={handleSearch}/>
+            <FormControl
+                style={{
+                  width: "100%",
+                  maxWidth: "200px",
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "6px", // Same border radius
+                    height: "40px", // Set consistent height
+                  },
+                }}
             >
-              <MenuItem value="default">Default</MenuItem>
-              <MenuItem value="alphabetical">Alphabetical</MenuItem>
-              <MenuItem value="price">Price</MenuItem>
-            </Select>
-          </FormControl>
+              <InputLabel htmlFor="sort">Sort by:</InputLabel>
+              <Select
+                  id="sort"
+                  value={sortOption}
+                  onChange={handleSortChange}
+                  label="Sort by"
+              >
+                <MenuItem value="default">Default</MenuItem>
+                <MenuItem value="alphabetical">Alphabetical</MenuItem>
+                <MenuItem value="price">Price</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <div className="listContainer">
             <div className="listWrapper">
               <div className="listResult">
                 {filteredBookings.length > 0 ? (
-                  filteredBookings.map((booking) => (
-                    <SearchItem key={booking.id} booking={booking} />
-                  ))
+                    filteredBookings.map((booking) => (
+                        <SearchItem key={booking.id} booking={booking}/>
+                    ))
                 ) : (
-                  <div
-                    style={{
-                      textAlign: "center",
-                      padding: "20px",
-                      color: "gray",
-                    }}
-                  >
-                    No bookings found.
-                  </div>
+                    <div
+                        style={{
+                          textAlign: "center",
+                          padding: "20px",
+                          color: "gray",
+                        }}
+                    >
+                      No bookings found.
+                    </div>
                 )}
               </div>
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  paddingTop: "20px",
-                  marginBottom: "30px",
-                }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    paddingTop: "20px",
+                    marginBottom: "30px",
+                  }}
               >
                 {filteredBookings.length > 0 && (
-                  <>
-                    <Pagination
-                      count={totalPages}
-                      page={currentPage}
+                    <>
+                      <Pagination
+                          count={totalPages}
+                          page={currentPage}
                       onChange={handlePageChange}
                       color="primary"
                       size="large"

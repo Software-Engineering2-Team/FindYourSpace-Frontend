@@ -111,7 +111,7 @@ const Profile = () => {
   };
 
   return (
-    <div data-testid="profilePage-1">
+    <div data-testid="profilePage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />

@@ -7,12 +7,10 @@ function SearchBar(props) {
 
   const searchContainerStyle = {
     width: "50%",
-    margin: "auto",
-    marginTop: "30px",
   };
 
   const handleSearchClick = () => {
-    props.onSearchHistory(searchTerm);
+    props.onSearch(searchTerm);
   };
 
   const handleKeyPress = (event) => {
@@ -22,7 +20,7 @@ function SearchBar(props) {
   };
 
   return (
-    <div data-testid="searchApproveSpacesPage-1" style={searchContainerStyle}>
+    <div data-testid="searchApproveSpacesPage-1" style={searchContainerStyle} >
       <TextField
         fullWidth
         label="Search term ..."

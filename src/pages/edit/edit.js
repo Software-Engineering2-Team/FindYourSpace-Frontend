@@ -31,7 +31,9 @@ const EditOfficeSpaceForm = () => {
   const updateOffice = OfficeStore((state) => state.updateOffice);
   const deleteOffice = OfficeStore((state) => state.deleteOffice);
 
-  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for Snackbar
+  const [editConfirmationOpen, setEditConfirmationOpen] = useState(false); // State for Snackbar
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State for Snackbar
+
 
   useEffect(() => {
     const fetchOfficeData = async () => {
@@ -63,14 +65,19 @@ const EditOfficeSpaceForm = () => {
     try {
       const data = await updateOffice(formData);
       console.log("Office space updated:", data);
-      setConfirmationOpen(true);
+      setEditConfirmationOpen(true);
     } catch (error) {
       console.error("Error updating office space:", error);
     }
   };
 
-  const handleConfirmationClose = () => {
-    setConfirmationOpen(false);
+  const handleEditConfirmationClose = () => {
+    setEditConfirmationOpen(false);
+    navigate("/myspaces"); // Navigate to the spaces page after confirmation
+  };
+
+  const handleDeleteConfirmationClose = () => {
+    setDeleteConfirmationOpen(false);
     navigate("/myspaces"); // Navigate to the spaces page after confirmation
   };
 
@@ -82,14 +89,14 @@ const EditOfficeSpaceForm = () => {
     try {
       await deleteOffice(id);
       console.log("Office space deleted");
-      navigate("/myspaces");
+      setDeleteConfirmationOpen(true);
     } catch (error) {
       console.error("Error deleting office space:", error);
     }
   };
 
   return (
-    <div data-testid="editPage-1">
+    <div data-testid="editPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <div className="ad_space_form">
@@ -235,17 +242,30 @@ const EditOfficeSpaceForm = () => {
           </Box>
         </div>
         <Snackbar
-          open={confirmationOpen}
+          open={editConfirmationOpen}
           autoHideDuration={2000}
-          onClose={handleConfirmationClose}
+          onClose={handleEditConfirmationClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <Alert
-            onClose={handleConfirmationClose}
+            onClose={handleEditConfirmationClose}
             severity="success"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", border: "2px solid green" }}
           >
-            Your ad space has been updated!
+            Your ad space has been updated successfully!
+          </Alert>
+        </Snackbar> <Snackbar
+          open={deleteConfirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleDeleteConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleDeleteConfirmationClose}
+            severity="info"
+            sx={{ width: "100%", border: "2px solid cyan" }}
+          >
+            Your ad space has been deleted successfully!
           </Alert>
         </Snackbar>
       </ThemeProvider>

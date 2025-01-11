@@ -7,12 +7,10 @@ function SearchBar(props) {
 
   const searchContainerStyle = {
     width: "50%",
-    margin: "auto",
-    marginTop: "30px",
   };
 
   const handleSearchClick = () => {
-    props.onSearchHistory(searchTerm);
+    props.onSearch(searchTerm);
   };
 
   const handleKeyPress = (event) => {

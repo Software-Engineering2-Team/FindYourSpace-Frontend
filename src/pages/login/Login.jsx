@@ -125,7 +125,7 @@ const Login = () => {
   };
 
   return (
-    <div data-testid="login-1">
+    <div data-testid="login-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         {/* <div style={{ height: '5px', backgroundColor: 'white' }} />  */}

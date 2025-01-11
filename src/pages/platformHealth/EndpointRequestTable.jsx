@@ -59,7 +59,7 @@ const EndpointRequestsTable = () => {
   });
 
   return (
-    <div data-testid="platformHealth-1">
+    <div data-testid="platformHealth-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <NavbarAdmin />
         <Typography sx={{ marginTop: "2%", marginLeft: "5%" }}>

@@ -6,8 +6,7 @@ function SearchBar(props) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchContainerStyle = {
-    width: "100%",
-    marginTop: "50px",
+    width: "50%",
   };
 
   const handleSearchClick = () => {

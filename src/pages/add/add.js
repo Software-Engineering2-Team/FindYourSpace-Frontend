@@ -78,7 +78,7 @@ const AddOfficeSpaceForm = () => {
   };
 
   return (
-    <div data-testid="addOfficeSpaceForm-1">
+    <div data-testid="addOfficeSpaceForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={theme}>
         <Navbar />
         <div className="ad_space_form">
@@ -222,7 +222,7 @@ const AddOfficeSpaceForm = () => {
           <Alert
             onClose={handleConfirmationClose}
             severity="success"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", border: "2px solid green" }}
           >
             Your ad space has been submitted for review!
           </Alert>

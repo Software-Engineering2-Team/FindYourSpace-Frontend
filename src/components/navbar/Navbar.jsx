@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <div data-testid="navbar-1">
       <ThemeProvider theme={theme}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography
               variant="h5"

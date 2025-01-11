@@ -61,7 +61,7 @@ const ExpandedSpacePage = () => {
   });
 
   return (
-    <div data-testid="expandedSpacePage-1">
+    <div data-testid="expandedSpacePage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <CssBaseline />

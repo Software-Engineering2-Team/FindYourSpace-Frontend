@@ -73,7 +73,7 @@ const Stats = () => {
   };
 
   return (
-    <div data-testid="statsPage-1">
+    <div data-testid="statsPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <NavbarAdmin />
         <Container>

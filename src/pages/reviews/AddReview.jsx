@@ -67,7 +67,7 @@ const AddReviewForm = () => {
   };
 
   return (
-    <div data-testid="addReviewForm-1">
+    <div data-testid="addReviewForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />

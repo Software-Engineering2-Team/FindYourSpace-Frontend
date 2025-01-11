@@ -57,7 +57,7 @@ const Reviews = () => {
   });
 
   return (
-    <div data-testid="reviewsPage-1">
+    <div data-testid="reviewsPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <div>
           <Navbar />

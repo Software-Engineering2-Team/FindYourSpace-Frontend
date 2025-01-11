@@ -117,7 +117,7 @@ const List = () => {
   });
 
   return (
-    <div data-testid="list-1">
+    <div data-testid="list-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <div style={{ height: "1px", backgroundColor: "white" }} />
@@ -127,32 +127,40 @@ const List = () => {
           style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}
         >
           <div style={{display: "flex", flexDirection: "column", width: "80%"}}>
-            <SearchBar onSearch={handleSearch}/>
-            <FormControl
-                style={{
-                  margin: "20px 0",
-                  width: "100%",
-                  maxWidth: "200px",
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "6px", // Same border radius
-                    height: "40px", // Set consistent height
-                  },
-                }}
-            >
-              <InputLabel htmlFor="sort">Sort by:</InputLabel>
-              <Select
-                  id="sort"
-                  value={sortOption}
-                  onChange={handleSortChange}
-                  label="Sort by"
+            <div style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "50px",
+              gap: "20px"
+            }}>
+              <SearchBar onSearch={handleSearch}/>
+              <FormControl
+                  style={{
+                    width: "100%",
+                    maxWidth: "200px",
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "6px", // Same border radius
+                      height: "40px", // Set consistent height
+                    },
+                  }}
               >
-                <MenuItem value="default">Default</MenuItem>
-                <MenuItem value="alphabetical">Alphabetical</MenuItem>
-                <MenuItem value="price">Price</MenuItem>
-              </Select>
-            </FormControl>
+                <InputLabel htmlFor="sort">Sort by:</InputLabel>
+                <Select
+                    id="sort"
+                    value={sortOption}
+                    onChange={handleSortChange}
+                    label="Sort by"
+                >
+                  <MenuItem value="default">Default</MenuItem>
+                  <MenuItem value="alphabetical">Alphabetical</MenuItem>
+                  <MenuItem value="price">Price</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
             <div
                 style={{
                   display: "flex",
@@ -178,20 +186,17 @@ const List = () => {
                 display: "flex",
                 justifyContent: "flex-end",
                 alignItems: "center",
-                paddingTop: "20px",
-                marginBottom: "30px",
+                padding: "50px"
               }}
           >
-            <Pagination
-                count={totalPages}
-                page={currentPage}
-                onChange={handlePageChange}
-                color="primary"
-                size="large"
-            />
-            <div style={{marginLeft: "20px"}}>
+              <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  color="primary"
+                  size="large"
+              />
               Page {currentPage} of {totalPages}
-            </div>
           </div>
         </div>
       </ThemeProvider>

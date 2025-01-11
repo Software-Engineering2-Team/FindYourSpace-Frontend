@@ -72,7 +72,6 @@ const MySpaces = () => {
     const filteredSpaces = officeSpaces.filter((space) =>
       space.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
     setFilteredOfficeSpaces(filteredSpaces);
   };
 
@@ -120,7 +119,7 @@ const MySpaces = () => {
   });
 
   return (
-    <div data-testid="mySpacesPage-1">
+    <div data-testid="mySpacesPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <Typography
@@ -131,53 +130,73 @@ const MySpaces = () => {
           Your Rented Spaces
         </Typography>
         <Container ref={listRef}>
-          <SearchBar onSearchHistory={handleSearch} />
-          <FormControl style={{ margin: "20px 0" }}>
-            <InputLabel htmlFor="sort">Sort by:</InputLabel>
-            <Select
-              id="sort"
-              value={sortOption}
-              onChange={handleSortChange}
-              label="Sort by"
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "50px",
+            gap: "20px"
+          }}>
+            <SearchBar onSearch={handleSearch}/>
+            <FormControl
+                style={{
+                  width: "100%",
+                  maxWidth: "200px",
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "6px", // Same border radius
+                    height: "40px", // Set consistent height
+                  },
+                }}
             >
-              <MenuItem value="default">Default</MenuItem>
-              <MenuItem value="alphabetical">Alphabetical</MenuItem>
-              <MenuItem value="price">Price</MenuItem>
-            </Select>
-          </FormControl>
+              <InputLabel htmlFor="sort">Sort by:</InputLabel>
+              <Select
+                  id="sort"
+                  value={sortOption}
+                  onChange={handleSortChange}
+                  label="Sort by"
+              >
+                <MenuItem value="default">Default</MenuItem>
+                <MenuItem value="alphabetical">Alphabetical</MenuItem>
+                <MenuItem value="price">Price</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <div className="listContainerMySpace">
             <div className="listWrapperMySpace">
               <div className="listResultMySpace">
                 {filteredOfficeSpaces.length > 0 ? (
-                  filteredOfficeSpaces.map((space) => (
-                    <MySpaceItem
-                      key={space.id}
-                      space={space}
-                      onUpdate={handleOfficeUpdate}
-                    />
-                  ))
+                    filteredOfficeSpaces.map((space) => (
+                        <MySpaceItem
+                            key={space.id}
+                            space={space}
+                            onUpdate={handleOfficeUpdate}
+                        />
+                    ))
                 ) : (
-                  <div
-                    style={{
-                      textAlign: "center",
-                      padding: "20px",
-                      color: "gray",
-                    }}
-                  >
-                    No office spaces available.
-                  </div>
+                    <div
+                        style={{
+                          textAlign: "center",
+                          padding: "20px",
+                          color: "gray",
+                        }}
+                    >
+                      No office spaces available.
+                    </div>
                 )}
               </div>
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  paddingTop: "20px",
-                  marginBottom: "30px",
-                }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    paddingTop: "20px",
+                    marginBottom: "30px",
+                  }}
               >
-                {filteredOfficeSpaces.length > 0 && (
+              {filteredOfficeSpaces.length > 0 && (
                   <>
                     <Pagination
                       count={totalPages}

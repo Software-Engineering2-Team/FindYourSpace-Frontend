@@ -129,7 +129,7 @@ const Signup = () => {
   };
 
   return (
-    <div data-testid="signupPage-1">
+    <div data-testid="signupPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <Navbar />
         <Grid

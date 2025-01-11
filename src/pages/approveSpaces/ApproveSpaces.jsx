@@ -144,7 +144,7 @@ const ApproveSpacesPage = () => {
   });
 
   return (
-    <div data-testid="ApproveSpacesPage-1">
+    <div data-testid="ApproveSpacesPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <NavbarAdmin />
         <Typography
@@ -155,20 +155,40 @@ const ApproveSpacesPage = () => {
           Reviewing and Approving Spaces
         </Typography>
         <Container>
-          <SearchBar onSearchHistory={handleSearch} />
-          <FormControl style={{ margin: "20px 0" }}>
-            <InputLabel htmlFor="sort">Sort by:</InputLabel>
-            <Select
-              id="sort"
-              value={sortOption}
-              onChange={handleSortChange}
-              label="Sort by"
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "50px",
+            gap: "20px"
+          }}>
+            <SearchBar onSearch={handleSearch}/>
+            <FormControl
+                style={{
+                  width: "100%",
+                  maxWidth: "200px",
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "6px", // Same border radius
+                    height: "40px", // Set consistent height
+                  },
+                }}
             >
-              <MenuItem value="default">Default</MenuItem>
-              <MenuItem value="alphabetical">Alphabetical</MenuItem>
-              <MenuItem value="price">Price</MenuItem>
-            </Select>
-          </FormControl>
+              <InputLabel htmlFor="sort">Sort by:</InputLabel>
+              <Select
+                  id="sort"
+                  value={sortOption}
+                  onChange={handleSortChange}
+                  label="Sort by"
+              >
+                <MenuItem value="default">Default</MenuItem>
+                <MenuItem value="alphabetical">Alphabetical</MenuItem>
+                <MenuItem value="price">Price</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <Paper elevation={4}>
             <TableContainer>
               <Table>
@@ -184,36 +204,36 @@ const ApproveSpacesPage = () => {
                 </TableHead>
                 <TableBody align="center">
                   {filteredSpaces.map((space) => (
-                    <TableRow key={space.id}>
-                      <TableCell align="center">{space.id}</TableCell>
-                      <TableCell align="center">{space.location}</TableCell>
-                      <TableCell align="center">{space.size}</TableCell>
-                      <TableCell align="center">{space.price}</TableCell>
-                      <TableCell align="center">{space.owner_id}</TableCell>
-                      <TableCell align="center" sx={{ width: "25%" }}>
-                        <Stack
-                          align="center"
-                          direction="row"
-                          spacing={2}
-                          sx={{ justifyContent: "center" }} // Add this line
-                        >
-                          <Button
-                            variant="outlined"
-                            color="success"
-                            onClick={() => handleApprove(space.id)}
+                      <TableRow key={space.id}>
+                        <TableCell align="center">{space.id}</TableCell>
+                        <TableCell align="center">{space.location}</TableCell>
+                        <TableCell align="center">{space.size}</TableCell>
+                        <TableCell align="center">{space.price}</TableCell>
+                        <TableCell align="center">{space.owner_id}</TableCell>
+                        <TableCell align="center" sx={{width: "25%"}}>
+                          <Stack
+                              align="center"
+                              direction="row"
+                              spacing={2}
+                              sx={{justifyContent: "center"}} // Add this line
                           >
-                            Approve
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            color="error"
-                            onClick={() => handleDisapprove(space.id)}
-                          >
-                            Disapprove
-                          </Button>
-                        </Stack>
-                      </TableCell>
-                    </TableRow>
+                            <Button
+                                variant="outlined"
+                                color="success"
+                                onClick={() => handleApprove(space.id)}
+                            >
+                              Approve
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                onClick={() => handleDisapprove(space.id)}
+                            >
+                              Disapprove
+                            </Button>
+                          </Stack>
+                        </TableCell>
+                      </TableRow>
                   ))}
                 </TableBody>
               </Table>
@@ -221,16 +241,16 @@ const ApproveSpacesPage = () => {
           </Paper>
 
           <Pagination
-            sx={{ marginLeft: "88%", marginTop: "50px" }}
-            count={totalPages}
-            page={currentPage}
-            onChange={handlePageChange}
-            color="primary"
-            size="large"
+              sx={{marginLeft: "88%", marginTop: "50px"}}
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              size="large"
           />
           <Typography
-            variant="body2"
-            sx={{ marginLeft: "91%", marginTop: "10px" }}
+              variant="body2"
+              sx={{marginLeft: "91%", marginTop: "10px"}}
           >{`Page ${currentPage} of ${totalPages}`}</Typography>
         </Container>
       </ThemeProvider>
