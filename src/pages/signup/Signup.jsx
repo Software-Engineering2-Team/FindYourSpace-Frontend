@@ -7,6 +7,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { Snackbar, Alert } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SignupStore from "../../api/SignupStore";
 
@@ -50,7 +51,8 @@ const Signup = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [signupError, setSignupError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -132,12 +134,25 @@ const Signup = () => {
     SignupStore.getState()
       .signup(username, email, password, confirmPassword)
       .then(() => {
-        navigate("/");
+        setConfirmationOpen(true);
+        console.log("ConfirmationOpen set to true.");
+        setTimeout(() => navigate("/"), 2000);
       })
       .catch((error) => {
-        const response = error.response.json();
-        setSignupError(response.error || "An unexpected error occurred.");
+        console.log("Error", error);
+        if (error.message == "Passwords do not match") {
+          setConfirmPasswordError(error.message);
+        } else if (error.message == "Username already exists") {
+          setUsernameError(error.message);
+        }
       });
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+    navigate("/");
   };
 
   const handleSubmit = (e) => {
@@ -250,8 +265,8 @@ const Signup = () => {
                 id="password2"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
-                error={!!signupError}
-                helperText={signupError}
+                error={!!confirmPasswordError}
+                helperText={confirmPasswordError}
                 autoComplete="current-password"
               />
               <Button
@@ -274,6 +289,20 @@ const Signup = () => {
             </Box>
           </Box>
         </Grid>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your account has been created!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

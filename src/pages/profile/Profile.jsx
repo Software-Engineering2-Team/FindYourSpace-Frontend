@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Snackbar, Alert } from "@mui/material";
 import ProfileStore from "../../api/ProfileStore";
 
 const defaultTheme = createTheme({
@@ -35,6 +36,7 @@ const Profile = () => {
   const [userInfoErrors, setUserInfoErrors] = useState({});
   const [passwordError, setPasswordError] = useState("");
   const [resetError, setresetError] = useState("");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,26 +77,26 @@ const Profile = () => {
     let error = "";
     switch (name) {
       case "first_name":
-        if (!value.trim().length <= 2) {
+        if (value.trim().length <= 2) {
           error = `First name is not valid.`;
         }
         break;
       case "last_name":
-        if (!value.trim().length <= 2) {
+        if (value.trim().length <= 2) {
           error = `${name.replace("_", " ")} is not valid.`;
         } else if (!/^[a-zA-Z]+$/.test(value)) {
           error = `${name.replace("_", " ")} can only contain letters.`;
         }
         break;
       case "email":
-        if (!value.trim().length <= 2) {
+        if (value.trim().length <= 2) {
           error = "Email is required.";
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
           error = "Invalid email address.";
         }
         break;
       case "contactInfo":
-        if (!value.trim().length <= 2) {
+        if (value.trim().length !== 9) {
           error = "Contact Info is required.";
         } else if (!/^\d+$/.test(value)) {
           error = "Contact Info can only contain numbers.";
@@ -145,10 +147,17 @@ const Profile = () => {
 
     try {
       await ProfileStore.getState().updateUserProfile(userData);
+      setConfirmationOpen(true);
       console.log("Profile updated successfully.");
     } catch (error) {
       console.error("Error updating profile:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
   };
 
   // Handle password change form submission
@@ -175,6 +184,7 @@ const Profile = () => {
       };
 
       await ProfileStore.getState().updateUserProfile(updatedUserData);
+      setConfirmationOpen(true);
       setPasswordData({ password: "", confirm_password: "" });
       setresetError("");
     } catch (error) {
@@ -358,6 +368,20 @@ const Profile = () => {
             Delete Account
           </Button>
         </Grid>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your profile has been updated!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

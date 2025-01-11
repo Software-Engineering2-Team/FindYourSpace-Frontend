@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Stack, Typography, Box, Grid } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Stack,
+  Typography,
+  Box,
+  Grid,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -27,6 +36,7 @@ const EditOfficeSpaceForm = () => {
     photos: "",
   });
   const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const fetchOffice = OfficeStore((state) => state.fetchOffice);
   const updateOffice = OfficeStore((state) => state.updateOffice);
@@ -50,32 +60,39 @@ const EditOfficeSpaceForm = () => {
 
   const validateField = (field, value) => {
     let error = "";
+    console.log(`Validating ${field} with value ${value}`);
     switch (field) {
       case "location":
-        if (value.trim().length <= 2) error = "Location is not valid.";
+        if (value === "" || value.trim().length <= 2) {
+          error = "Location is not valid.";
+          console.log("Error in location field");
+        }
         break;
       case "photos":
-        if (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        if (
+          value === "" ||
+          (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        ) {
           error = "Invalid URL format.";
+          console.log("Error in photos field");
+        }
         break;
       case "size":
-        if (!value.trim()) error = "Size is required.";
-        else if (isNaN(value) || Number(value) <= 0)
+        if (value === 0 || isNaN(value) || Number(value) <= 0) {
           error = "Size must be a positive number.";
+          console.log("Error in size field");
+        }
         break;
       case "price":
-        if (!value.trim()) error = "Price is required.";
-        else if (isNaN(value) || Number(value) <= 0)
+        if (value === 0 || isNaN(value) || Number(value) <= 0) {
           error = "Price must be a positive number.";
+          console.log("Error in price field");
+        }
         break;
       default:
         break;
     }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [field]: error,
-    }));
-    return !error;
+    return error;
   };
 
   const handleInputChange = (field, value) => {
@@ -83,28 +100,52 @@ const EditOfficeSpaceForm = () => {
       ...prevData,
       [field]: value,
     }));
-    validateField(field, value);
+
+    const error = validateField(field, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: error || "", // Clear the error if the field is valid
+    }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log("Form data:", formData);
-    const isValid = Object.keys(formData).every((field) =>
-      validateField(field, formData[field])
-    );
+
+    const newErrors = {};
+    let isValid = true;
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
 
     if (!isValid) {
       console.log("Form validation failed.");
+      console.log("Form validation errors", newErrors);
       return;
     }
 
     try {
       const data = await updateOffice(formData);
       console.log("Office space updated:", data);
-      navigate("/myspaces");
+      setConfirmationOpen(true);
+      console.log("ConfirmationOpen set to true.");
+      setTimeout(() => navigate("/spaces"), 2000);
     } catch (error) {
       console.error("Error updating office space:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+    navigate("/spaces");
   };
 
   const cancelHandler = () => {
@@ -252,6 +293,20 @@ const EditOfficeSpaceForm = () => {
             </form>
           </Box>
         </div>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your ad space has been edited successfully!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

@@ -1,5 +1,12 @@
 import React, { useRef, useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,12 +24,15 @@ const defaultTheme = createTheme({
 });
 
 const ContactAdminForm = () => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [adminEmail, setAdminEmail] = useState("akhilajithuni@gmail.com");
   const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const form = useRef();
 
@@ -31,7 +41,11 @@ const ContactAdminForm = () => {
     switch (name) {
       case "fullName":
         if (!value.trim()) {
+          // Check for empty string or whitespace
           error = "Full Name is required.";
+          console.log("Full name is empty");
+        } else if (value.trim().length < 2) {
+          error = "Full name is not valid.";
         } else if (!/^[a-zA-Z\s]+$/.test(value)) {
           error = "Full Name can only contain letters and spaces.";
         }
@@ -46,6 +60,8 @@ const ContactAdminForm = () => {
       case "subject":
         if (!value.trim()) {
           error = "Subject is required.";
+        } else if (value.trim().length < 5) {
+          error = "Subject must be at least 5 characters long.";
         }
         break;
       case "message":
@@ -58,27 +74,30 @@ const ContactAdminForm = () => {
       default:
         break;
     }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
-    return !error;
-  };
-
-  const validateForm = () => {
-    const isFullNameValid = validateField("fullName", fullName);
-    const isEmailValid = validateField("email", email);
-    const isSubjectValid = validateField("subject", subject);
-    const isMessageValid = validateField("message", message);
-    return isFullNameValid && isEmailValid && isSubjectValid && isMessageValid;
+    return error;
   };
 
   const sendEmail = (e) => {
-    if (!validateForm()) {
-      console.log("Form validation failed.");
+    e.preventDefault();
+
+    const newErrors = {};
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
+    // If there are any errors, stop submission
+    if (Object.keys(newErrors).length > 0) {
+      console.log("Form validation failed:", newErrors);
       return;
     }
-    e.preventDefault();
+
+    // Proceed with sending the email
     emailjs
       .sendForm("service_0fkozoz", "template_7c06qpa", form.current, {
         publicKey: "O_9E7yjTjSaZP0Fr9",
@@ -87,46 +106,41 @@ const ContactAdminForm = () => {
       .then(
         () => {
           console.log("SUCCESS!");
+          setConfirmationOpen(true);
         },
         (error) => {
           console.log("FAILED...", error.text);
         }
       );
 
-    setFullName("");
-    setEmail("");
-    setSubject("");
-    setMessage("");
-    setAdminEmail("");
+    // Reset form
+    setFormData({
+      fullName: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
   };
 
-  const handleFullNameChange = (event) => {
-    const value = event.target.value;
-    setFullName(value);
-    validateField("fullName", value); // Pass the field name and value
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
   };
 
-  const handleEmailChange = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-    validateField("email", value);
-  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
 
-  const handleSubjectChange = (event) => {
-    const value = event.target.value;
-    setSubject(value);
-    validateField("subject", value);
-  };
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
 
-  const handleMessageChange = (event) => {
-    const value = event.target.value;
-    setMessage(value);
-    validateField("message", value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, value),
+    }));
   };
-
-  // const handleAdminEmailChange = (event) => {
-  //     setAdminEmail(event.target.value);
-  // };
 
   return (
     <div data-testid="contactAdminForm-1">
@@ -155,12 +169,11 @@ const ContactAdminForm = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-              name="user_name"
-              value={fullName}
-              onChange={handleFullNameChange}
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
               error={!!errors.fullName}
               helperText={errors.fullName}
-              required
               size="large"
             />
             <TextField
@@ -168,12 +181,11 @@ const ContactAdminForm = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-              name="user_email"
-              value={email}
-              onChange={handleEmailChange}
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               error={!!errors.email}
               helperText={errors.email}
-              required
               size="large"
             />
             <TextField
@@ -184,7 +196,6 @@ const ContactAdminForm = () => {
               name="admin_email"
               value={adminEmail}
               disabled
-              required
               size="large"
             />
             <TextField
@@ -193,11 +204,10 @@ const ContactAdminForm = () => {
               fullWidth
               margin="normal"
               name="subject"
-              value={subject}
-              onChange={handleSubjectChange}
+              value={formData.subject}
+              onChange={handleInputChange}
               error={!!errors.subject}
               helperText={errors.subject}
-              required
               size="large"
             />
             <TextField
@@ -208,11 +218,10 @@ const ContactAdminForm = () => {
               fullWidth
               margin="normal"
               name="message"
-              value={message}
-              onChange={handleMessageChange}
+              value={formData.message}
+              onChange={handleInputChange}
               error={!!errors.message}
               helperText={errors.message}
-              required
               size="large"
             />
             <Button
@@ -227,6 +236,21 @@ const ContactAdminForm = () => {
             </Button>
           </form>
         </Box>
+
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your message has been sent to Admin!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

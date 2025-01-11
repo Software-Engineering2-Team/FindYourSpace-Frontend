@@ -56,20 +56,28 @@ const Login = () => {
 
   const validateUsername = (value) => {
     const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{5,25}$/;
+    console.log("Username value", value);
 
-    if (!usernameRegex.test(value)) {
-      if (value.length < 6 || value.length > 26) {
-        setUsernameError("Username must be between 6 and 26 characters long.");
-      } else if (!/^[a-zA-Z]/.test(value)) {
-        setUsernameError("Username must start with an alphabetical character.");
-      } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
-        setUsernameError("Username can only contain alphanumeric characters.");
-      } else {
-        setUsernameError("Invalid username.");
-      }
+    if (value === "") {
+      // Check for empty value first
+      setUsernameError("Username is required.");
+      console.log("Username is empty");
+      return false;
+    } else if (value.length < 6 || value.length > 26) {
+      setUsernameError("Username must be between 6 and 26 characters long.");
+      return false;
+    } else if (!/^[a-zA-Z]/.test(value)) {
+      setUsernameError("Username must start with an alphabetical character.");
+      return false;
+    } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+      setUsernameError("Username can only contain alphanumeric characters.");
+      return false;
+    } else if (!usernameRegex.test(value)) {
+      setUsernameError("Invalid username.");
       return false;
     }
 
+    // Clear error if valid
     setUsernameError("");
     return true;
   };
@@ -78,6 +86,11 @@ const Login = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/;
 
     if (!passwordRegex.test(value)) {
+      if (value === "") {
+        setPasswordError("Password is required.");
+        console.log("Password is empty");
+        return false;
+      }
       if (value.length < 8 || value.length > 32) {
         setPasswordError("Password must be between 8 and 32 characters long.");
       } else if (!/[A-Za-z]/.test(value)) {
@@ -124,20 +137,23 @@ const Login = () => {
       })
       .catch((error) => {
         console.log("Error response content", error);
-        setLoginError("Invalid Credentials!");
+        setLoginError(error.message);
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    validatePassword(password);
+    validateUsername(username);
+    fetchData();
 
-    if (validatePassword(password) && validateUsername(username)) {
-      console.log("An email was submitted: ", username);
-      console.log("A password was submitted: ", password);
-      fetchData();
-    } else {
-      console.log("Form invalid");
-    }
+    // if (validatePassword(password) && validateUsername(username)) {
+    //   console.log("An email was submitted: ", username);
+    //   console.log("A password was submitted: ", password);
+    //   fetchData();
+    // } else {
+    //   console.log("Form invalid");
+    // }
   };
 
   return (

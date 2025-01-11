@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Stack, Typography, Box, Grid } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Stack,
+  Typography,
+  Box,
+  Grid,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import AddOfficeStore from "../../api/AddOfficeStore";
 import LoginStore from "../../api/LoginStore";
@@ -17,16 +26,18 @@ const AddOfficeSpaceForm = () => {
   }
   const ownerId = loginInfo.id;
   const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   console.log(ownerId);
+
   const [formData, setFormData] = useState({
-    description: "",
-    price: 0,
-    location: "",
-    size: "",
+    description: null,
+    price: null,
+    location: null,
+    size: null,
     availability: "true",
     isApproved: "false",
-    photos: "",
+    photos: null,
     owner: ownerId,
   });
 
@@ -43,32 +54,39 @@ const AddOfficeSpaceForm = () => {
 
   const validateField = (field, value) => {
     let error = "";
+    console.log(`Validating ${field} with value ${value}`);
     switch (field) {
       case "location":
-        if (value.trim().length <= 2) error = "Location is not valid.";
+        if (value === null || value.trim().length <= 2) {
+          error = "Location is not valid.";
+          console.log("Error in location field");
+        }
         break;
       case "photos":
-        if (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        if (
+          value === null ||
+          (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        ) {
           error = "Invalid URL format.";
+          console.log("Error in photos field");
+        }
         break;
       case "size":
-        if (!value.trim()) error = "Size is required.";
-        else if (isNaN(value) || Number(value) <= 0)
+        if (value === null || isNaN(value) || Number(value) <= 0) {
           error = "Size must be a positive number.";
+          console.log("Error in size field");
+        }
         break;
       case "price":
-        if (!value.trim()) error = "Price is required.";
-        else if (isNaN(value) || Number(value) <= 0)
+        if (value === null || isNaN(value) || Number(value) <= 0) {
           error = "Price must be a positive number.";
+          console.log("Error in price field");
+        }
         break;
       default:
         break;
     }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [field]: error,
-    }));
-    return !error;
+    return error;
   };
 
   const handleInputChange = (field, value) => {
@@ -76,25 +94,51 @@ const AddOfficeSpaceForm = () => {
       ...prevData,
       [field]: value,
     }));
-    validateField(field, value);
+
+    const error = validateField(field, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: error || "", // Clear the error if the field is valid
+    }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const isValid = Object.keys(formData).every((field) =>
-      validateField(field, formData[field])
-    );
+
+    const newErrors = {};
+    let isValid = true;
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
 
     if (!isValid) {
       console.log("Form validation failed.");
+      console.log("Form validation errors", newErrors);
       return;
     }
+
     try {
       await AddOfficeStore.getState().createAdSpace(formData);
-      navigate("/spaces");
+      setConfirmationOpen(true);
+      console.log("ConfirmationOpen set to true.");
+      setTimeout(() => navigate("/spaces"), 2000);
     } catch (error) {
       console.error("Error adding AdSpace data:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+    navigate("/spaces");
   };
 
   const cancelHandler = () => {
@@ -109,6 +153,7 @@ const AddOfficeSpaceForm = () => {
           <Typography sx={{ marginTop: "2%", paddingLeft: "1.5%" }}>
             <h2>Create A New Advertisement Space Listing</h2>
           </Typography>
+
           <Box
             sx={{
               padding: { xs: "24px", md: "32px" },
@@ -224,6 +269,20 @@ const AddOfficeSpaceForm = () => {
             </form>
           </Box>
         </div>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your ad space has been submitted for review!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );
