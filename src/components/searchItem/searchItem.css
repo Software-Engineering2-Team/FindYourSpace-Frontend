@@ -1,14 +1,14 @@
 .searchItem {
   display: flex;
-  flex-direction: column; /* Change to column layout */
+  flex-direction: column;
   justify-content: center;
-  transition: transform 0.3s ease-in-out; /* Optional: Add animation for the entire item */
+  transition: transform 0.3s ease-in-out;
 }
 
 .imageContainer {
   flex: 1;
   border-radius: 20px;
-  transition: transform 0.3s ease-in-out, margin-bottom 0.3s ease-in-out; /* Smooth animation for scaling and spacing */
+  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
 }
 
 .siImg {
@@ -16,10 +16,10 @@
   height: 300px;
   object-fit: cover;
   border-radius: 20px;
-  transition: transform 0.3s ease-in-out; /* Smooth hover animation */
+  transition: transform 0.3s ease-in-out;
 }
 
 .imageContainer:hover {
-  transform: scale(1.1); /* Scale the container */
-  margin-bottom: 20px; /* Add space below smoothly */
+  transform: scale(1.1);
+  margin: 10px;
 }
