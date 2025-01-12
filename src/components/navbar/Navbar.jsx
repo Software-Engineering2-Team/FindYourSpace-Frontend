@@ -21,20 +21,6 @@ const theme = createTheme({
 });
 
 const Navbar = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(() => LoginStore.getState().userData !== null);
-
-  // const handleLogout = async () => {
-  //     await LoginStore.getState().logout();
-  //     setIsLoggedIn(false); // Update isLoggedIn state after logout
-  // };
-
-  // // Inside the useEffect, remove isLoggedIn from the dependency array
-  // useEffect(() => {
-  //     const unsubscribe = LoginStore.subscribe(
-  //         (userData) => setIsLoggedIn(userData !== null)
-  //     );
-  //     return () => unsubscribe();
-  // }, [isLoggedIn]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => LoginStore.getState().userData !== null
