@@ -2,16 +2,24 @@
   display: flex;
   flex-direction: column; /* Change to column layout */
   justify-content: center;
-  gap: 5px;
-  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out; /* Optional: Add animation for the entire item */
 }
 
 .imageContainer {
   flex: 1;
+  border-radius: 20px;
+  transition: transform 0.3s ease-in-out, margin-bottom 0.3s ease-in-out; /* Smooth animation for scaling and spacing */
 }
 
 .siImg {
-  width: 276px;
-  height: 280px;
-  object-fit: cover;  
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: transform 0.3s ease-in-out; /* Smooth hover animation */
+}
+
+.imageContainer:hover {
+  transform: scale(1.1); /* Scale the container */
+  margin-bottom: 20px; /* Add space below smoothly */
 }
