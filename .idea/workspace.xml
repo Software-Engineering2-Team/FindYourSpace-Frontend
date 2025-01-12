@@ -6,31 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="83621704-29c1-40fd-8d3e-e8115ed8ef3f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/Navbar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/searchItem/searchItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchItem/searchItem.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/add/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add/add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/SearchApproveSpaces.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approveSpaces/SearchApproveSpaces.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/SearchBookingHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bookingHistory/SearchBookingHistory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/edit/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/edit/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list/List.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/List.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/SearchMySpaces.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mySpaces/SearchMySpaces.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/SearchUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/policyEnforcement/SearchUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,32 +18,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2rU4GK11YHJeckaUv0WxTuQfI0A" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "akhil",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/akhil/OneDrive/Desktop/WEBAPP Project/Backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;akhil&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/akhil/OneDrive/Desktop/WEBAPP Project/Backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -82,7 +60,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1736600222956</updated>
-      <workItem from="1736600225877" duration="14975000" />
+      <workItem from="1736600225877" duration="15639000" />
+      <workItem from="1736685593773" duration="4222000" />
     </task>
     <servers />
   </component>

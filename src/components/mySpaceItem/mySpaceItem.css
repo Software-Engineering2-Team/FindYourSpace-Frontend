@@ -6,6 +6,11 @@
   justify-content: space-between; /* Add this line */
   gap: 20px; /* Add this line */
   margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out
+}
+
+.searchItemHis:hover {
+  transform: scale(1.05); /* Scale the container */
 }
 
 .siImgHis {

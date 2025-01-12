@@ -67,6 +67,9 @@ const Navbar = () => {
             <div>
               {isLoggedIn ? (
                 <>
+                  <Button component={Link} to="/spaces" color="inherit">
+                    Find spaces
+                  </Button>
                   <Button
                     component={Link}
                     to="/booking-history"
@@ -75,13 +78,10 @@ const Navbar = () => {
                     Booking History
                   </Button>
                   <Button component={Link} to="/add" color="inherit">
-                    Rent my space
+                    Rent out my space
                   </Button>
                   <Button component={Link} to="/myspaces" color="inherit">
                     My Spaces
-                  </Button>
-                  <Button component={Link} to="/spaces" color="inherit">
-                    Find spaces
                   </Button>
                   <Button component={Link} to="/profile" color="inherit">
                     Profile
