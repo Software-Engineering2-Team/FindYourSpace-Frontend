@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -11,6 +12,7 @@ import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
+import ExpandedAdSpaceStore from "../../api/ExpandedAdSpaceStore";
 
 const defaultTheme = createTheme({
   palette: {
@@ -31,13 +33,36 @@ const ContactForm = () => {
     subject: "",
     message: "",
   });
-  const spaceOwnerEmail = "davidabraham384@gmail.com";
+
+  const { id } = useParams();
+
+  const [spaceOwnerEmail, setSpaceOwnerEmail] = useState("");
 
   const form = useRef();
 
   const [errors, setErrors] = useState({});
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id);
+        const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace;
+        console.log("Fetched owner email", fetchedData.owner_email);
+        if (fetchedData.owner_email) {
+          setSpaceOwnerEmail(fetchedData.owner_email);
+        } else {
+          setSpaceOwnerEmail("davidabraham@gmail.com");
+        }
+      } catch (error) {
+        console.error("Error fetching expanded ad space:", error);
+      }
+    };
+
+    console.log("Fetching expanded ad space with id:", id);
+    fetchData();
+  }, [id]);
 
   const validateField = (name, value) => {
     let error = "";
@@ -212,7 +237,6 @@ const ContactForm = () => {
               name="spaceOwner_email"
               value={spaceOwnerEmail}
               disabled
-              // onChange={handleSpaceOwnerEmailChange}
               required
               size="large"
               sx={{
