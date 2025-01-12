@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83621704-29c1-40fd-8d3e-e8115ed8ef3f" name="Changes" comment="" />
+    <list default="true" id="83621704-29c1-40fd-8d3e-e8115ed8ef3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/ChildComponent.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ParentComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/SignupStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/SignupStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add/add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/edit/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/edit/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,54 +26,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2rU4GK11YHJeckaUv0WxTuQfI0A" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;akhil&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/akhil/OneDrive/Desktop/WEBAPP Project/Backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "Merging merged",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
-        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+}]]></component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="83621704-29c1-40fd-8d3e-e8115ed8ef3f" name="Changes" comment="" />
-      <created>1736600222956</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1736600222956</updated>
-      <workItem from="1736600225877" duration="15639000" />
-      <workItem from="1736685593773" duration="5051000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
 </project>

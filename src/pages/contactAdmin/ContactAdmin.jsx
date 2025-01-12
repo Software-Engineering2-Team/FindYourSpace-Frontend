@@ -35,6 +35,7 @@ const ContactAdminForm = () => {
   const [adminEmail, setAdminEmail] = useState("akhilajithuni@gmail.com");
   const [errors, setErrors] = useState({});
   const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useRef();
 
@@ -108,7 +109,7 @@ const ContactAdminForm = () => {
       })
       .then(
         () => {
-          setSnackbarOpen(true);
+          setConfirmationOpen(true);
           setIsLoading(false); // Remove loading state
           setTimeout(() => navigate(-1), 2000);
         },
