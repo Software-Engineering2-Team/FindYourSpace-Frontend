@@ -1,17 +1,23 @@
 .searchItemHis {
   border: 1px solid lightgray;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 22px;
   display: flex;
   justify-content: space-between; /* Add this line */
   gap: 20px; /* Add this line */
   margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out
+}
+
+.searchItemHis:hover {
+  transform: scale(1.05); /* Scale the container */
 }
 
 .siImgHis {
   width: 160px;
   height: 160px;
   object-fit: cover;
+  border-radius: 13px;
 }
 
 .siDescHis {
@@ -24,7 +30,6 @@
 .siTitleHis {
   font-size: 25px;
   color: #000000;
-  font-family:BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .siDistanceHis {
@@ -40,76 +45,83 @@
   border-radius: 5px;
 }
 
-.siSubtitleHis{
+.siSubtitleHis {
   font-size: 18px;
   /*font-weight: bold;*/
   margin-top: auto;
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
-.siFeaturesHis{
+.siFeaturesHis {
   font-size: 15px;
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   margin-top: auto;
 }
 
-.siCancelOpHis{
+.siCancelOpHis {
   font-size: 12px;
   color: #008009;
   font-weight: bold;
 }
 
-.siCancelOpSubtitleHis{
+.siCancelOpSubtitleHis {
   font-size: 12px;
   color: #008009;
 }
 
 .siDetailsHis {
   margin-top: 10px;
-  width: 150px; 
+  width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
-.siRatingHis{
+.siDetailRow {
   display: flex;
-  justify-content: space-between
 }
 
-.siRatingHis>span{
+.siHeading {
+  font-weight: bold;
+  margin-right: 8px; /* Add some spacing between the heading and its value */
+}
+
+.siRatingHis {
+  display: flex;
+  justify-content: space-between;
+}
+
+.siRatingHis > span {
   font-weight: 500;
 }
-.siRatingHis>button{
- background-color: #6522ad;
- color: white;
- padding: 5px;
- font-weight: bold;
- border: none;
- border-radius: 5px;
+.siRatingHis > button {
+  background-color: #6522ad;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
 }
 
-.siDetailTextsHis{
+.siDetailTextsHis {
   text-align: right;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.siPriceHis{
+.siPriceHis {
   font-size: 20px;
   margin-top: auto;
   font-family: "Dubai", serif;
 }
 
-.siTaxOpHis{
+.siTaxOpHis {
   font-size: 12px;
   color: gray;
 }
 
-.siCheckButtonHis{
+.siCheckButtonHis {
   background-color: black;
   color: white;
   font-weight: bold;
@@ -156,18 +168,4 @@
 .deleteIconHis {
   cursor: pointer;
   margin-left: 86px;
-}
-
-.mySpaceItem-container {
-  position: relative;
-}
-
-.deleteIcon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 20px;
 }
