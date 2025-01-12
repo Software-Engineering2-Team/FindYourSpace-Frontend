@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   Pagination,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Typography,
 } from "@mui/material";
 import SearchBar from "./Search";
 import SearchItem from "../../components/searchItem/SearchItem";
@@ -124,36 +119,45 @@ const List = () => {
         <MarketingComponent />
         <div
           ref={listRef}
-          style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
         >
-          <div style={{display: "flex", flexDirection: "column", width: "80%"}}>
-            <div style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "50px",
-              gap: "20px"
-            }}>
-              <SearchBar onSearch={handleSearch}/>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "80%" }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "50px",
+                gap: "20px",
+              }}
+            >
+              <SearchBar onSearch={handleSearch} />
               <FormControl
-                  style={{
-                    width: "100%",
-                    maxWidth: "200px",
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "6px", // Same border radius
-                      height: "40px", // Set consistent height
-                    },
-                  }}
+                style={{
+                  width: "100%",
+                  maxWidth: "200px",
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "6px", // Same border radius
+                    height: "40px", // Set consistent height
+                  },
+                }}
               >
                 <InputLabel htmlFor="sort">Sort by:</InputLabel>
                 <Select
-                    id="sort"
-                    value={sortOption}
-                    onChange={handleSortChange}
-                    label="Sort by"
+                  id="sort"
+                  value={sortOption}
+                  onChange={handleSortChange}
+                  label="Sort by"
                 >
                   <MenuItem value="default">Default</MenuItem>
                   <MenuItem value="alphabetical">Alphabetical</MenuItem>
@@ -162,41 +166,39 @@ const List = () => {
               </FormControl>
             </div>
             <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  // width: "100%",
-                  columnGap: "40px", // Add spacing between items
-                  rowGap: "40px",
-                  justifyContent: "center",
-                }}
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                // width: "100%",
+                columnGap: "40px", // Add spacing between items
+                rowGap: "40px",
+                justifyContent: "center",
+              }}
             >
               {filteredOfficeSpaces.map((space) => (
-                  <div
-                      key={space.id}
-                  >
-                    <SearchItem space={space} onUpdate={handleOfficeUpdate}/>
-                  </div>
+                <div key={space.id}>
+                  <SearchItem space={space} onUpdate={handleOfficeUpdate} />
+                </div>
               ))}
             </div>
           </div>
 
           <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                padding: "50px"
-              }}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              padding: "50px",
+            }}
           >
-              <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  color="primary"
-                  size="large"
-              />
-              Page {currentPage} of {totalPages}
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              size="large"
+            />
+            Page {currentPage} of {totalPages}
           </div>
         </div>
       </ThemeProvider>

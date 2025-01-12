@@ -139,9 +139,9 @@ const Signup = () => {
       })
       .catch((error) => {
         console.log("Error", error);
-        if (error.message == "Passwords do not match") {
+        if (error.message === "Passwords do not match") {
           setConfirmPasswordError(error.message);
-        } else if (error.message == "Username already exists") {
+        } else if (error.message === "Username already exists") {
           setUsernameError(error.message);
         }
       });

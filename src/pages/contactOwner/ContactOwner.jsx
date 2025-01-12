@@ -11,7 +11,6 @@ import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom"; // For navigation
 
 const defaultTheme = createTheme({
   palette: {
@@ -32,9 +31,7 @@ const ContactForm = () => {
     subject: "",
     message: "",
   });
-  const [spaceOwnerEmail, setSpaceOwnerEmail] = useState(
-    "davidabraham384@gmail.com"
-  );
+  const spaceOwnerEmail = "davidabraham384@gmail.com";
 
   const form = useRef();
 
@@ -80,6 +77,9 @@ const ContactForm = () => {
       default:
         break;
     }
+    if (error) {
+      setIsLoading(false);
+    }
     return error;
   };
 
@@ -111,9 +111,8 @@ const ContactForm = () => {
       })
       .then(
         () => {
-          setConfirmationOpen(true);
           setIsLoading(false); // Remove loading state
-          setTimeout(() => navigate(-1), 2000);
+          setConfirmationOpen(true);
         },
         (error) => {
           console.log("FAILED...", error.text);
@@ -151,7 +150,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div data-testid="contactForm-1">
+    <div data-testid="contactForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />
@@ -212,6 +211,7 @@ const ContactForm = () => {
               margin="normal"
               name="spaceOwner_email"
               value={spaceOwnerEmail}
+              disabled
               // onChange={handleSpaceOwnerEmailChange}
               required
               size="large"

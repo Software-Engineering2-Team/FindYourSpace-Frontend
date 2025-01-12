@@ -49,8 +49,6 @@ const defaultTheme = createTheme({
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
@@ -168,8 +166,8 @@ const Login = () => {
                   onChange={handleUsernameChange}
                   autoComplete="username"
                   autoFocus
-                  error={!!usernameError || !!loginError}
-                  helperText={usernameError || loginError} // Show error message
+                  error={!!loginError}
+                  helperText={loginError} // Show error message
                 />
                 <TextField
                   margin="normal"
@@ -182,8 +180,8 @@ const Login = () => {
                   value={password}
                   onChange={handlePasswordChange}
                   autoComplete="current-password"
-                  error={!!passwordError || !!loginError}
-                  helperText={passwordError || loginError} // Show error message
+                  error={!!loginError}
+                  helperText={loginError} // Show error message
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}

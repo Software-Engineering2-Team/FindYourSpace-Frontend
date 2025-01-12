@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -30,7 +30,6 @@ const AddOfficeSpaceForm = () => {
   console.log(ownerId);
 
   const [formData, setFormData] = useState({
-    description: null,
     price: null,
     location: null,
     size: null,
@@ -183,6 +182,8 @@ const AddOfficeSpaceForm = () => {
                   },
                 }}
                 margin="normal"
+                error={!!errors.location}
+                helperText={errors.location}
               />
 
               <TextField
@@ -198,6 +199,8 @@ const AddOfficeSpaceForm = () => {
                   },
                 }}
                 margin="normal"
+                error={!!errors.photos}
+                helperText={errors.photos}
               />
 
               {formData.photos && (
@@ -236,6 +239,8 @@ const AddOfficeSpaceForm = () => {
                     borderRadius: "9px", // Custom border radius
                   },
                 }}
+                error={!!errors.size}
+                helperText={errors.size}
               />
               <TextField
                 label="Price"
@@ -251,6 +256,8 @@ const AddOfficeSpaceForm = () => {
                     borderRadius: "9px", // Custom border radius
                   },
                 }}
+                error={!!errors.price}
+                helperText={errors.price}
               />
               <Stack
                 direction="row"

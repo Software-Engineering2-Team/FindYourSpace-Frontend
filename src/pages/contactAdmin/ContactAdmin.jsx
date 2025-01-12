@@ -11,7 +11,6 @@ import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom"; // For navigation
 
 const defaultTheme = createTheme({
   palette: {
@@ -32,7 +31,7 @@ const ContactAdminForm = () => {
     subject: "",
     message: "",
   });
-  const [adminEmail, setAdminEmail] = useState("akhilajithuni@gmail.com");
+  const adminEmail = "akhilajithuni@gmail.com";
   const [errors, setErrors] = useState({});
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -111,7 +110,6 @@ const ContactAdminForm = () => {
         () => {
           setConfirmationOpen(true);
           setIsLoading(false); // Remove loading state
-          setTimeout(() => navigate(-1), 2000);
         },
         (error) => {
           console.log("FAILED...", error.text);
@@ -263,13 +261,13 @@ const ContactAdminForm = () => {
           </form>
         </Box>
         <Snackbar
-          open={snackbarOpen}
+          open={confirmationOpen}
           autoHideDuration={2500}
-          onClose={handleSnackbarClose}
+          onClose={handleConfirmationClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <Alert
-            onClose={handleSnackbarClose}
+            onClose={handleConfirmationClose}
             severity="success"
             sx={{ width: "100%", border: "2px solid green" }}
           >

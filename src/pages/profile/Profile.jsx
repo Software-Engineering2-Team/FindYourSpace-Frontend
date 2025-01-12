@@ -86,7 +86,7 @@ const Profile = () => {
         break;
       case "last_name":
         if (value.trim().length <= 2) {
-          error = `${name.replace("_", " ")} is not valid.`;
+          error = `Last name is not valid.`;
         } else if (!/^[a-zA-Z]+$/.test(value)) {
           error = `${name.replace("_", " ")} can only contain letters.`;
         }
@@ -247,7 +247,6 @@ const Profile = () => {
             >
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="firstname"
                 label="First Name"
@@ -265,7 +264,6 @@ const Profile = () => {
               />
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="lastname"
                 label="Last Name"
@@ -279,6 +277,7 @@ const Profile = () => {
                   },
                 }}
                 error={!!userInfoErrors.last_name}
+                helperText={userInfoErrors.last_name}
               />
               <TextField
                 margin="normal"
@@ -300,10 +299,10 @@ const Profile = () => {
               />
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="contactinfo"
                 label="Contact Info"
+                type="tel"
                 name="contactInfo"
                 value={userData.contactInfo}
                 onChange={handleInputChange}
@@ -337,7 +336,7 @@ const Profile = () => {
               width: "40%",
               textAlign: "center",
               marginTop: 5,
-              marginBottom: 5,
+              marginBottom: 10,
             }}
           >
             <Typography
@@ -401,13 +400,6 @@ const Profile = () => {
               </Button>
             </Box>
           </Box>
-          <Button
-            variant="outlined"
-            color="error"
-            style={{ marginTop: 50, marginBottom: 50 }}
-          >
-            Delete Account
-          </Button>
         </Grid>
         <Snackbar
           open={confirmationOpen}
@@ -420,7 +412,7 @@ const Profile = () => {
             severity="success"
             sx={{ width: "100%", border: "2px border green" }}
           >
-            Your profile has been updated!
+            Your profile has been updated successfully!
           </Alert>
         </Snackbar>
         <Snackbar
@@ -434,7 +426,7 @@ const Profile = () => {
             severity="success"
             sx={{ width: "100%", border: "2px border green" }}
           >
-            Your profile has been updated!
+            Your password has been changes successfully!
           </Alert>
         </Snackbar>
       </ThemeProvider>

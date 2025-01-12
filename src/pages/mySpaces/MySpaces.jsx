@@ -19,12 +19,8 @@ const MySpaces = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [officeSpaces, setOfficeSpaces] = useState(
-    OfficeStore.getState().offices
-  );
-  const [filteredOfficeSpaces, setFilteredOfficeSpaces] = useState(
-    OfficeStore.getState().offices
-  );
+  const [officeSpaces, setOfficeSpaces] = useState([]);
+  const [filteredOfficeSpaces, setFilteredOfficeSpaces] = useState([]);
   const [sortOption, setSortOption] = useState("default");
   const listRef = React.createRef();
 

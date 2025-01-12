@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
   height: 50px;
   width: 100%;
   background-color: black;
@@ -6,23 +6,23 @@
   justify-content: center;
 }
 
-.navContainer{
+.navContainer {
   width: 100%;
   color: white;
   display: flex;
-  align-items: center ;
+  align-items: center;
   justify-content: space-around;
   background-color: black;
 }
 
-.logo{
+.logo {
   font-weight: 1000;
   font-size: x-large;
   color: white;
   font-family: "Dubai Medium", serif;
 }
 
-.navButton{
+.navButton {
   margin-left: 20px;
   border: none;
   padding: 5px 10px;

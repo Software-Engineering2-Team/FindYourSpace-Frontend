@@ -35,7 +35,6 @@ const EditOfficeSpaceForm = () => {
     photos: "",
   });
   const [errors, setErrors] = useState({});
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const fetchOffice = OfficeStore((state) => state.fetchOffice);
   const updateOffice = OfficeStore((state) => state.updateOffice);
