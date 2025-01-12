@@ -26,22 +26,84 @@ const defaultTheme = createTheme({
 });
 
 const ContactForm = () => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [spaceOwnerEmail, setSpaceOwnerEmail] = useState(
     "davidabraham384@gmail.com"
   );
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // Snackbar state
-  const form = useRef();
-  const navigate = useNavigate(); // For navigation
 
+  const form = useRef();
+
+  const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const validateField = (name, value) => {
+    let error = "";
+    switch (name) {
+      case "fullName":
+        if (!value.trim()) {
+          // Check for empty string or whitespace
+          error = "Full Name is required.";
+          console.log("Full name is empty");
+        } else if (value.trim().length < 2) {
+          error = "Full name is not valid.";
+        } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+          error = "Full Name can only contain letters and spaces.";
+        }
+        break;
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Invalid email address.";
+        }
+        break;
+      case "subject":
+        if (!value.trim()) {
+          error = "Subject is required.";
+        } else if (value.trim().length < 5) {
+          error = "Subject must be at least 5 characters long.";
+        }
+        break;
+      case "message":
+        if (!value.trim()) {
+          error = "Message is required.";
+        } else if (value.trim().length < 10) {
+          error = "Message must be at least 10 characters long.";
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state
+    setIsLoading(true);
+    const newErrors = {};
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
+    // If there are any errors, stop submission
+    if (Object.keys(newErrors).length > 0) {
+      console.log("Form validation failed:", newErrors);
+      return;
+    }
+
+    // Proceed with sending the email
     emailjs
       .sendForm("service_ypanvv4", "template_a6s6y9o", form.current, {
         publicKey: "O_9E7yjTjSaZP0Fr9",
@@ -49,7 +111,7 @@ const ContactForm = () => {
       })
       .then(
         () => {
-          setSnackbarOpen(true);
+          setConfirmationOpen(true);
           setIsLoading(false); // Remove loading state
           setTimeout(() => navigate(-1), 2000);
         },
@@ -58,34 +120,38 @@ const ContactForm = () => {
           setIsLoading(false); // Remove loading state even on failure
         }
       );
+
+    // Reset form
+    setFormData({
+      fullName: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
   };
 
-  const handleFullNameChange = (event) => {
-    setFullName(event.target.value);
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
 
-  const handleSubjectChange = (event) => {
-    setSubject(event.target.value);
-  };
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
 
-  const handleMessageChange = (event) => {
-    setMessage(event.target.value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, value),
+    }));
   };
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
-  // const handleSpaceOwnerEmailChange = (event) => {
-  //     setSpaceOwnerEmail(event.target.value);
-  // };
 
   return (
-    <div data-testid="contactForm-1" style={{ paddingTop: "64px" }}>
+    <div data-testid="contactForm-1">
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Navbar />
@@ -102,119 +168,124 @@ const ContactForm = () => {
           }}
         >
           <Typography variant="h4" gutterBottom sx={{ textAlign: "center" }}>
-            Contact Space Owner
+            Contact Space
           </Typography>
-            <form ref={form} onSubmit={sendEmail}>
-                <TextField
-                    label="Full Name"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="user_name"
-                    value={fullName}
-                    onChange={handleFullNameChange}
-                    required
-                    size="large"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "9px",
-                        },
-                    }}
-                />
-                <TextField
-                    label="Your Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="user_email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    required
-                    size="large"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "9px",
-                        },
-                    }}
-                />
-                <TextField
-                    label="Space Owner Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="spaceOwner_email"
-                    value={spaceOwnerEmail}
-                    required
-                    size="large"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "9px",
-                        },
-                    }}
-                />
-                <TextField
-                    label="Subject"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="subject"
-                    value={subject}
-                    onChange={handleSubjectChange}
-                    required
-                    size="large"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "9px",
-                        },
-                    }}
-                />
-                <TextField
-                    label="Message"
-                    variant="outlined"
-                    multiline
-                    rows={6}
-                    fullWidth
-                    margin="normal"
-                    name="message"
-                    value={message}
-                    onChange={handleMessageChange}
-                    required
-                    size="large"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "9px",
-                        },
-                    }}
-                />
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        sx={{color: "#fff", backgroundColor: "#000"}}
-                        style={{marginTop: 20, borderRadius: 7}}
-                        disabled={isLoading} // Disable button when loading
-                    >
-                        {isLoading ? "Sending..." : "Send Message"}
-                    </Button>
-                </div>
-            </form>
-        </Box>
-          {/* Snackbar for confirmation */}
-          <Snackbar
-              open={snackbarOpen}
-              autoHideDuration={2500}
-              onClose={handleSnackbarClose}
-              anchorOrigin={{vertical: "top", horizontal: "center"}}
-          >
-              <Alert
-                  onClose={handleSnackbarClose}
-                  severity="success"
-                  sx={{width: "100%"}}
+          <form ref={form} onSubmit={sendEmail}>
+            <TextField
+              label="Full Name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              error={!!errors.fullName}
+              helperText={errors.fullName}
+              size="large"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
+            />
+            <TextField
+              label="Your Email"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              error={!!errors.email}
+              helperText={errors.email}
+              size="large"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
+            />
+            <TextField
+              label="Space Owner Email"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="spaceOwner_email"
+              value={spaceOwnerEmail}
+              // onChange={handleSpaceOwnerEmailChange}
+              required
+              size="large"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
+            />
+            <TextField
+              label="Subject"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              error={!!errors.subject}
+              helperText={errors.subject}
+              size="large"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
+            />
+            <TextField
+              label="Message"
+              variant="outlined"
+              multiline
+              rows={6}
+              fullWidth
+              margin="normal"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              error={!!errors.message}
+              helperText={errors.message}
+              size="large"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
+            />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ color: "#fff", backgroundColor: "#000" }}
+                style={{ marginTop: 20, borderRadius: 7 }}
+                disabled={isLoading} // Disable button when loading
               >
-                  Message sent successfully!
-              </Alert>
-          </Snackbar>
+                {isLoading ? "Sending..." : "Send Message"}
+              </Button>
+            </div>
+          </form>
+        </Box>
+
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%", border: "2px solid green" }}
+          >
+            Your message has been sent to the Space Owner!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

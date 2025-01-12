@@ -47,56 +47,30 @@ const defaultTheme = createTheme({
 });
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [emailError, setEmailError] = useState('');
-  // const [passwordError, setPasswordError] = useState('');
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
 
-  const validateEmail = () => {
-    // TODO: consider if want to use email or username to login
-
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   setEmailError('Invalid email address');
-    //   return false;
-    // }
-    // setEmailError('');
-    return true;
-  };
-
-  const validatePassword = () => {
-    // if (password.length < 3) {
-    //   setPasswordError('Password must be at least 3 characters');
-    //   return false;
-    // }
-    // setPasswordError('');
-    return true;
-  };
-
-  const handleEmailChange = (e) => {
+  const handleUsernameChange = (e) => {
     const value = e.target.value;
-    setEmail(value);
-    console.log(email);
-    validateEmail(value);
+    setUsername(value);
+    setLoginError("");
   };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
     console.log(password);
-    validatePassword(value);
+    setLoginError("");
   };
 
-  const isValid = () => validateEmail() && validatePassword();
-
   const fetchData = () => {
-    // TODO: change to email or username and update .login() method
-
     LoginStore.getState()
-      .login(email, password)
+      .login(username, password)
       .then(() => {
         const userData = LoginStore.getState().userData;
         if (userData) {
@@ -108,19 +82,13 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.error("Invalid email or password");
-        setLoginError("Incorrect Username or Password Entered!");
+        console.log("Error response content", error);
+        setLoginError(error.message);
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!isValid()) {
-      return;
-    }
-    console.log("An email was submitted: ", email);
-    console.log("A password was submitted: ", password);
     fetchData();
   };
 
@@ -170,6 +138,7 @@ const Login = () => {
                 boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
                 borderRadius: "8px",
                 backgroundColor: "#fff",
+                width: { xs: "95%", sm: "80%", md: "60%" }, // Adjust width for responsiveness
               }}
             >
               <Typography
@@ -192,12 +161,15 @@ const Login = () => {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
+                  id="username"
                   label="Username"
-                  name="email"
-                  onChange={handleEmailChange}
-                  autoComplete="email"
+                  name="username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  autoComplete="username"
                   autoFocus
+                  error={!!usernameError || !!loginError}
+                  helperText={usernameError || loginError} // Show error message
                 />
                 <TextField
                   margin="normal"
@@ -207,14 +179,12 @@ const Login = () => {
                   label="Password"
                   type="password"
                   id="password"
+                  value={password}
                   onChange={handlePasswordChange}
                   autoComplete="current-password"
+                  error={!!passwordError || !!loginError}
+                  helperText={passwordError || loginError} // Show error message
                 />
-                {loginError && (
-                  <p style={{ color: "red", textAlign: "center" }}>
-                    {loginError}
-                  </p>
-                )}
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"

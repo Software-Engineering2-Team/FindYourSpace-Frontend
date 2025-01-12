@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Snackbar, Alert } from "@mui/material";
 import ProfileStore from "../../api/ProfileStore";
 
 const defaultTheme = createTheme({
@@ -33,8 +34,12 @@ const Profile = () => {
     password: "",
     confirm_password: "",
   });
-
-  const [loginError, setLoginError] = useState("");
+  const [userInfoErrors, setUserInfoErrors] = useState({});
+  const [passwordError, setPasswordError] = useState("");
+  const [resetError, setresetError] = useState("");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [passChangeConfirmationOpen, setPassChangeConfirmationOpen] =
+    useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,12 +56,72 @@ const Profile = () => {
     fetchData();
   }, []);
 
+  const validatePassword = (value) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/;
+
+    if (!passwordRegex.test(value)) {
+      if (value.length < 8 || value.length > 32) {
+        setPasswordError("Password must be between 8 and 32 characters long.");
+      } else if (!/[A-Za-z]/.test(value)) {
+        setPasswordError("Password must contain at least one letter.");
+      } else if (!/\d/.test(value)) {
+        setPasswordError("Password must contain at least one number.");
+      } else {
+        setPasswordError("Invalid password format.");
+      }
+      return false;
+    }
+
+    setPasswordError("");
+    return true;
+  };
+
+  const validateField = (name, value) => {
+    let error = "";
+    switch (name) {
+      case "first_name":
+        if (value.trim().length <= 2) {
+          error = `First name is not valid.`;
+        }
+        break;
+      case "last_name":
+        if (value.trim().length <= 2) {
+          error = `${name.replace("_", " ")} is not valid.`;
+        } else if (!/^[a-zA-Z]+$/.test(value)) {
+          error = `${name.replace("_", " ")} can only contain letters.`;
+        }
+        break;
+      case "email":
+        if (value.trim().length <= 2) {
+          error = "Email is required.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Invalid email address.";
+        }
+        break;
+      case "contactInfo":
+        if (value.trim().length !== 9) {
+          error = "Contact Info is required.";
+        } else if (!/^\d+$/.test(value)) {
+          error = "Contact Info can only contain numbers.";
+        }
+        break;
+      default:
+        break;
+    }
+    setUserInfoErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+    return !error;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    validateField(name, value);
     console.log("Changed data ", userData);
   };
 
@@ -66,47 +131,77 @@ const Profile = () => {
       ...passwordData,
       [name]: value,
     });
+    if (name === "password") {
+      validatePassword(value);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const isValid = Object.keys(userData).every((field) =>
+      validateField(field, userData[field])
+    );
+
+    if (!isValid) {
+      console.log("Form validation failed.");
+      return;
+    }
+
     try {
       await ProfileStore.getState().updateUserProfile(userData);
+      setConfirmationOpen(true);
+      console.log("Profile updated successfully.");
     } catch (error) {
       console.error("Error updating profile:", error);
-      setLoginError("Failed to update profile");
     }
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+  };
+
+  const handlePassChangeConfirmationClose = () => {
+    console.log("Code comes inside handlePassChangeConfirmationClose");
+    console.log(
+      "PassChangeConfirmationClose value:",
+      passChangeConfirmationOpen
+    );
+    setPassChangeConfirmationOpen(false);
   };
 
   // Handle password change form submission
   const handlePasswordChangeSubmit = async (e) => {
     e.preventDefault();
+
     const { password, confirm_password } = passwordData;
 
-    // Validate if passwords match
-    if (password !== confirm_password) {
-      setLoginError("Passwords do not match");
+    // Validate password
+    if (!validatePassword(password)) {
       return;
     }
 
-    console.log("Changed Password ", password);
-
-    // Prepare updated userData
-    const updatedUserData = {
-      ...userData,
-      password: password,
-    };
-
-    console.log("UserData after Changed Password ", updatedUserData);
-    setUserData(updatedUserData);
+    // Validate if passwords match
+    if (password !== confirm_password) {
+      setresetError("Passwords do not match");
+      return;
+    }
 
     try {
+      const updatedUserData = {
+        ...userData,
+        password: password,
+      };
+
       await ProfileStore.getState().updateUserProfile(updatedUserData);
+      setPassChangeConfirmationOpen(true);
       setPasswordData({ password: "", confirm_password: "" });
-      setLoginError("");
+      setresetError("");
     } catch (error) {
       console.error("Error updating profile:", error);
-      setLoginError("Failed to update profile");
+      setresetError("Failed to update profile");
     }
   };
 
@@ -161,10 +256,12 @@ const Profile = () => {
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!userInfoErrors.first_name}
+                helperText={userInfoErrors.first_name}
               />
               <TextField
                 margin="normal"
@@ -177,10 +274,11 @@ const Profile = () => {
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!userInfoErrors.last_name}
               />
               <TextField
                 margin="normal"
@@ -193,10 +291,12 @@ const Profile = () => {
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!userInfoErrors.email}
+                helperText={userInfoErrors.email}
               />
               <TextField
                 margin="normal"
@@ -209,16 +309,14 @@ const Profile = () => {
                 onChange={handleInputChange}
                 InputLabelProps={{ shrink: true }}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!userInfoErrors.contactInfo}
+                helperText={userInfoErrors.contactInfo}
               />
-              {loginError && (
-                <p style={{ color: "red", textAlign: "center" }}>
-                  {loginError}
-                </p>
-              )}
+
               <Button
                 type="submit"
                 variant="contained"
@@ -267,10 +365,12 @@ const Profile = () => {
                 onChange={handlePasswordInputChange}
                 value={passwordData.password}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!passwordError}
+                helperText={passwordError}
               />
               <TextField
                 margin="normal"
@@ -284,10 +384,12 @@ const Profile = () => {
                 onChange={handlePasswordInputChange}
                 value={passwordData.confirm_password}
                 sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "9px",
-                },
-              }}
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "9px",
+                  },
+                }}
+                error={!!resetError}
+                helperText={resetError}
               />
               <Button
                 type="submit"
@@ -307,6 +409,34 @@ const Profile = () => {
             Delete Account
           </Button>
         </Grid>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%", border: "2px border green" }}
+          >
+            Your profile has been updated!
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={passChangeConfirmationOpen}
+          autoHideDuration={2000}
+          onClose={handlePassChangeConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handlePassChangeConfirmationClose}
+            severity="success"
+            sx={{ width: "100%", border: "2px border green" }}
+          >
+            Your profile has been updated!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

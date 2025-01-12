@@ -7,6 +7,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { Snackbar, Alert } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SignupStore from "../../api/SignupStore";
 
@@ -47,37 +48,67 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  // const [emailError, setEmailError] = useState('');
-  // const [passwordError, setPasswordError] = useState('');
-  const [loginError, setLoginError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  const validateEmail = () => {
-    // TODO: consider if want to use email or username to login
-
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   setEmailError('Invalid email address');
-    //   return false;
-    // }
-    // setEmailError('');
+  // Validation functions
+  const validateUsername = (value) => {
+    const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{5,25}$/;
+    if (!usernameRegex.test(value)) {
+      if (value.length < 6 || value.length > 26) {
+        setUsernameError("Username must be between 6 and 26 characters.");
+      } else if (!/^[a-zA-Z]/.test(value)) {
+        setUsernameError("Username must start with an alphabetical character.");
+      } else if (!/^[a-zA-Z0-9]+$/.test(value)) {
+        setUsernameError("Username can only contain alphanumeric characters.");
+      } else {
+        setUsernameError("Invalid username.");
+      }
+      return false;
+    }
+    setUsernameError("");
     return true;
   };
 
-  const validatePassword = () => {
-    // if (password.length < 3) {
-    //   setPasswordError('Password must be at least 3 characters');
-    //   return false;
-    // }
-    // setPasswordError('');
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Invalid email address.");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const validatePassword = (value) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/;
+
+    if (!passwordRegex.test(value)) {
+      if (value.length < 8 || value.length > 32) {
+        setPasswordError("Password must be between 8 and 32 characters long.");
+      } else if (!/[A-Za-z]/.test(value)) {
+        setPasswordError("Password must contain at least one letter.");
+      } else if (!/\d/.test(value)) {
+        setPasswordError("Password must contain at least one number.");
+      } else {
+        setPasswordError("Invalid password format.");
+      }
+      return false;
+    }
+
+    setPasswordError("");
     return true;
   };
 
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     setUsername(value);
+    validateUsername(value);
   };
 
   const handleEmailChange = (e) => {
@@ -95,10 +126,7 @@ const Signup = () => {
   const handleConfirmPasswordChange = (e) => {
     const value = e.target.value;
     setConfirmPassword(value);
-    validatePassword(value);
   };
-
-  const isValid = () => validateEmail() && validatePassword();
 
   const makeSignupRequest = () => {
     // TODO: change to email or username and update .login() method
@@ -106,26 +134,44 @@ const Signup = () => {
     SignupStore.getState()
       .signup(username, email, password, confirmPassword)
       .then(() => {
-        navigate("/");
+        setConfirmationOpen(true);
+        console.log("ConfirmationOpen set to true.");
       })
       .catch((error) => {
-        console.error("Invalid password");
-        setLoginError("Passwords dont match!");
+        console.log("Error", error);
+        if (error.message == "Passwords do not match") {
+          setConfirmPasswordError(error.message);
+        } else if (error.message == "Username already exists") {
+          setUsernameError(error.message);
+        }
       });
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+    navigate("/");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!isValid()) {
-      return;
-    }
-    console.log("A username was submitted: ", username);
-    console.log("An email was submitted: ", email);
-    console.log("A password was submitted: ", password);
-    console.log("Confirm Password was : ", confirmPassword);
+    const isUsernameValid = validateUsername(username);
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
 
-    makeSignupRequest();
+    if (isUsernameValid && isEmailValid && isPasswordValid) {
+      console.log("Signup data:", {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+      makeSignupRequest();
+    } else {
+      console.log("Form validation failed.");
+    }
   };
 
   return (
@@ -174,7 +220,10 @@ const Signup = () => {
                 id="username"
                 label="Username"
                 name="username"
+                value={username}
                 onChange={handleUsernameChange}
+                error={!!usernameError}
+                helperText={usernameError}
                 autoComplete="username"
                 autoFocus
               />
@@ -185,7 +234,10 @@ const Signup = () => {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={email}
                 onChange={handleEmailChange}
+                error={!!emailError}
+                helperText={emailError}
                 autoComplete="email"
                 autoFocus
               />
@@ -193,29 +245,30 @@ const Signup = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="password1"
+                name="password"
                 label="Password"
                 type="password"
                 id="password1"
+                value={password}
                 onChange={handlePasswordChange}
+                error={!!passwordError}
+                helperText={passwordError}
                 autoComplete="current-password"
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password2"
+                name="confirmPassword"
                 label="Confirm Password"
                 type="password"
                 id="password2"
+                value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
+                error={!!confirmPasswordError}
+                helperText={confirmPasswordError}
                 autoComplete="current-password"
               />
-              {loginError && (
-                <p style={{ color: "red", textAlign: "center" }}>
-                  {loginError}
-                </p>
-              )}
               <Button
                 type="submit"
                 fullWidth
@@ -236,6 +289,20 @@ const Signup = () => {
             </Box>
           </Box>
         </Grid>
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2000}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your account has been created!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );

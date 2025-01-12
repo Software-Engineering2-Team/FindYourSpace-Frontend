@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {TextField, Button, Stack, Typography, Box, Alert, Snackbar} from "@mui/material";
+import {
+  TextField,
+  Button,
+  Stack,
+  Typography,
+  Box,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -26,6 +34,8 @@ const EditOfficeSpaceForm = () => {
     price: 0,
     photos: "",
   });
+  const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const fetchOffice = OfficeStore((state) => state.fetchOffice);
   const updateOffice = OfficeStore((state) => state.updateOffice);
@@ -33,7 +43,6 @@ const EditOfficeSpaceForm = () => {
 
   const [editConfirmationOpen, setEditConfirmationOpen] = useState(false); // State for Snackbar
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State for Snackbar
-
 
   useEffect(() => {
     const fetchOfficeData = async () => {
@@ -51,16 +60,77 @@ const EditOfficeSpaceForm = () => {
     }
   }, [id, fetchOffice]);
 
+  const validateField = (field, value) => {
+    let error = "";
+    console.log(`Validating ${field} with value ${value}`);
+    switch (field) {
+      case "location":
+        if (value === "" || value.trim().length <= 2) {
+          error = "Location is not valid.";
+          console.log("Error in location field");
+        }
+        break;
+      case "photos":
+        if (
+          value === "" ||
+          (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        ) {
+          error = "Invalid URL format.";
+          console.log("Error in photos field");
+        }
+        break;
+      case "size":
+        if (value === 0 || isNaN(value) || Number(value) <= 0) {
+          error = "Size must be a positive number.";
+          console.log("Error in size field");
+        }
+        break;
+      case "price":
+        if (value === 0 || isNaN(value) || Number(value) <= 0) {
+          error = "Price must be a positive number.";
+          console.log("Error in price field");
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
+
+    const error = validateField(field, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: error || "", // Clear the error if the field is valid
+    }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log("Form data:", formData);
+
+    const newErrors = {};
+    let isValid = true;
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (!isValid) {
+      console.log("Form validation failed.");
+      console.log("Form validation errors", newErrors);
+      return;
+    }
 
     try {
       const data = await updateOffice(formData);
@@ -135,8 +205,9 @@ const EditOfficeSpaceForm = () => {
                   },
                 }}
                 margin="normal"
+                error={!!errors.location}
+                helperText={errors.location}
               />
-
 
               <TextField
                 label="Image URL"
@@ -144,38 +215,34 @@ const EditOfficeSpaceForm = () => {
                 value={formData.photos}
                 onChange={(e) => handleInputChange("photos", e.target.value)}
                 fullWidth
-                sx={{
-                  marginBottom: "20px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "9px", // Custom border radius
-                  },
-                }}
                 margin="normal"
+                error={!!errors.photos}
+                helperText={errors.photos}
               />
 
               {formData.photos && (
-                  <div
-                      style={{
-                        display: "flex", // Flexbox for centering
-                        justifyContent: "center", // Center horizontally
-                        alignItems: "center", // Center vertically
-                        margin: "20px",
-                      }}
-                  >
-                    <img
-                        src={formData.photos}
-                        alt="Office Space"
-                        style={{
-                          width: "50%",
-                          height: "50%",
-                          objectFit: "contain",
-                          borderRadius: "13px", // Apply rounded corners
-                        }}
-                    />
-                  </div>
+                <div
+                  style={{
+                    display: "flex", // Flexbox for centering
+                    justifyContent: "center", // Center horizontally
+                    alignItems: "center", // Center vertically
+                    margin: "20px",
+                  }}
+                >
+                  <img
+                    src={formData.photos}
+                    alt="Office Space"
+                    style={{
+                      width: "50%",
+                      height: "50%",
+                      objectFit: "contain",
+                      borderRadius: "13px", // Apply rounded corners
+                    }}
+                  />
+                </div>
               )}
 
-             <TextField
+              <TextField
                 label="Size"
                 placeholder="Size"
                 value={formData.size}
@@ -183,6 +250,8 @@ const EditOfficeSpaceForm = () => {
                 onChange={(e) => handleInputChange("size", e.target.value)}
                 fullWidth
                 margin="normal"
+                error={!!errors.size}
+                helperText={errors.size}
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
@@ -190,7 +259,6 @@ const EditOfficeSpaceForm = () => {
                   },
                 }}
               />
-
               <TextField
                 label="Price"
                 placeholder="Price"
@@ -199,6 +267,8 @@ const EditOfficeSpaceForm = () => {
                 onChange={(e) => handleInputChange("price", e.target.value)}
                 fullWidth
                 margin="normal"
+                error={!!errors.price}
+                helperText={errors.price}
                 sx={{
                   marginBottom: "20px",
                   "& .MuiOutlinedInput-root": {
@@ -254,7 +324,8 @@ const EditOfficeSpaceForm = () => {
           >
             Your ad space has been updated successfully!
           </Alert>
-        </Snackbar> <Snackbar
+        </Snackbar>{" "}
+        <Snackbar
           open={deleteConfirmationOpen}
           autoHideDuration={2000}
           onClose={handleDeleteConfirmationClose}

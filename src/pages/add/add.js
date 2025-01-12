@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -24,20 +24,21 @@ const AddOfficeSpaceForm = () => {
     };
   }
   const ownerId = loginInfo.id;
+  const [errors, setErrors] = useState({});
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   console.log(ownerId);
+
   const [formData, setFormData] = useState({
-    description: "",
-    price: 0,
-    location: "",
-    size: "",
+    description: null,
+    price: null,
+    location: null,
+    size: null,
     availability: "true",
     isApproved: "false",
-    photos: "",
+    photos: null,
     owner: ownerId,
   });
-
-  const [confirmationOpen, setConfirmationOpen] = useState(false); // State for Snackbar
 
   const theme = createTheme({
     palette: {
@@ -51,15 +52,78 @@ const AddOfficeSpaceForm = () => {
     },
   });
 
+  const validateField = (field, value) => {
+    let error = "";
+    console.log(`Validating ${field} with value ${value}`);
+    switch (field) {
+      case "location":
+        if (value === null || value.trim().length <= 2) {
+          error = "Location is not valid.";
+          console.log("Error in location field");
+        }
+        break;
+      case "photos":
+        if (
+          value === null ||
+          (value.trim() && !/^(https?:\/\/[^\s$.?#].[^\s]*)$/i.test(value))
+        ) {
+          error = "Invalid URL format.";
+          console.log("Error in photos field");
+        }
+        break;
+      case "size":
+        if (value === null || isNaN(value) || Number(value) <= 0) {
+          error = "Size must be a positive number.";
+          console.log("Error in size field");
+        }
+        break;
+      case "price":
+        if (value === null || isNaN(value) || Number(value) <= 0) {
+          error = "Price must be a positive number.";
+          console.log("Error in price field");
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
   const handleInputChange = (field, value) => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
+
+    const error = validateField(field, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: error || "", // Clear the error if the field is valid
+    }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
+
+    const newErrors = {};
+    let isValid = true;
+
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        newErrors[field] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (!isValid) {
+      console.log("Form validation failed.");
+      console.log("Form validation errors", newErrors);
+      return;
+    }
+
     try {
       await AddOfficeStore.getState().createAdSpace(formData);
       setConfirmationOpen(true); // Show confirmation message
@@ -69,8 +133,10 @@ const AddOfficeSpaceForm = () => {
   };
 
   const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
     setConfirmationOpen(false);
-    navigate("/spaces"); // Navigate to the spaces page after confirmation
+    navigate("/spaces");
   };
 
   const cancelHandler = () => {
@@ -212,7 +278,6 @@ const AddOfficeSpaceForm = () => {
             </form>
           </Box>
         </div>
-        {/* Snackbar for confirmation */}
         <Snackbar
           open={confirmationOpen}
           autoHideDuration={2000}

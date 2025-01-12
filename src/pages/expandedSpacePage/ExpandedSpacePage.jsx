@@ -31,7 +31,8 @@ const defaultTheme = createTheme({
 
 const ExpandedSpacePage = () => {
   const [space, setSpace] = useState(null);
-  // const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [startDateError, setStartDateError] = useState("");
   const [numberOfDays, setNumberOfDays] = useState(1);
   const { id } = useParams();
   console.log("The id is: ", id);
@@ -56,11 +57,32 @@ const ExpandedSpacePage = () => {
   //   setStartDate(newDate);
   // };
 
+  const validateForm = () => {
+    let isValid = true;
+    console.log("Start date value", startDate);
+
+    // Validate start date
+    if (startDate == null) {
+      setStartDateError("Please select a start date.");
+      isValid = false;
+    } else {
+      setStartDateError(""); // Clear error if valid
+    }
+
+    console.log("Start Date Error", startDateError);
+
+    return isValid;
+  };
+
   const handleNumberOfDaysChange = (value) => {
     setNumberOfDays(value);
   };
 
   const handleRentNowClick = async () => {
+    if (!validateForm()) {
+      return; // Stop if validation fails
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:4242/create-checkout-session",
@@ -71,6 +93,7 @@ const ExpandedSpacePage = () => {
           name: space.location,
           ad_space_id: id,
           client_id: LoginStore.getState().userData.id,
+          start_date: startDate, // Include start date
         }
       );
       const { checkoutUrl } = response.data;
@@ -152,8 +175,8 @@ const ExpandedSpacePage = () => {
               >
                 {space?.description}
               </Typography>
-
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {/* Add additional details like number of days counter and starting date selector */}
+              <LocalizationProvider marginTop="10px" dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker
                     sx={{
@@ -162,6 +185,17 @@ const ExpandedSpacePage = () => {
                       },
                     }}
                     label="Starting Date"
+                    value={startDate}
+                    onChange={(newValue) => {
+                      setStartDate(newValue);
+                      setStartDateError("");
+                    }}
+                    slotProps={{
+                      textField: {
+                        error: !!startDateError,
+                        helperText: startDateError,
+                      },
+                    }}
                   />
                 </DemoContainer>
               </LocalizationProvider>
