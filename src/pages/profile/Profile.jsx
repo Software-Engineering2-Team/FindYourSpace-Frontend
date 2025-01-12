@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LoginStore from "../../api/LoginStore";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -209,7 +209,7 @@ const Profile = () => {
     <div data-testid="profilePage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <Navbar />
+        <NavbarUser />
         <Grid
           container
           sx={{

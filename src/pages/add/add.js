@@ -9,7 +9,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import AddOfficeStore from "../../api/AddOfficeStore";
 import LoginStore from "../../api/LoginStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -145,7 +145,7 @@ const AddOfficeSpaceForm = () => {
   return (
     <div data-testid="addOfficeSpaceForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={theme}>
-        <Navbar />
+        <NavbarUser />
         <div className="ad_space_form">
           <Typography
             variant="h5"

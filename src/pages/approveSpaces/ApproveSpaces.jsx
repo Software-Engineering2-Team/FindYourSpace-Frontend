@@ -20,7 +20,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import NavbarAdmin from "../../components/navbarAdmin/NavbarAdmin";
+import NavbarAdmin from "../../components/navbar/NavbarAdmin";
 
 const ApproveSpacesPage = () => {
   const itemsPerPage = 10;
@@ -189,7 +189,7 @@ const ApproveSpacesPage = () => {
               </Select>
             </FormControl>
           </div>
-          <Paper elevation={4}>
+          <Paper elevation={4} style={{borderRadius: "9px"}}>
             <TableContainer>
               <Table>
                 <TableHead align="center">
@@ -239,19 +239,26 @@ const ApproveSpacesPage = () => {
               </Table>
             </TableContainer>
           </Paper>
-
-          <Pagination
-              sx={{marginLeft: "88%", marginTop: "50px"}}
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              color="primary"
-              size="large"
-          />
-          <Typography
-              variant="body2"
-              sx={{marginLeft: "91%", marginTop: "10px"}}
-          >{`Page ${currentPage} of ${totalPages}`}</Typography>
+          <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end", // Align content to the right
+                alignItems: "center",
+                margin: "50px",
+              }}
+          >
+            <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                size="large"
+            />
+            <Typography variant="body2" style={{marginLeft: "10px"}}>
+              {`Page ${currentPage} of ${totalPages}`}
+            </Typography>
+          </div>
         </Container>
       </ThemeProvider>
     </div>

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import SearchBar from "./Search";
 import SearchItem from "../../components/searchItem/SearchItem";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import OfficeStore from "../../api/OfficeStore";
 import MarketingComponent from "../../components/marketingComponent/MarketingComponent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -114,7 +114,7 @@ const List = () => {
   return (
     <div data-testid="list-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         <div style={{ height: "1px", backgroundColor: "white" }} />
         <MarketingComponent />
         <div

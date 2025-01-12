@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginStore from "../../api/LoginStore";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -91,9 +91,9 @@ const Login = () => {
   };
 
   return (
-    <div data-testid="login-1" style={{ paddingTop: "64px" }}>
+    <div data-testid="login-1" >
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         {/* <div style={{ height: '5px', backgroundColor: 'white' }} />  */}
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
@@ -153,7 +153,11 @@ const Login = () => {
                 component="form"
                 noValidate
                 onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
+                sx={{
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                    borderRadius: "9px",
+                }}
               >
                 <TextField
                   margin="normal"
@@ -168,6 +172,11 @@ const Login = () => {
                   autoFocus
                   error={!!loginError}
                   helperText={loginError} // Show error message
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "9px",
+                    },
+                  }}
                 />
                 <TextField
                   margin="normal"
@@ -182,35 +191,28 @@ const Login = () => {
                   autoComplete="current-password"
                   error={!!loginError}
                   helperText={loginError} // Show error message
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "9px",
+                    },
+                  }}
                 />
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  style={{ borderRadius: "7px", marginTop: "20px", marginBottom: "20px" }}
                 >
                   Log In
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link
-                      to="/signup"
-                      variant="body2"
-                      onClick={() => navigate("/signup")}
-                    >
-                      {"Create a new account"}
-                    </Link>
-                  </Grid>
-                </Grid>
+                <Link
+                  to="/signup"
+                  variant="body2"
+                  onClick={() => navigate("/signup")}
+                  style={{display: "flex", justifyContent: "flex-end", cursor: "pointer"}}
+                >
+                  {"Create a new account"}
+                </Link>
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>

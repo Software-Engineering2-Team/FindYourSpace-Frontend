@@ -10,7 +10,7 @@ import {
   MenuItem,
   Paper,
 } from "@mui/material";
-import NavbarAdmin from "../../components/navbarAdmin/NavbarAdmin";
+import NavbarAdmin from "../../components/navbar/NavbarAdmin";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Stats = () => {
@@ -76,19 +76,21 @@ const Stats = () => {
     <div data-testid="statsPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <NavbarAdmin />
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ fontSize: "30px", marginLeft: "25px", marginTop: "30px" }}
+        >
+          Booking Stats
+        </Typography>
         <Container>
-          <Typography
-            variant="h5"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              paddingTop: "40px",
-              paddingBottom: "20px",
-            }}
-          >
-            Booking Stats
             <FormControl
-              style={{ position: "absolute", right: "200px", top: "92px" }}
+              style={{marginBottom: "20px"}}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "9px",
+                },
+              }}
             >
               <Select
                 id="graphRange"
@@ -100,8 +102,7 @@ const Stats = () => {
                 <MenuItem value="monthly">Month</MenuItem>
               </Select>
             </FormControl>
-          </Typography>
-          <Paper elevation={3} style={{ padding: "10px" }}>
+          <Paper elevation={3} style={{ padding: "10px", borderRadius: "13px"}}>
             <canvas id="bookingChart" width="400" height="100"></canvas>
           </Paper>
         </Container>

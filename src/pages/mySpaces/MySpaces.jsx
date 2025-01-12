@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import SearchBar from "./SearchMySpaces";
 import MySpaceItem from "../../components/mySpaceItem/mySpaceItem";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LoginStore from "../../api/LoginStore";
@@ -117,7 +117,7 @@ const MySpaces = () => {
   return (
     <div data-testid="mySpacesPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         <Typography
           variant="h5"
           gutterBottom

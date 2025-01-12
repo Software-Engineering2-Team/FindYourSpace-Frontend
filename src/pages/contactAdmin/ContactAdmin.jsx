@@ -7,7 +7,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import emailjs from "@emailjs/browser";
@@ -144,7 +144,7 @@ const ContactAdminForm = () => {
     <div data-testid="contactAdminForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <Navbar />
+        <NavbarUser />
         <Box
           sx={{
             width: "100%",

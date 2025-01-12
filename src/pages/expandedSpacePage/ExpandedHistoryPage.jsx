@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -63,7 +63,7 @@ const ExpandedSpacePage = () => {
   return (
     <div data-testid="expandedSpacePage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         <CssBaseline />
         <Grid
           container

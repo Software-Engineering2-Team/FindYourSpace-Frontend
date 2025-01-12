@@ -9,7 +9,7 @@ import {
   Alert,
   Snackbar,
 } from "@mui/material";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import OfficeStore from "../../api/OfficeStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -167,7 +167,7 @@ const EditOfficeSpaceForm = () => {
   return (
     <div data-testid="editPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         <div className="ad_space_form">
           <Typography
             variant="h5"

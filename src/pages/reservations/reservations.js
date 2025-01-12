@@ -1,6 +1,6 @@
 // ReservationsTable.js
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import { useParams } from 'react-router-dom';
 import {
   Typography,
@@ -70,7 +70,7 @@ const ReservationsTable = () => {
 
   return (
     <div>
-      <Navbar />
+      <NavbarUser />
       <Typography sx={{marginTop: "2%", marginLeft: "2.5%"}}>
             <h2>Reservations for Office Space</h2>
       </Typography>

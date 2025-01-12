@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
@@ -70,7 +70,7 @@ const AddReviewForm = () => {
     <div data-testid="addReviewForm-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <Navbar />
+        <NavbarUser />
         <Box
           sx={{
             width: "100%",

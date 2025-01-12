@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import SearchBar from "./SearchBookingHistory";
 import SearchItem from "../../components/searchItemBookingHistory/SearchItemBookingHistory";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import useBookingStore from "../../api/BookingStore";
 import LoginStore from "../../api/LoginStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -117,7 +117,7 @@ const BookingHistory = () => {
   return (
     <div data-testid="bookingHistory-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
-        <Navbar />
+        <NavbarUser />
         <Typography
           variant="h5"
           gutterBottom

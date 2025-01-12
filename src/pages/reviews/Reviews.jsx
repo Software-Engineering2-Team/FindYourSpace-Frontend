@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Pagination } from "@mui/material";
-import Navbar from "../../components/navbar/Navbar";
+import NavbarUser from "../../components/navbar/NavbarUser";
 import ReviewsStore from "../../api/ReviewsStore";
 import ReviewItem from "../../components/reviewItems/reviewItem";
 import { useParams } from "react-router-dom";
@@ -60,7 +60,7 @@ const Reviews = () => {
     <div data-testid="reviewsPage-1" style={{ paddingTop: "64px" }}>
       <ThemeProvider theme={defaultTheme}>
         <div>
-          <Navbar />
+          <NavbarUser />
           <Stack
             direction="row"
             spacing={150}

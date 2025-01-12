@@ -1,4 +1,4 @@
-// BaseNavbar.jsx
+// NavbarBase.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -19,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-const BaseNavbar = ({ title, links, onLogout }) => {
+const NavbarBase = ({ title, links, onLogout }) => {
   return (
     <div data-testid="navbar-1">
       <ThemeProvider theme={theme}>
@@ -45,7 +45,7 @@ const BaseNavbar = ({ title, links, onLogout }) => {
                 </Button>
               ))}
               {onLogout && (
-                <Button color="inherit" onClick={onLogout}>
+                <Button color="inherit" component={Link} to={"/"} onClick={onLogout}>
                   Log Out
                 </Button>
               )}
@@ -57,4 +57,4 @@ const BaseNavbar = ({ title, links, onLogout }) => {
   );
 };
 
-export default BaseNavbar;
+export default NavbarBase;
