@@ -44,6 +44,42 @@ const AddReviewForm = () => {
     description: "",
   };
 
+  const [errors, setErrors] = useState({
+    title: "",
+    rating: "",
+    description: "",
+  });
+
+  const validateField = (name, value) => {
+    let error = "";
+    switch (name) {
+      case "title":
+        if (!value.trim()) {
+          error = "Title is too short";
+        } else if (value.trim().length < 5) {
+          error = "Title must be at least 5 characters long.";
+        }
+        break;
+      case "rating":
+        if (!value) {
+          error = "Rating is required.";
+        } else if (isNaN(value) || value < 1 || value > 5) {
+          error = "Rating must be a number between 1 and 5.";
+        }
+        break;
+      case "description":
+        if (!value.trim()) {
+          error = "Description cannot be empty.";
+        } else if (value.trim().length < 10) {
+          error = "Description must be at least 5 characters long.";
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setReviewData((prevData) => ({
@@ -51,12 +87,34 @@ const AddReviewForm = () => {
       [name]: value,
     }));
     console.log("Changed data ", reviewData);
+
+    const error = validateField(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
   };
 
   const form = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {};
+    Object.keys(reviewData).forEach((field) => {
+      const error = validateField(field, reviewData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      console.log("Form validation failed.");
+      return;
+    }
+
     try {
       await ReviewsStore.getState().createReview(reviewData);
       setReviewData(initialReviewData);
@@ -96,8 +154,8 @@ const AddReviewForm = () => {
               name="title"
               value={reviewData.title}
               onChange={handleInputChange}
-              required
-              size="large"
+              error={!!errors.title}
+              helperText={errors.title}
             />
             <TextField
               label="Rating"
@@ -108,8 +166,8 @@ const AddReviewForm = () => {
               name="rating"
               value={reviewData.rating}
               onChange={handleInputChange}
-              required
-              size="large"
+              error={!!errors.rating}
+              helperText={errors.rating}
             />
             <TextField
               label="Description"
@@ -119,8 +177,8 @@ const AddReviewForm = () => {
               name="description"
               value={reviewData.description}
               onChange={handleInputChange}
-              required
-              size="large"
+              error={!!errors.description}
+              helperText={errors.description}
             />
             <Button
               type="submit"

@@ -72,7 +72,7 @@ const Login = () => {
       .then(() => {
         const userData = LoginStore.getState().userData;
         if (userData) {
-          if (userData.username === "admin") {
+          if (userData.is_staff === true) {
             navigate("/admin/platform-health");
           } else {
             navigate("/spaces");
