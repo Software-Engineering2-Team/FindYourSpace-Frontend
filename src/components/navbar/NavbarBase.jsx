@@ -40,12 +40,33 @@ const NavbarBase = ({ title, links, onLogout }) => {
                   to={href}
                   color="inherit"
                   onClick={onClick}
+                  style={{ borderRadius: "13px"}}
+                  sx={{
+                    color: 'inherit',
+                    '&:hover': {
+                      backgroundColor: '#f0f0f0',
+                      color: '#000',
+                    },
+                  }}
                 >
                   {label}
                 </Button>
               ))}
               {onLogout && (
-                <Button color="inherit" component={Link} to={"/"} onClick={onLogout}>
+                <Button
+                    color="inherit"
+                    component={Link}
+                    to={"/"}
+                    onClick={onLogout}
+                    style={{ borderRadius: "13px"}}
+                    sx={{
+                      color: 'inherit',
+                      '&:hover': {
+                        backgroundColor: '#f0f0f0',
+                        color: '#000',
+                      },
+                    }}
+                >
                   Log Out
                 </Button>
               )}

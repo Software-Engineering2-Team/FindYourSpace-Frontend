@@ -8,6 +8,6 @@ test('renders Policy componenet', () => {
         <PolicyPage/>
       </MemoryRouter>
     );
-    const navBar = screen.getByTestId('policyPage-1');
-    expect(navBar).toBeInTheDocument();
+    const policyPage = screen.getByTestId('policyPage-1');
+    expect(policyPage).toBeInTheDocument();
   });

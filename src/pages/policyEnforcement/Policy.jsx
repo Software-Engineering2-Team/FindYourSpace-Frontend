@@ -10,7 +10,7 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import SearchBar from "./SearchUsers";
+import SearchBar from "../../components/searchBar/SearchBar";
 import UserStore from "../../api/UserStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -129,7 +129,7 @@ const PolicyPage = () => {
             margin: "50px",
             gap: "20px"
           }}>
-            <SearchBar onSearch={handleSearch}/>
+            <SearchBar onSearch={handleSearch} testId="searchUsersPage-1"/>
             <FormControl
                 style={{
                   width: "100%",

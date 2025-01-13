@@ -3,12 +3,12 @@ import { MemoryRouter } from 'react-router-dom';
 import ApproveSpacesPage from '../pages/approveSpaces/ApproveSpaces';
 
 
-test('renders SearchMySpaces component', () => {
+test('renders ApproveSpacesPage component', () => {
     render(
       <MemoryRouter>
         <ApproveSpacesPage/>
       </MemoryRouter>
     );
-    const searchMySpacesPage = screen.getByTestId('ApproveSpacesPage-1');
-    expect(searchMySpacesPage).toBeInTheDocument();
+    const approveSpacesPage = screen.getByTestId('ApproveSpacesPage-1');
+    expect(approveSpacesPage).toBeInTheDocument();
   });

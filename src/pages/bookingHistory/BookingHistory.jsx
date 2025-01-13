@@ -9,7 +9,7 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
-import SearchBar from "./SearchBookingHistory";
+import SearchBar from "../../components/searchBar/SearchBar";
 import SearchItem from "../../components/searchItemBookingHistory/SearchItemBookingHistory";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import useBookingStore from "../../api/BookingStore";
@@ -24,29 +24,27 @@ const BookingHistory = () => {
   const [sortOption, setSortOption] = useState("default");
   const listRef = React.createRef();
 
-  const { bookings, fetchBookingsByClient } = useBookingStore();
-  const { userData } = LoginStore.getState();
+  const [ bookings, setBookings ] = useState([]);
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const clientId = userData.id;
-        await fetchBookingsByClient(clientId);
-      } catch (error) {
-        console.error("Error fetching booking data:", error);
-      }
-    };
-    fetchBookings();
-  }, [fetchBookingsByClient, userData]);
+    const userData = LoginStore.getState().userData;
 
-  useEffect(() => {
-    if (!bookings) {
-      console.error("Bookings are null");
-    } else {
-      setFilteredBookings(bookings);
-      setTotalPages(Math.ceil(bookings.length / itemsPerPage));
+    if (!userData) {
+      console.error("User is not logged in");
+      return;
     }
-  }, [bookings]);
+
+    useBookingStore.getState()
+      .fetchBookingsByClient(userData.id)
+      .then((response) => {
+        console.log(response);
+        const totalItems = response.length;
+        setTotalPages(Math.ceil(totalItems / itemsPerPage));
+        setBookings(response);
+        setFilteredBookings(response);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   useEffect(() => {
     if (!bookings) {
@@ -59,17 +57,11 @@ const BookingHistory = () => {
   }, [currentPage, bookings]);
 
   const handleSearch = (searchTerm) => {
-    if (!searchTerm.trim()) {
-      setFilteredBookings(bookings);
-    } else {
-      const filtered = bookings.filter((booking) =>
-        booking.adSpace.location
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      );
-      setFilteredBookings(filtered);
-    }
-  };
+    const filtered = bookings.filter((booking) =>
+      booking.adSpace.location.toLowerCase().includes(searchTerm.toLowerCase()
+      ));
+    setFilteredBookings(filtered);
+  }
 
   const handleSortChange = (event) => {
     const selectedSortOption = event.target.value;
@@ -136,7 +128,7 @@ const BookingHistory = () => {
               gap: "20px",
             }}
           >
-            <SearchBar onSearchHistory={handleSearch} />
+            <SearchBar onSearchHistory={handleSearch} testId="searchHistoryPage-1"/>
             <FormControl
               style={{
                 width: "100%",
@@ -167,7 +159,7 @@ const BookingHistory = () => {
               <div className="listResult">
                 {filteredBookings.length > 0 ? (
                   filteredBookings.map((booking) => (
-                    <SearchItem key={booking.id} booking={booking} />
+                    <SearchItem key={booking.id} booking={booking}/>
                   ))
                 ) : (
                   <div

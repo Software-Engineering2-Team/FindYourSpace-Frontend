@@ -26,7 +26,6 @@ const useBookingStore = create((set) => ({
 
       const data = await response.json();
       useBookingStore.getState().setBookings(data);
-
       console.log(data);
     } catch (error) {
       console.error('Fetching Bookings failed:', error.message);
@@ -46,7 +45,8 @@ const useBookingStore = create((set) => ({
         throw new Error('Failed to fetch bookings');
       }
       const data = await response.json();
-      useBookingStore.getState().setBookings(data);
+      return data;
+      // useBookingStore.getState().setBookings(data);
     } catch (error) {
       console.error('Error fetching bookings:', error);
       throw error;

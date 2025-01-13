@@ -5,8 +5,6 @@ import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -134,9 +132,8 @@ const Login = () => {
                 padding: { xs: "24px", md: "32px" },
                 margin: { xs: "16px", md: "32px" },
                 boxShadow: "0px 0px 16px rgba(0, 0, 0, 0.1)",
-                borderRadius: "8px",
+                borderRadius: "13px",
                 backgroundColor: "#fff",
-                width: { xs: "95%", sm: "80%", md: "60%" }, // Adjust width for responsiveness
               }}
             >
               <Typography

@@ -5,33 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2810ae1f-eac7-4757-aa8e-fbde8613ca04" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/navbar/NavbarUser.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/searchBar/SearchBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/Navbar.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Navbar.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/Navbar.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/AddReview.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/AddReview.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/ApproveSpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/ApproveSpaces.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/EndpointRequestTable.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/EndpointRequestTable.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/Policy.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Policy.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchApproveSpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchApproveSpaces.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchMySpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchMySpaces.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchUsers.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchUsers.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/Stats.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Stats.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/BookingStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/BookingStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/marketingComponent/marketingComponet.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/navbar/NavbarBase.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/NavbarBase.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbarAdmin/NavbarAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/NavbarAdmin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbarAdmin/navbarAdmin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/add/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add/add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar/navbar.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/SearchApproveSpaces.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/edit/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/edit/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/SearchBookingHistory.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/list/List.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/List.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/backgroundimglogin.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/SearchMySpaces.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reservations/reservations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reservations/reservations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/SearchUsers.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +39,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2rZhaPRGyJ7DbM9erWS4zm5y8Vr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "quality",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external"
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -53,7 +65,27 @@
       <recent name="C:\Users\akhil\OneDrive\Desktop\WEBAPP Project\Frontend\src\components\navbar" />
     </key>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2810ae1f-eac7-4757-aa8e-fbde8613ca04" name="Changes" comment="" />
+      <created>1736772573934</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736772573934</updated>
+      <workItem from="1736772575485" duration="6238000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

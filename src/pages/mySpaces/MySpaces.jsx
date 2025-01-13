@@ -8,7 +8,7 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
-import SearchBar from "./SearchMySpaces";
+import SearchBar from "../../components/searchBar/SearchBar";
 import MySpaceItem from "../../components/mySpaceItem/mySpaceItem";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import OfficeStore from "../../api/OfficeStore";
@@ -43,19 +43,6 @@ const MySpaces = () => {
       })
       .catch((error) => console.error(error));
   }, []);
-
-  const handleOfficeUpdate = async () => {
-    try {
-      const response = await OfficeStore.getState().fetchOfficesByOwner(
-        LoginStore.getState().userData.id
-      );
-      const data = await response.json();
-      setOfficeSpaces(data);
-      setFilteredOfficeSpaces(data);
-    } catch (error) {
-      console.error("Error updating offices:", error);
-    }
-  };
 
   useEffect(() => {
     const start = (currentPage - 1) * itemsPerPage;
@@ -134,7 +121,7 @@ const MySpaces = () => {
             margin: "50px",
             gap: "20px"
           }}>
-            <SearchBar onSearch={handleSearch}/>
+            <SearchBar onSearch={handleSearch} testid="searchMySpacesPage-1"/>
             <FormControl
                 style={{
                   width: "100%",
@@ -168,7 +155,6 @@ const MySpaces = () => {
                         <MySpaceItem
                             key={space.id}
                             space={space}
-                            onUpdate={handleOfficeUpdate}
                         />
                     ))
                 ) : (

@@ -6,7 +6,7 @@ import {
   Select,
   Pagination,
 } from "@mui/material";
-import SearchBar from "./Search";
+import SearchBar from "../../components/searchBar/SearchBar";
 import SearchItem from "../../components/searchItem/SearchItem";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import OfficeStore from "../../api/OfficeStore";
@@ -139,7 +139,7 @@ const List = () => {
                 gap: "20px",
               }}
             >
-              <SearchBar onSearch={handleSearch} />
+              <SearchBar onSearch={handleSearch}/>
               <FormControl
                 style={{
                   width: "100%",

@@ -11,7 +11,7 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import SearchBar from "./SearchApproveSpaces";
+import SearchBar from "../../components/searchBar/SearchBar";
 import ApproveSpaceStore from "../../api/ApproveSpaceStore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -163,7 +163,7 @@ const ApproveSpacesPage = () => {
             margin: "50px",
             gap: "20px"
           }}>
-            <SearchBar onSearch={handleSearch}/>
+            <SearchBar onSearch={handleSearch} testId="searchApproveSpacesPage-1"/>
             <FormControl
                 style={{
                   width: "100%",
