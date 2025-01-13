@@ -1,27 +1,27 @@
-import { create } from 'zustand';
+import {create} from 'zustand';
+
 const url = 'http://localhost:8000';
 const ReviewsStore = create((set) => ({
     reviews: [],
-    setReviews: (reviews) => set({ reviews }),
 
     createReview: async (reviewData) => {
         try {
-          console.log('Creating new review with data:', reviewData);
-          const response = await fetch(`${url}/api/create-rating/`, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(reviewData)
-        });
-          const data = await response.json();
-          console.log('Response from Backend after create review request:', data);
-          set({ createdSpace: data });
+            console.log('Creating new review with data:', reviewData);
+            const response = await fetch(`${url}/api/create-rating/`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reviewData)
+            });
+            const data = await response.json();
+            console.log('Response from Backend after create review request:', data);
+            set({createdSpace: data});
         } catch (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
         }
-      },
+    },
     fetchReviews: async () => {
         try {
             const response = await fetch(`${url}/api/get-all-ratings/`, {
@@ -32,7 +32,7 @@ const ReviewsStore = create((set) => ({
                 }
             });
             const reviews = await response.json();
-            set({ reviews });
+            set({reviews});
         } catch (error) {
             console.error('Error fetching reviews:', error);
         }
@@ -41,7 +41,7 @@ const ReviewsStore = create((set) => ({
         try {
             await ReviewsStore.getState().fetchReviews();
             const entry = ReviewsStore.getState().reviews.find(entry => entry.id === parseInt(spaceId, 10));
-            
+
             if (entry) {
                 const reviews = entry.reviews;
                 return Promise.resolve({

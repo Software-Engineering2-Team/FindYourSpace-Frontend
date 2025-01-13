@@ -5,36 +5,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2810ae1f-eac7-4757-aa8e-fbde8613ca04" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/searchBar/SearchBar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/AdSpaceStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/AddSpaceStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/theme.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/AddReview.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/AddReview.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/ApproveSpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/ApproveSpaces.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/EndpointRequestTable.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/EndpointRequestTable.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/Policy.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Policy.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchApproveSpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchApproveSpaces.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchMySpaces.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchMySpaces.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/SearchUsers.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/SearchUsers.test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/Stats.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Stats.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/Add.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Add.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/Edit.test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/Edit.test.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/AddOfficeStore.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/BookingStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/BookingStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/marketingComponent/marketingComponet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/EndpointLogStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/EndpointLogStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/OfficeStore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/ReservationStore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/ReviewsStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/ReviewsStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/endpointLogData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/photos.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/reviewsdata.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/spacedata.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/userdata.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/webVitalsData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChildComponent.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParentComponent.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/marketingComponent/MarketingComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/marketingComponent/MarketingComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/mySpaceItem/mySpaceItem.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/navbar/NavbarBase.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar/NavbarBase.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar/navbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviewItems/reviewItem.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/reviewItems/reviewItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/reviewItems/reviewItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchItem/SearchItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchItem/SearchItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchItemBookingHistory/SearchItemBookingHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchItemBookingHistory/SearchItemBookingHistory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchItemBookingHistory/searchItemBookingHistory.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchItemPolicy/SearchItemPolicy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/searchItemPolicy/SearchItemPolicy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/searchItemPolicy/searchItemPolicy.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/add/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/add/Add.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/approveSpaces/ApproveSpaces.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/approveSpaces/SearchApproveSpaces.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/bookingHistory/BookingHistory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bookingHistory/SearchBookingHistory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/edit/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/edit/Edit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedHistoryPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/expandedSpacePage/ExpandedSpacePage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/list/List.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/List.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/list/Search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/list/list.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/backgroundimglogin.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/mySpaces/MySpaces.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/mySpaces/SearchMySpaces.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/platformHealth/EndpointRequestTable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/policyEnforcement/Policy.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/SearchUsers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/policyEnforcement/policy.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reservations/reservations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/AddReview.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reviews/Reviews.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/signup/Signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,6 +93,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -81,7 +119,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1736772573934</updated>
-      <workItem from="1736772575485" duration="6238000" />
+      <workItem from="1736772575485" duration="15699000" />
     </task>
     <servers />
   </component>
