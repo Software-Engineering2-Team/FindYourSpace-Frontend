@@ -1,5 +1,12 @@
 import React, { useRef, useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,6 +29,7 @@ const defaultTheme = createTheme({
 const AddReviewForm = () => {
   const navigate = useNavigate();
   var userData = LoginStore.getState().userData;
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
   if (userData == null) {
     userData = {
       username: "",
@@ -118,10 +126,17 @@ const AddReviewForm = () => {
     try {
       await ReviewsStore.getState().createReview(reviewData);
       setReviewData(initialReviewData);
-      navigate(`/reviews/${id}`);
+      setConfirmationOpen(true);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
+  };
+
+  const handleConfirmationClose = () => {
+    console.log("Code comes inside handleConfirmationClose");
+    console.log("ConfirmationOpen value:", confirmationOpen);
+    setConfirmationOpen(false);
+    navigate(`/reviews/${id}`);
   };
 
   return (
@@ -192,6 +207,21 @@ const AddReviewForm = () => {
             </Button>
           </form>
         </Box>
+
+        <Snackbar
+          open={confirmationOpen}
+          autoHideDuration={2500}
+          onClose={handleConfirmationClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleConfirmationClose}
+            severity="success"
+            sx={{ width: "100%", border: "2px solid green" }}
+          >
+            Your review has been added successfully!
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     </div>
   );
