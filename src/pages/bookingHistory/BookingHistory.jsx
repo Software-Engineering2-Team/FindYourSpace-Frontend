@@ -24,7 +24,7 @@ const BookingHistory = () => {
   const [sortOption, setSortOption] = useState("default");
   const listRef = React.createRef();
 
-  const [ bookings, setBookings ] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     const userData = LoginStore.getState().userData;
@@ -34,7 +34,8 @@ const BookingHistory = () => {
       return;
     }
 
-    useBookingStore.getState()
+    useBookingStore
+      .getState()
       .fetchBookingsByClient(userData.id)
       .then((response) => {
         console.log(response);
@@ -58,10 +59,10 @@ const BookingHistory = () => {
 
   const handleSearch = (searchTerm) => {
     const filtered = bookings.filter((booking) =>
-      booking.adSpace.location.toLowerCase().includes(searchTerm.toLowerCase()
-      ));
+      booking.adSpace.location.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     setFilteredBookings(filtered);
-  }
+  };
 
   const handleSortChange = (event) => {
     const selectedSortOption = event.target.value;
@@ -128,7 +129,7 @@ const BookingHistory = () => {
               gap: "20px",
             }}
           >
-            <SearchBar onSearchHistory={handleSearch} testId="searchHistoryPage-1"/>
+            <SearchBar onSearch={handleSearch} testId="searchHistoryPage-1" />
             <FormControl
               style={{
                 width: "100%",
@@ -159,7 +160,7 @@ const BookingHistory = () => {
               <div className="listResult">
                 {filteredBookings.length > 0 ? (
                   filteredBookings.map((booking) => (
-                    <SearchItem key={booking.id} booking={booking}/>
+                    <SearchItem key={booking.id} booking={booking} />
                   ))
                 ) : (
                   <div
