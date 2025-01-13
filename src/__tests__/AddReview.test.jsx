@@ -8,6 +8,6 @@ test('renders AddReviewForm component', () => {
         <AddReviewForm/>
       </MemoryRouter>
     );
-    const searchMySpacesPage = screen.getByTestId('addReviewForm-1');
-    expect(searchMySpacesPage).toBeInTheDocument();
+    const addReviewForm = screen.getByTestId('addReviewForm-1');
+    expect(addReviewForm).toBeInTheDocument();
   });

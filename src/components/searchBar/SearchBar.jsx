@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search"; // Import the search icon
+import SearchIcon from "@mui/icons-material/Search";
 
-function SearchBar(props) {
+function SearchBar({ onSearch, testId = "default-search", placeholder = "Search term ..." }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchContainerStyle = {
-    width: "50%",
-  };
-
   const handleSearchClick = () => {
-    props.onSearch(searchTerm);
+    if (onSearch) {
+      onSearch(searchTerm);
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -20,10 +18,10 @@ function SearchBar(props) {
   };
 
   return (
-    <div data-testid="searchMySpacesPage-1" style={searchContainerStyle}>
+    <div data-testid={testId} style={{ width: "50%" }}>
       <TextField
         fullWidth
-        label="Search term ..."
+        label={placeholder}
         variant="outlined"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -41,10 +39,10 @@ function SearchBar(props) {
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: "6px",
-            height: "40px", // Set consistent height
+            height: "40px",
           },
           "& .MuiInputLabel-root": {
-            transform: "translateY(-6%)", // Center transform
+            transform: "translateY(-6%)",
             fontSize: "1rem",
             padding: "10px",
           },

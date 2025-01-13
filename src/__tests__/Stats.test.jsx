@@ -8,6 +8,6 @@ test('renders Stats componenet', () => {
         <Stats/>
       </MemoryRouter>
     );
-    const contactForm = screen.getByTestId('statsPage-1');
-    expect(contactForm).toBeInTheDocument();
+    const statsPage = screen.getByTestId('statsPage-1');
+    expect(statsPage).toBeInTheDocument();
   });

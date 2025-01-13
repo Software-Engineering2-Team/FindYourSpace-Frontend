@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+import NavbarUser from '../components/navbar/NavbarUser';
 
 test('renders navbar', () => {
     render(
       <MemoryRouter>
-        <Navbar/>
+        <NavbarUser/>
       </MemoryRouter>
     );
     const navBar = screen.getByTestId('navbar-1');

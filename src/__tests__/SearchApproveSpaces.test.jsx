@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import SearchBar from '../pages/approveSpaces/SearchApproveSpaces';
+import SearchBar from '../components/searchBar/SearchBar';
 
 
-test('renders SearchMySpaces component', () => {
+test('renders SearchApproveSpaces component', () => {
     render(
       <MemoryRouter>
-        <SearchBar/>
+        <SearchBar testId="searchApproveSpacesPage-1"/>
       </MemoryRouter>
     );
-    const searchMySpacesPage = screen.getByTestId('searchApproveSpacesPage-1');
-    expect(searchMySpacesPage).toBeInTheDocument();
+    const searchApproveSpaces = screen.getByTestId('searchApproveSpacesPage-1');
+    expect(searchApproveSpaces).toBeInTheDocument();
   });

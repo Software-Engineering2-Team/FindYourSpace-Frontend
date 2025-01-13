@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import AddOfficeSpaceForm from '../pages/add/add';
+import {render, screen} from '@testing-library/react';
+import {MemoryRouter} from 'react-router-dom';
+import AddAdSpaceSpaceForm from '../pages/add/Add';
 
 test('renders add page', () => {
     render(
-      <MemoryRouter>
-        <AddOfficeSpaceForm/>
-      </MemoryRouter>
+        <MemoryRouter>
+            <AddAdSpaceSpaceForm/>
+        </MemoryRouter>
     );
-    const addOfficeSpaceForm = screen.getByTestId('addOfficeSpaceForm-1');
-    expect(addOfficeSpaceForm).toBeInTheDocument();
-  });
+    const addAdSpaceSpaceForm = screen.getByTestId('addAdSpaceSpaceForm-1');
+    expect(addAdSpaceSpaceForm).toBeInTheDocument();
+});

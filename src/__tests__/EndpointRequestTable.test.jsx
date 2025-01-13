@@ -3,12 +3,12 @@ import { MemoryRouter } from 'react-router-dom';
 import EndpointRequestsTable from '../pages/platformHealth/EndpointRequestTable';
 
 
-test('renders edit page', () => {
+test('renders platformHealth page', () => {
     render(
       <MemoryRouter>
         <EndpointRequestsTable/>
       </MemoryRouter>
     );
-    const editPage = screen.getByTestId('platformHealth-1');
-    expect(editPage).toBeInTheDocument();
+    const platformHealth = screen.getByTestId('platformHealth-1');
+    expect(platformHealth).toBeInTheDocument();
   });
