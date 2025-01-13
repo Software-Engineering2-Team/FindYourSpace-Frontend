@@ -1,8 +1,4 @@
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {ThemeProvider} from "@mui/material/styles";
 import defaultTheme from "./theme";
 import List from "./pages/list/List";
@@ -19,10 +15,11 @@ import EditAdSpaceSpaceForm from "./pages/edit/Edit";
 import MySpaces from "./pages/mySpaces/MySpaces";
 import Stats from "./pages/stats/Stats";
 import PolicyPage from "./pages/policyEnforcement/Policy";
-import ApproveSpacesPage from "./pages/approveSpaces/ApproveSpaces"
-import ContactAdminForm from "./pages/contactAdmin/ContactAdmin"
+import ApproveSpacesPage from "./pages/approveSpaces/ApproveSpaces";
+import ContactAdminForm from "./pages/contactAdmin/ContactAdmin";
 import EndpointRequestsTable from "./pages/platformHealth/EndpointRequestTable";
 import AddReviewForm from "./pages/reviews/AddReview";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
     return (
@@ -42,11 +39,39 @@ function App() {
                     <Route path="/create-review/:id" element={<AddReviewForm/>}/>
                     <Route path="/booking-history/:id" element={<ExpandedHistoryPage/>}/>
                     <Route path="/contact/:id" element={<ContactOwner/>}/>
-                    <Route path="/admin/stats" element={<Stats/>}/>
-                    <Route path="/admin/policy-enforcement" element={<PolicyPage/>}/>
-                    <Route path="/admin/review-spaces" element={<ApproveSpacesPage/>}/>
                     <Route path="/contact-us" element={<ContactAdminForm/>}/>
-                    <Route path="/admin/platform-health" element={<EndpointRequestsTable/>}/>
+                    <Route
+                      path="/admin/stats"
+                      element={
+                        <AdminRoute>
+                          <Stats />
+                        </AdminRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin/policy-enforcement"
+                      element={
+                        <AdminRoute>
+                          <PolicyPage />
+                        </AdminRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin/review-spaces"
+                      element={
+                        <AdminRoute>
+                          <ApproveSpacesPage />
+                        </AdminRoute>
+                      }
+                    />
+                    <Route
+                      path="/admin/platform-health"
+                      element={
+                        <AdminRoute>
+                          <EndpointRequestsTable />
+                        </AdminRoute>
+                      }
+                    />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

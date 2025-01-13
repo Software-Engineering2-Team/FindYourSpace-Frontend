@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import LoginStore from "../../api/LoginStore";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
@@ -18,16 +18,24 @@ const Profile = () => {
         password: "",
     });
 
-    const [passwordData, setPasswordData] = useState({
-        password: "",
-        confirm_password: "",
-    });
-    const [userInfoErrors, setUserInfoErrors] = useState({});
-    const [passwordError, setPasswordError] = useState("");
-    const [resetError, setresetError] = useState("");
-    const [confirmationOpen, setConfirmationOpen] = useState(false);
-    const [passChangeConfirmationOpen, setPassChangeConfirmationOpen] =
-        useState(false);
+  const [userInfoErrors, setUserInfoErrors] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    contactInfo: "",
+    password: "",
+  });
+
+  const [passwordData, setPasswordData] = useState({
+    password: "",
+    confirm_password: "",
+  });
+
+  const [passwordError, setPasswordError] = useState("");
+  const [resetError, setresetError] = useState("");
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [passChangeConfirmationOpen, setPassChangeConfirmationOpen] =
+    useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,54 +72,57 @@ const Profile = () => {
         return true;
     };
 
-    const validateField = (name, value) => {
-        let error = "";
-        switch (name) {
-            case "first_name":
-                if (value.trim().length <= 2) {
-                    error = `First name is not valid.`;
-                }
-                break;
-            case "last_name":
-                if (value.trim().length <= 2) {
-                    error = `Last name is not valid.`;
-                } else if (!/^[a-zA-Z]+$/.test(value)) {
-                    error = `${name.replace("_", " ")} can only contain letters.`;
-                }
-                break;
-            case "email":
-                if (value.trim().length <= 2) {
-                    error = "Email is required.";
-                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    error = "Invalid email address.";
-                }
-                break;
-            case "contactInfo":
-                if (value.trim().length !== 9) {
-                    error = "Contact Info is required.";
-                } else if (!/^\d+$/.test(value)) {
-                    error = "Contact Info can only contain numbers.";
-                }
-                break;
-            default:
-                break;
+  const validateField = (name, value) => {
+    let error = "";
+    switch (name) {
+      case "first_name":
+        if (!value.trim()) {
+          error = "First name is required.";
+        } else if (!/^[a-zA-Z]+$/.test(value)) {
+          error = "First name can only contain letters.";
         }
-        setUserInfoErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: error,
-        }));
-        return !error;
-    };
+        break;
+      case "last_name":
+        if (!value.trim()) {
+          error = "Last name is required.";
+        } else if (!/^[a-zA-Z]+$/.test(value)) {
+          error = "Last name can only contain letters.";
+        }
+        break;
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Invalid email address.";
+        }
+        break;
+      case "contactInfo":
+        if (!value.trim()) {
+          error = "Contact Info is required.";
+        } else if (!/^\d{9}$/.test(value)) {
+          error = "Contact Info must be 9 digits.";
+        }
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
 
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setUserData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-        validateField(name, value);
-        console.log("Changed data ", userData);
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log("Changed data ", userData);
+
+    const error = validateField(name, value);
+    setUserInfoErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
 
     const handlePasswordInputChange = (e) => {
         const {name, value} = e.target;
@@ -127,14 +138,23 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const isValid = Object.keys(userData).every((field) =>
-            validateField(field, userData[field])
-        );
+    // Collect all validation errors
+    const newErrors = {};
+    Object.keys(userData).forEach((field) => {
+      const error = validateField(field, userData[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
 
-        if (!isValid) {
-            console.log("Form validation failed.");
-            return;
-        }
+    // Update state with errors
+    setUserInfoErrors(newErrors);
+
+    // If there are validation errors, stop form submission
+    if (Object.keys(newErrors).length > 0) {
+      console.log("Form validation failed:", newErrors);
+      return;
+    }
 
         try {
             await ProfileStore.getState().updateUserProfile(userData);

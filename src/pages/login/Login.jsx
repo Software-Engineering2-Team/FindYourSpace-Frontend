@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginStore from "../../api/LoginStore";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
@@ -49,24 +49,24 @@ const Login = () => {
         setLoginError("");
     };
 
-    const fetchData = () => {
-        LoginStore.getState()
-            .login(username, password)
-            .then(() => {
-                const userData = LoginStore.getState().userData;
-                if (userData) {
-                    if (userData.username === "admin") {
-                        navigate("/admin/platform-health");
-                    } else {
-                        navigate("/spaces");
-                    }
-                }
-            })
-            .catch((error) => {
-                console.log("Error response content", error);
-                setLoginError(error.message);
-            });
-    };
+  const fetchData = () => {
+    LoginStore.getState()
+      .login(username, password)
+      .then(() => {
+        const userData = LoginStore.getState().userData;
+        if (userData) {
+          if (userData.is_staff === true) {
+            navigate("/admin/platform-health");
+          } else {
+            navigate("/spaces");
+          }
+        }
+      })
+      .catch((error) => {
+        console.log("Error response content", error);
+        setLoginError(error.message);
+      });
+  };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -75,11 +75,8 @@ const Login = () => {
 
     return (
         <div data-testid="login-1">
-
             <NavbarUser/>
-            {/* <div style={{ height: '5px', backgroundColor: 'white' }} />  */}
             <Grid container component="main" sx={{height: "100vh"}}>
-
                 <Grid
                     item
                     xs={false}
