@@ -1,5 +1,5 @@
 // BookingHistory.js
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
     Container,
     FormControl,
@@ -117,7 +117,7 @@ const BookingHistory = () => {
                         gap: "20px",
                     }}
                 >
-                    <SearchBar onSearchHistory={handleSearch} testId="searchHistoryPage-1"/>
+                    <SearchBar onSearch={handleSearch} testId="searchHistoryPage-1"/>
                     <FormControl
                         style={{
                             width: "100%",
