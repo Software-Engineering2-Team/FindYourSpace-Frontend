@@ -30,7 +30,6 @@ const PolicyPage = () => {
     const [sortOption, setSortOption] = useState("default");
 
     useEffect(() => {
-        // Fetch user data when the component mounts
         UserStore.getState()
             .fetchUsers()
             .then((response) => response.json())
@@ -71,7 +70,6 @@ const PolicyPage = () => {
                     a.username.localeCompare(b.username)
                 );
                 break;
-            // Add more sorting options if needed
             default:
                 sortedUsers = [...users];
                 break;
@@ -125,8 +123,8 @@ const PolicyPage = () => {
                         }}
                         sx={{
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: "6px", // Same border radius
-                                height: "40px", // Set consistent height
+                                borderRadius: "6px",
+                                height: "40px",
                             },
                         }}
                     >
@@ -185,7 +183,7 @@ const PolicyPage = () => {
                     style={{
                         display: "flex",
                         flexDirection: "row",
-                        justifyContent: "flex-end", // Align content to the right
+                        justifyContent: "flex-end",
                         alignItems: "center",
                         margin: "50px",
                     }}

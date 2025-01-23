@@ -42,7 +42,6 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    // Validation functions
     const validateUsername = (value) => {
         const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{5,25}$/;
         if (!usernameRegex.test(value)) {

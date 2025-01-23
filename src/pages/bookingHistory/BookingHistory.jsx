@@ -1,5 +1,4 @@
-// BookingHistory.js
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
     Container,
     FormControl,
@@ -125,8 +124,8 @@ const BookingHistory = () => {
                         }}
                         sx={{
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: "6px", // Same border radius
-                                height: "40px", // Set consistent height
+                                borderRadius: "6px",
+                                height: "40px",
                             },
                         }}
                     >

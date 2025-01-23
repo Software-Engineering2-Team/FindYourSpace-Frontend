@@ -117,8 +117,8 @@ const MySpaces = () => {
                         }}
                         sx={{
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: "6px", // Same border radius
-                                height: "40px", // Set consistent height
+                                borderRadius: "6px",
+                                height: "40px",
                             },
                         }}
                     >

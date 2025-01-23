@@ -56,7 +56,6 @@ const ContactForm = () => {
         switch (name) {
             case "fullName":
                 if (!value.trim()) {
-                    // Check for empty string or whitespace
                     error = "Full Name is required.";
                     console.log("Full name is empty");
                 } else if (value.trim().length < 2) {
@@ -109,13 +108,11 @@ const ContactForm = () => {
 
         setErrors(newErrors);
 
-        // If there are any errors, stop submission
         if (Object.keys(newErrors).length > 0) {
             console.log("Form validation failed:", newErrors);
             return;
         }
 
-        // Proceed with sending the email
         emailjs
             .sendForm("service_ypanvv4", "template_a6s6y9o", form.current, {
                 publicKey: "O_9E7yjTjSaZP0Fr9",
@@ -123,16 +120,15 @@ const ContactForm = () => {
             })
             .then(
                 () => {
-                    setIsLoading(false); // Remove loading state
+                    setIsLoading(false);
                     setConfirmationOpen(true);
                 },
                 (error) => {
                     console.log("FAILED...", error.text);
-                    setIsLoading(false); // Remove loading state even on failure
+                    setIsLoading(false);
                 }
             );
 
-        // Reset form
         setFormData({
             fullName: "",
             email: "",
@@ -273,7 +269,7 @@ const ContactForm = () => {
                             color="primary"
                             sx={{color: "#fff", backgroundColor: "#000"}}
                             style={{marginTop: 20, borderRadius: 7}}
-                            disabled={isLoading} // Disable button when loading
+                            disabled={isLoading}
                         >
                             {isLoading ? "Sending..." : "Send Message"}
                         </Button>

@@ -12,7 +12,7 @@ import NavbarAdmin from "../../components/navbar/NavbarAdmin";
 
 const EndpointRequestsTable = () => {
     const [requests, setRequests] = useState([]);
-    const [loading, setLoading] = useState(true); // New state for loading
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         EndPointLogStore.getState()
@@ -24,7 +24,7 @@ const EndpointRequestsTable = () => {
                 setRequests(response);
             })
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false)); // Set loading to false after data is fetched
+            .finally(() => setLoading(false));
     }, []);
 
     const successfulRequestsCount = requests.filter(
@@ -58,7 +58,7 @@ const EndpointRequestsTable = () => {
                 Endpoint Requests
             </Typography>
             <Box sx={{margin: "3%"}}>
-                {loading ? ( // Show loading indicator while data is being fetched
+                {loading ? (
                     <Box
                         sx={{
                             display: "flex",

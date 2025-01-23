@@ -1,6 +1,4 @@
 import {create} from 'zustand'
-// const url = 'https://officely.azurewebsites.net';
-//const url = 'http://localhost:8080';
 
 const ApproveSpaceStore = create((set) => ({
     spaces: [],

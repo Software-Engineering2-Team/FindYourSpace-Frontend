@@ -3,13 +3,6 @@ import {create} from 'zustand';
 const apiUrl = 'http://localhost:8000';
 
 const BookingStore = create((set) => ({
-    // bookings: JSON.parse(localStorage.getItem('bookings')) || null,
-    // setBookings: (bookings) => {
-    //     set({bookings});
-    //     // Store userData in localStorage
-    //     localStorage.setItem('bookings', JSON.stringify(bookings));
-    //     console.log("Value inside bookings", bookings);
-    // },
 
     fetchBookings: async () => {
         try {
@@ -25,8 +18,6 @@ const BookingStore = create((set) => ({
             }
 
             const data = await response.json();
-            // BookingStore.getState().setBookings(data);
-            // console.log(data);
             return data
         } catch (error) {
             console.error('Fetching Bookings failed:', error.message);

@@ -28,8 +28,8 @@ const EditAdSpaceSpaceForm = () => {
     const updateAdSpace = AdSpaceStore((state) => state.updateAdSpace);
     const deleteAdSpace = AdSpaceStore((state) => state.deleteAdSpace);
 
-    const [editConfirmationOpen, setEditConfirmationOpen] = useState(false); // State for Snackbar
-    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State for Snackbar
+    const [editConfirmationOpen, setEditConfirmationOpen] = useState(false);
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
     useEffect(() => {
         const fetchAdSpaceData = async () => {
@@ -93,7 +93,7 @@ const EditAdSpaceSpaceForm = () => {
         const error = validateField(field, value);
         setErrors((prevErrors) => ({
             ...prevErrors,
-            [field]: error || "", // Clear the error if the field is valid
+            [field]: error || "",
         }));
     };
 
@@ -130,12 +130,12 @@ const EditAdSpaceSpaceForm = () => {
 
     const handleEditConfirmationClose = () => {
         setEditConfirmationOpen(false);
-        navigate("/myspaces"); // Navigate to the spaces page after confirmation
+        navigate("/myspaces");
     };
 
     const handleDeleteConfirmationClose = () => {
         setDeleteConfirmationOpen(false);
-        navigate("/myspaces"); // Navigate to the spaces page after confirmation
+        navigate("/myspaces");
     };
 
     const cancelHandler = () => {
@@ -188,7 +188,7 @@ const EditAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                             margin="normal"
@@ -210,9 +210,9 @@ const EditAdSpaceSpaceForm = () => {
                         {formData.photos && (
                             <div
                                 style={{
-                                    display: "flex", // Flexbox for centering
-                                    justifyContent: "center", // Center horizontally
-                                    alignItems: "center", // Center vertically
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
                                     margin: "20px",
                                 }}
                             >
@@ -223,7 +223,7 @@ const EditAdSpaceSpaceForm = () => {
                                         width: "50%",
                                         height: "50%",
                                         objectFit: "contain",
-                                        borderRadius: "13px", // Apply rounded corners
+                                        borderRadius: "13px",
                                     }}
                                 />
                             </div>
@@ -242,7 +242,7 @@ const EditAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                         />
@@ -259,7 +259,7 @@ const EditAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                         />

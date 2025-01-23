@@ -136,8 +136,8 @@ const List = () => {
                             }}
                             sx={{
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "6px", // Same border radius
-                                    height: "40px", // Set consistent height
+                                    borderRadius: "6px",
+                                    height: "40px",
                                 },
                             }}
                         >
@@ -158,8 +158,7 @@ const List = () => {
                         style={{
                             display: "flex",
                             flexWrap: "wrap",
-                            // width: "100%",
-                            columnGap: "40px", // Add spacing between items
+                            columnGap: "40px",
                             rowGap: "40px",
                             justifyContent: "center",
                         }}

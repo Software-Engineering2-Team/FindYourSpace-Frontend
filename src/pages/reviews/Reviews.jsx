@@ -100,7 +100,7 @@ const Reviews = () => {
                                         style={{
                                             display: "flex",
                                             flexDirection: "row",
-                                            justifyContent: "flex-end", // Align content to the right
+                                            justifyContent: "flex-end",
                                             alignItems: "center",
                                             margin: "50px",
                                         }}

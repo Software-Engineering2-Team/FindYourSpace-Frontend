@@ -30,7 +30,6 @@ const ContactAdminForm = () => {
         switch (name) {
             case "fullName":
                 if (!value.trim()) {
-                    // Check for empty string or whitespace
                     error = "Full Name is required.";
                     console.log("Full name is empty");
                 } else if (value.trim().length < 2) {
@@ -71,7 +70,7 @@ const ContactAdminForm = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-        setIsLoading(true); // Set loading state
+        setIsLoading(true);
 
         const newErrors = {};
 
@@ -84,13 +83,11 @@ const ContactAdminForm = () => {
 
         setErrors(newErrors);
 
-        // If there are any errors, stop submission
         if (Object.keys(newErrors).length > 0) {
             console.log("Form validation failed:", newErrors);
             return;
         }
 
-        // Proceed with sending the email
         emailjs
             .sendForm("service_ypanvv4", "template_7c06qpa", form.current, {
                 publicKey: "O_9E7yjTjSaZP0Fr9",
@@ -99,15 +96,14 @@ const ContactAdminForm = () => {
             .then(
                 () => {
                     setConfirmationOpen(true);
-                    setIsLoading(false); // Remove loading state
+                    setIsLoading(false);
                 },
                 (error) => {
                     console.log("FAILED...", error.text);
-                    setIsLoading(false); // Remove loading state even on failure
+                    setIsLoading(false);
                 }
             );
 
-        // Reset form
         setFormData({
             fullName: "",
             email: "",
@@ -241,7 +237,7 @@ const ContactAdminForm = () => {
                             color="primary"
                             sx={{color: "#fff", backgroundColor: "#000"}}
                             style={{marginTop: 20, borderRadius: 7}}
-                            disabled={isLoading} // Disable button when loading
+                            disabled={isLoading}
                         >
                             {isLoading ? "Sending..." : "Send Message"}
                         </Button>

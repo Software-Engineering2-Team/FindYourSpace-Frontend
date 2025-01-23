@@ -84,7 +84,7 @@ const AddAdSpaceSpaceForm = () => {
         const error = validateField(field, value);
         setErrors((prevErrors) => ({
             ...prevErrors,
-            [field]: error || "", // Clear the error if the field is valid
+            [field]: error || "",
         }));
     };
 
@@ -112,7 +112,7 @@ const AddAdSpaceSpaceForm = () => {
 
         try {
             await AddSpaceStore.getState().createAdSpace(formData);
-            setConfirmationOpen(true); // Show confirmation message
+            setConfirmationOpen(true);
         } catch (error) {
             console.error("Error adding AdSpace data:", error);
         }
@@ -164,7 +164,7 @@ const AddAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                             margin="normal"
@@ -181,7 +181,7 @@ const AddAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                             margin="normal"
@@ -192,9 +192,9 @@ const AddAdSpaceSpaceForm = () => {
                         {formData.photos && (
                             <div
                                 style={{
-                                    display: "flex", // Flexbox for centering
-                                    justifyContent: "center", // Center horizontally
-                                    alignItems: "center", // Center vertically
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
                                     margin: "20px",
                                 }}
                             >
@@ -205,7 +205,7 @@ const AddAdSpaceSpaceForm = () => {
                                         width: "50%",
                                         height: "50%",
                                         objectFit: "contain",
-                                        borderRadius: "13px", // Apply rounded corners
+                                        borderRadius: "13px",
                                     }}
                                 />
                             </div>
@@ -222,7 +222,7 @@ const AddAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                             error={!!errors.size}
@@ -239,7 +239,7 @@ const AddAdSpaceSpaceForm = () => {
                             sx={{
                                 marginBottom: "20px",
                                 "& .MuiOutlinedInput-root": {
-                                    borderRadius: "9px", // Custom border radius
+                                    borderRadius: "9px",
                                 },
                             }}
                             error={!!errors.price}

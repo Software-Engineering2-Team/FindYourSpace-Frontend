@@ -1,4 +1,3 @@
-// SearchItemBookingHistory.js
 import React from "react";
 import {Link} from "react-router-dom";
 
@@ -13,7 +12,6 @@ export const formatAdSpaceType = (officeType) => {
 };
 
 const SearchItem = ({booking}) => {
-    // Changed prop name to 'booking'
     if (!booking) {
         booking = {
             id: 0,
@@ -47,7 +45,7 @@ const SearchItem = ({booking}) => {
                 <div className="searchItemHis">
                     {booking.adSpace.photos && (
                         <img
-                            src={booking.adSpace.photos} // Assuming photos is an array, so accessing the first one
+                            src={booking.adSpace.photos}
                             alt={booking.adSpace.location}
                             className="siImgHis"
                         />

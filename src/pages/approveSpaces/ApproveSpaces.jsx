@@ -75,7 +75,6 @@ const ApproveSpacesPage = () => {
                 );
                 break;
 
-            // Add more sorting options if needed
             default:
                 sortedSpaces = [...approvedSpaces];
                 break;
@@ -159,8 +158,8 @@ const ApproveSpacesPage = () => {
                         }}
                         sx={{
                             "& .MuiOutlinedInput-root": {
-                                borderRadius: "6px", // Same border radius
-                                height: "40px", // Set consistent height
+                                borderRadius: "6px",
+                                height: "40px",
                             },
                         }}
                     >
@@ -203,7 +202,7 @@ const ApproveSpacesPage = () => {
                                                 align="center"
                                                 direction="row"
                                                 spacing={2}
-                                                sx={{justifyContent: "center"}} // Add this line
+                                                sx={{justifyContent: "center"}}
                                             >
                                                 <Button
                                                     variant="outlined"
@@ -233,7 +232,7 @@ const ApproveSpacesPage = () => {
                     style={{
                         display: "flex",
                         flexDirection: "row",
-                        justifyContent: "flex-end", // Align content to the right
+                        justifyContent: "flex-end",
                         alignItems: "center",
                         margin: "50px",
                     }}

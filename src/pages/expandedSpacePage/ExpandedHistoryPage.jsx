@@ -11,7 +11,7 @@ import LoginStore from "../../api/LoginStore";
 const ExpandedHistoryPage = () => {
     const [space, setSpace] = useState(null);
     const {id} = useParams();
-    const bookingId = parseInt(id, 10); // Ensure id is a number
+    const bookingId = parseInt(id, 10);
     const [booking, setBooking] = useState("");
     const [adSpaceID, setAdSpaceID] = useState("");
 
@@ -59,10 +59,10 @@ const ExpandedHistoryPage = () => {
                 container
                 component="main"
                 sx={{
-                    height: "90vh", // Full viewport height
-                    display: "flex", // Flex display for alignment
-                    alignItems: "center", // Center vertically
-                    justifyContent: "center", // Center horizontally
+                    height: "90vh",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                     padding: "10%",
                 }}
             >
@@ -96,8 +96,8 @@ const ExpandedHistoryPage = () => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-start", // Ensures text is left-aligned
-                        justifyContent: "center", // Centers the text section vertically
+                        alignItems: "flex-start",
+                        justifyContent: "center",
                         padding: "5%",
                     }}
                 >
@@ -105,7 +105,7 @@ const ExpandedHistoryPage = () => {
                         <Typography variant="h5" gutterBottom sx={{fontSize: "40px"}}>
                             {space?.location}
                         </Typography>
-                        {/* New Booking Details Section */}
+    
                         <Typography
                             marginTop="10px"
                             variant="body1"

@@ -27,8 +27,8 @@ const ExpandedSpacePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id); // Fetch data and set it in the store
-                const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace; // Access the updated state
+                await ExpandedAdSpaceStore.getState().fetchExpandedAdSpace(id);
+                const fetchedData = ExpandedAdSpaceStore.getState().expandedAdSpace;
                 console.log("Fetched ad space:", fetchedData);
                 setSpace(fetchedData);
             } catch (error) {
@@ -40,20 +40,15 @@ const ExpandedSpacePage = () => {
         fetchData();
     }, [id]);
 
-    // const handleStartDateChange = (newDate) => {
-    //   setStartDate(newDate);
-    // };
-
     const validateForm = () => {
         let isValid = true;
         console.log("Start date value", startDate);
-
-        // Validate start date
+        
         if (startDate == null) {
             setStartDateError("Please select a start date.");
             isValid = false;
         } else {
-            setStartDateError(""); // Clear error if valid
+            setStartDateError("");
         }
 
         console.log("Start Date Error", startDateError);
@@ -67,7 +62,7 @@ const ExpandedSpacePage = () => {
 
     const handleRentNowClick = async () => {
         if (!validateForm()) {
-            return; // Stop if validation fails
+            return;
         }
 
         try {
@@ -80,7 +75,7 @@ const ExpandedSpacePage = () => {
                     name: space.location,
                     ad_space_id: id,
                     client_id: LoginStore.getState().userData.id,
-                    start_date: startDate, // Include start date
+                    start_date: startDate,
                 }
             );
             const {checkoutUrl} = response.data;
@@ -97,14 +92,13 @@ const ExpandedSpacePage = () => {
                 container
                 component="main"
                 sx={{
-                    height: "90vh", // Full viewport height
-                    display: "flex", // Flex display for alignment
-                    alignItems: "center", // Center vertically
-                    justifyContent: "center", // Center horizontally
+                    height: "90vh",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                     padding: "10%",
                 }}
             >
-                {/* Image Section */}
                 <Grid
                     item
                     xs={12}
@@ -127,7 +121,6 @@ const ExpandedSpacePage = () => {
                     />
                 </Grid>
 
-                {/* Text Section */}
                 <Grid
                     item
                     xs={12}
@@ -135,8 +128,8 @@ const ExpandedSpacePage = () => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-start", // Ensures text is left-aligned
-                        justifyContent: "center", // Centers the text section vertically
+                        alignItems: "flex-start",
+                        justifyContent: "center",
                         padding: "5%",
                     }}
                 >
@@ -160,7 +153,6 @@ const ExpandedSpacePage = () => {
                         >
                             {space?.description}
                         </Typography>
-                        {/* Add additional details like number of days counter and starting date selector */}
                         <LocalizationProvider marginTop="10px" dateAdapter={AdapterDayjs}>
                             <DemoContainer components={["DatePicker"]}>
                                 <DatePicker
@@ -211,7 +203,7 @@ const ExpandedSpacePage = () => {
                         <Grid
                             container
                             spacing={2}
-                            justifyContent="flex-start" // Ensures buttons align to the left
+                            justifyContent="flex-start"
                             marginTop="10px"
                         >
                             <Grid item>

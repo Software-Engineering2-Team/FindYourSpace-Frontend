@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import LoginStore from "../../api/LoginStore";
 import NavbarUser from "../../components/navbar/NavbarUser";
 import Button from "@mui/material/Button";
@@ -49,24 +49,24 @@ const Login = () => {
         setLoginError("");
     };
 
-  const fetchData = () => {
-    LoginStore.getState()
-      .login(username, password)
-      .then(() => {
-        const userData = LoginStore.getState().userData;
-        if (userData) {
-          if (userData.is_staff === true) {
-            navigate("/admin/platform-health");
-          } else {
-            navigate("/spaces");
-          }
-        }
-      })
-      .catch((error) => {
-        console.log("Error response content", error);
-        setLoginError(error.message);
-      });
-  };
+    const fetchData = () => {
+        LoginStore.getState()
+            .login(username, password)
+            .then(() => {
+                const userData = LoginStore.getState().userData;
+                if (userData) {
+                    if (userData.is_staff === true) {
+                        navigate("/admin/platform-health");
+                    } else {
+                        navigate("/spaces");
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log("Error response content", error);
+                setLoginError(error.message);
+            });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -106,7 +106,7 @@ const Login = () => {
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        justifyContent: "center", // Center vertically
+                        justifyContent: "center",
                     }}
                 >
                     <Box
@@ -150,7 +150,7 @@ const Login = () => {
                                 autoComplete="username"
                                 autoFocus
                                 error={!!loginError}
-                                helperText={loginError} // Show error message
+                                helperText={loginError}
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
                                         borderRadius: "9px",
@@ -169,7 +169,7 @@ const Login = () => {
                                 onChange={handlePasswordChange}
                                 autoComplete="current-password"
                                 error={!!loginError}
-                                helperText={loginError} // Show error message
+                                helperText={loginError}
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
                                         borderRadius: "9px",
