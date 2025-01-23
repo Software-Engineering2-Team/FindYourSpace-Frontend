@@ -222,7 +222,6 @@ const ContactForm = () => {
                         margin="normal"
                         name="spaceOwner_email"
                         value={spaceOwnerEmail}
-                        disabled
                         required
                         size="large"
                         sx={{

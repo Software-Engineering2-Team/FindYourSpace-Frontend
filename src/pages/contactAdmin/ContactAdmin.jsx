@@ -191,7 +191,6 @@ const ContactAdminForm = () => {
                         margin="normal"
                         name="admin_email"
                         value={adminEmail}
-                        disabled
                         size="large"
                         sx={{
                             "& .MuiOutlinedInput-root": {
