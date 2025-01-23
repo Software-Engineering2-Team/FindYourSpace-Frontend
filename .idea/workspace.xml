@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2810ae1f-eac7-4757-aa8e-fbde8613ca04" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_12_2025_11_21_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_12_2025_11_21_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactAdmin/ContactAdmin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactOwner/ContactOwner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/stats/Stats.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

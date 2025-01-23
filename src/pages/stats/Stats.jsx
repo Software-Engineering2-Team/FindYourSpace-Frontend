@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import Chart from "chart.js/auto";
 import prepareChartData from "./prepareChart";
-import useBookingsStore from "../../api/BookingStore";
+import BookingsStore from "../../api/BookingStore";
 import {
     Container,
     Typography,
@@ -20,8 +20,8 @@ const Stats = () => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                await useBookingsStore.getState().fetchBookings();
-                setBookingsData(useBookingsStore.getState().bookings);
+                const bookings = await BookingsStore.getState().fetchBookings();
+                setBookingsData(bookings);
             } catch (error) {
                 console.error("Error fetching bookings:", error);
             }
